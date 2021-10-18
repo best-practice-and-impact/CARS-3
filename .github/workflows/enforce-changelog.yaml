@@ -1,7 +1,7 @@
 name: "Release workflow"
 on:
   release:
-   
+    types: [released]
 jobs:
   # Enforces the update of a changelog file on every pull request 
   changelog:
