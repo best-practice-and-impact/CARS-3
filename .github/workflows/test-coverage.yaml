@@ -33,10 +33,10 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes"))
-          remotes::install_deps("carsurvey2", dependencies = TRUE)
+          remotes::install_deps("carsurvey3", dependencies = TRUE)
           remotes::install_cran("covr")
         shell: Rscript {0}
 
       - name: Test coverage
-        run: covr::codecov("carsurvey2")
+        run: covr::codecov("carsurvey3")
         shell: Rscript {0}
