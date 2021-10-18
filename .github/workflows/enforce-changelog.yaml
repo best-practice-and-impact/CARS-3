@@ -1,8 +1,6 @@
 name: "Release workflow"
 on:
-  push:
-    tags:
-      - '*'
+  pull_request:
 jobs:
   # Enforces the update of a changelog file on every pull request 
   changelog:
