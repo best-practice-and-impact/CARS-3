@@ -2,15 +2,19 @@ Package: carsurvey3
 Title: key functionality for the CARS wave 3 analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Daniel",
-           family = "Shiloh",
-           role = c("aut", "cre")),
-    person(given = "Jacob",
-           family = "Cole",
-           role = c("aut", "cre"))
+    c(person(given = "Daniel",
+             family = "Shiloh",
+             role = c("aut", "cre"),
+             email = "gsshelp@ons.gov.uk"),
+      person(given = "Jacob",
+             family = "Cole",
+             role = c("aut"),
+             email = "gsshelp@ons.gov.uk"))
 Description: Data ingestion, cleaning and analysis for the coding in analysis and research survey (CARS) wave 3
-License: `use_mit_license()
+License: License: MIT + file LICENSE
 Encoding: UTF-8
+Suggests: 
+	testthat (>= 2.1.0)
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
