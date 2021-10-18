@@ -13,6 +13,11 @@ Authors@R:
 Description: Data ingestion, cleaning and analysis for the coding in analysis and research survey (CARS) wave 3
 License: License: MIT + file LICENSE
 Encoding: UTF-8
+Depends: 
+	R (>= 4.0.0),
+Imports:
+    dplyr,
+    yaml
 Suggests: 
 	testthat (>= 2.1.0)
 LazyData: true
