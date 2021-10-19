@@ -15,6 +15,7 @@ Enforce_streaming <- function(data){
   data <- enforce_outside_role_streaming(data)
   data <- enforce_prev_exp_streaming(data)
   data <- enforce_heard_of_rap_streaming(data)
+  data <- enforce_rap_champ_streaming(data)
   
   return(data)
 }
@@ -217,9 +218,9 @@ enforce_rap_champ_knowl_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce heard of RAP streaming on RAP statments
+#'@title Enforce heard of RAP streaming on RAP statements
 #'
-#'@description Enforce the streaming rules that if heard of RAP is "No" then statments on RAP are skipped
+#'@description Enforce the streaming rules that if heard of RAP is "No" then statements on RAP are skipped
 #'
 #'@param data pre-processed data
 #'
@@ -230,6 +231,21 @@ enforce_rap_state_streaming <- function(data){
   statement_data <- dplyr::select(data, "RAP_confident":"RAP_comments")
   statement_data[!is.na(data$heard_of_RAP) & (data$heard_of_RAP %in% c("No")),] <- NA
   data[colnames(statement_data)] <- statement_data
+  
+  return(data)
+}
+
+#'@title Enforce RAP champion streaming
+#'
+#'@description Enforce the streaming rules that if RAP champion is yes then Do you know your RAP champion is skipped
+#'
+#'@param data pre-processed data
+#'
+#'@return data frame
+
+enforce_rap_champ_streaming <- function(data){
+  
+  data$RAP_knowledge[!is.na(data$RAP_champion) & (data$RAP_champion %in% c("Yes"))] <- NA
   
   return(data)
 }
