@@ -1,3 +1,24 @@
+#'@title API to enforce streaming rules
+#'
+#'@description Enforce all streaming rules across all questions
+#'
+#'@param data pre-processed data
+#'
+#'@return data
+#'
+#'@export
+
+Enforce_streaming <- function(data){
+  
+  data <- enforce_degree_streaming(data)
+  data <- enforce_code_freq_streaming(data)
+  data <- enforce_outside_role_streaming(data)
+  data <- enforce_prev_exp_streaming(data)
+  
+  return(data)
+}
+
+
 #'@title Enforce degree streaming
 #'
 #'@description Enforce the streaming rules that if highest qualification isn't degree then no degree subject has "Yes" returned 
@@ -130,9 +151,26 @@ enforce_codefreq_comment <- function(data){
   return(data)
 }
 
+#'@title Enforce coding experience outside current role streaming
+#'
+#'@description Enforce the streaming rules that if coding experience outside current role is no then follow up questions are skipped
+#'
+#'@param data pre-processed data
+#'
+#'@return data frame
+
+enforce_outside_role_streaming <- function(data){
+  
+  prev_exp_data <- dplyr::select(data, "ability_change":"where_learned_to_code")
+  prev_exp_data[!is.na(data$experience_outside_role) & (data$experience_outside_role %in% c("No")),] <- NA
+  data[colnames(prev_exp_data)] <- prev_exp_data
+  
+  return(data)
+}
+
 #'@title Enforce previous coding experience streaming
 #'
-#'@description Enforce the streaming rules that if previous coding experience is no then follow up questions are skipped
+#'@description Enforce the streaming rules that if previous coding experience is no then where learned to code is skipped
 #'
 #'@param data pre-processed data
 #'
@@ -140,9 +178,7 @@ enforce_codefreq_comment <- function(data){
 
 enforce_prev_exp_streaming <- function(data){
   
-  prev_exp_data <- dplyr::select(data, "ability_change":"where_learned_to_code")
-  prev_exp_data[!is.na(data$experience_outside_role) & (data$experience_outside_role %in% c("No")),] <- NA
-  data[colnames(prev_exp_data)] <- prev_exp_data
+  data$where_learned_to_code[!is.na(data$learn_before_current_role) & (data$learn_before_current_role %in% c("No"))] <- NA
   
   return(data)
 }
