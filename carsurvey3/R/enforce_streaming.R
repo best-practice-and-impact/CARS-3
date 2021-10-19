@@ -182,3 +182,20 @@ enforce_prev_exp_streaming <- function(data){
   
   return(data)
 }
+
+#'@title Enforce heard of RAP streaming
+#'
+#'@description Enforce the streaming rules that if heard of RAP is "No" then are you RAP_champion and RAP_knowledge are skipped
+#'
+#'@param data pre-processed data
+#'
+#'@return data frame
+
+enforce_heard_of_rap_streaming <- function(data){
+  
+  rap_data <- data[,c("RAP_champion","RAP_knowledge")]
+  rap_data[!is.na(data$heard_of_RAP) & (data$heard_of_RAP %in% c("No")),] <- NA
+  data[colnames(rap_data)] <- rap_data
+  
+  return(data)
+}
