@@ -14,6 +14,7 @@ Enforce_streaming <- function(data){
   data <- enforce_code_freq_streaming(data)
   data <- enforce_outside_role_streaming(data)
   data <- enforce_prev_exp_streaming(data)
+  data <- enforce_heard_of_rap_streaming(data)
   
   return(data)
 }
@@ -185,13 +186,29 @@ enforce_prev_exp_streaming <- function(data){
 
 #'@title Enforce heard of RAP streaming
 #'
-#'@description Enforce the streaming rules that if heard of RAP is "No" then are you RAP_champion and RAP_knowledge are skipped
+#'@description Enforce the streaming rules that if heard of RAP is "No" then skip various RAP based questions
 #'
 #'@param data pre-processed data
 #'
 #'@return data frame
 
 enforce_heard_of_rap_streaming <- function(data){
+
+  data <- enforce_rap_champ_knowl_streaming(data)
+  data <- enforce_outside_role_streaming(data)
+
+  return(data)
+}
+
+#'@title Enforce heard of RAP streaming on RAP_champion and RAP_knowledge
+#'
+#'@description Enforce the streaming rules that if heard of RAP is "No" then are you RAP_champion and RAP_knowledge are skipped
+#'
+#'@param data pre-processed data
+#'
+#'@return data frame
+
+enforce_rap_champ_knowl_streaming <- function(data){
   
   rap_data <- data[,c("RAP_champion","RAP_knowledge")]
   rap_data[!is.na(data$heard_of_RAP) & (data$heard_of_RAP %in% c("No")),] <- NA
@@ -199,3 +216,21 @@ enforce_heard_of_rap_streaming <- function(data){
   
   return(data)
 }
+
+#'@title Enforce heard of RAP streaming on RAP statments
+#'
+#'@description Enforce the streaming rules that if heard of RAP is "No" then statments on RAP are skipped
+#'
+#'@param data pre-processed data
+#'
+#'@return data frame
+
+enforce_rap_state_streaming <- function(data){
+  
+  statement_data <- dplyr::select(data, "RAP_confident":"RAP_comments")
+  statement_data[!is.na(data$heard_of_RAP) & (data$heard_of_RAP %in% c("No")),] <- NA
+  data[colnames(statement_data)] <- statement_data
+  
+  return(data)
+}
+

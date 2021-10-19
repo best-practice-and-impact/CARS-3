@@ -8,7 +8,7 @@ expected_output <- data.frame(heard_of_RAP = dummy_data$heard_of_RAP,
                             RAP_knowledge = c("I know who the RAP champion in my department is",
                                               NA))
 
-dummy_output <- enforce_heard_of_rap_streaming(dummy_data)
+dummy_output <- enforce_rap_champ_knowl_streaming(dummy_data)
 
 test_that("output values match expected values", {
   expect_true(identical(dummy_output, expected_output))
