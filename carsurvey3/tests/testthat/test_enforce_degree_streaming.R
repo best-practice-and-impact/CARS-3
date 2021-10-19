@@ -17,4 +17,6 @@ expected_output <- data.frame(highest_qualification = dummy_data$highest_qualifi
 
 dummy_output <- enforce_degree_streaming(dummy_data)
 
-testthat::expect_true(identical(dummy_output, expected_output))
+test_that("output values match expected values", {
+  expect_true(identical(dummy_output, expected_output))
+})
