@@ -80,9 +80,7 @@ enforce_codefreq_doc <- function(data){
 
 enforce_codefreq_ci <- function(data){
   
-  ci_data <- data.frame(data$CI)
-  ci_data[!is.na(data$code_freq) & (data$code_freq %in% c("Never")),] <- NA
-  data[colnames(ci_data)] <- ci_data
+  data$CI[!is.na(data$code_freq) & (data$code_freq %in% c("Never"))] <- NA
   
   return(data)
 }
@@ -97,9 +95,7 @@ enforce_codefreq_ci <- function(data){
 
 enforce_codefreq_dep_man <- function(data){
   
-  dep_man_data <- data.frame(data$dependency_management)
-  dep_man_data[!is.na(data$code_freq) & (data$code_freq %in% c("Never")),] <- NA
-  data[colnames(dep_man_data)] <- dep_man_data
+  data$dependency_management[!is.na(data$code_freq) & (data$code_freq %in% c("Never"))] <- NA
   
   return(data)
 }
@@ -114,9 +110,7 @@ enforce_codefreq_dep_man <- function(data){
 
 enforce_codefreq_rep_wf <- function(data){
   
-  rep_wf_data <- data.frame(data$reproducible_workflow)
-  rep_wf_data[!is.na(data$code_freq) & (data$code_freq %in% c("Never")),] <- NA
-  data[colnames(rep_wf_data)] <- rep_wf_data
+  data$reproducible_workflow[!is.na(data$code_freq) & (data$code_freq %in% c("Never"))] <- NA
   
   return(data)
 }
@@ -131,9 +125,24 @@ enforce_codefreq_rep_wf <- function(data){
 
 enforce_codefreq_comment <- function(data){
   
-  comment_data <- data.frame(data$coding_practices_comments)
-  comment_data[!is.na(data$code_freq) & (data$code_freq %in% c("Never")),] <- NA
-  data[colnames(comment_data)] <- comment_data
+  data$coding_practices_comments[!is.na(data$code_freq) & (data$code_freq %in% c("Never"))] <- NA
+  
+  return(data)
+}
+
+#'@title Enforce previous coding experience streaming
+#'
+#'@description Enforce the streaming rules that if previous coding experience is no then follow up questions are skipped
+#'
+#'@param data pre-processed data
+#'
+#'@return data frame
+
+enforce_prev_exp_streaming <- function(data){
+  
+  prev_exp_data <- dplyr::select(data, "ability_change":"where_learned_to_code")
+  prev_exp_data[!is.na(data$experience_outside_role) & (data$experience_outside_role %in% c("No")),] <- NA
+  data[colnames(prev_exp_data)] <- prev_exp_data
   
   return(data)
 }
