@@ -11,7 +11,7 @@
 enforce_streaming <- function(data){
   
   if (class(data) != "data.frame") {
-    stop("Unexpected input: data is not a data.frame.")
+    stop("Unexpected input: data is not a data.frame.")}
   
   data <- enforce_degree_streaming(data)
   data <- enforce_code_freq_streaming(data)
