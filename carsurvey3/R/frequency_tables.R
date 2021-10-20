@@ -106,3 +106,40 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
   
   return(frequencies)
 }
+
+#'@title Summarise where respondents learned to code 
+#'
+#'@description calculate frequency table of where respondents learned to code
+#'
+#'@param data full CARS wave 3 data.frame after preprocessing
+#'
+#'@return frequency table
+#'@export 
+#'
+
+summarise_where_learned_code <- function(data){
+ 
+   # Validation checks
+  if (!"where_learned_to_code" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'where_learned_to_code")
+  }
+  
+  levels = c("In current role",
+             "In education",
+             "In private sector employment",
+             "In public sector employment",
+             "Self-taught",
+             "Other")
+  
+  data$where_learned_to_code[!is.na(data$where_learned_to_code) &
+                               !(data$where_learned_to_code %in% levels)] <- "Other"
+  
+  data$where_learned_to_code <- factor(data$where_learned_to_code, levels = levels)
+  
+  freqs <- data.frame(table(data$where_learned_to_code))
+  
+  colnames(freqs) <- c("First coding experience", "Count")
+  
+  return(freqs)
+  
+}
