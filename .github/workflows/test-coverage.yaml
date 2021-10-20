@@ -34,8 +34,7 @@ jobs:
         run: |
           install.packages(c("remotes"))
           remotes::install_deps("carsurvey3", dependencies = TRUE)
-          install.packages("devtools")
-          devtools::install_github("best-practice-and-impact/CARS2")
+          remotes::install_github("best-practice-and-impact/CARS2"
           remotes::install_cran("covr")
         shell: Rscript {0}
 
