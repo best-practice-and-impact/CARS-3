@@ -2,4 +2,5 @@
 
 export(rename_cols)
 export(summarise_code_freq)
+export(summarise_coding_tools)
 export(summarise_operations)
