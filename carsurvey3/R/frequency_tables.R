@@ -32,7 +32,7 @@ summarise_code_freq <- function(data) {
 #'
 #' @description calculate frequency table for data operations
 #'
-#' @param data  full CARS wave 3 data.frame after preprocessing 
+#' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return
 #' @export
@@ -59,4 +59,50 @@ summarise_operations <- function(data) {
   
   return(frequencies)
   
+}
+
+
+#' Summarise coding tools
+#'
+#' @description calculate frequency table coding tools (knowledge or access)
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#' @param type type of table (knowledge or access)
+#'
+#' @return
+#' @export
+#'
+
+summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
+  type <- match.arg(type, several.ok = FALSE)
+  
+  selected_data <- data[grepl(paste0(type, "_"), colnames(data))]
+  
+  frequencies <- apply(selected_data, 2, function(x) {
+    x <- factor(x, levels = c("Yes", "Don't Know", "No"))
+    
+    table(x)
+  })
+    
+  languages <- c(
+    "R", 
+    "SQL",
+    "SAS",
+    "VBA",
+    "Python", 
+    "SPSS", 
+    "Stata",
+    "Javascript / Typescript",
+    "Java / Scala",
+    "C++ / C#",
+    "Matlab"
+  )
+  
+  frequencies <- data.frame("Programming language" = languages, t(frequencies), check.names = FALSE)
+  
+  rownames(frequencies) <- NULL
+  
+  frequencies <- frequencies[order(languages), ]
+  
+  return(frequencies)
 }
