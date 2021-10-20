@@ -37,6 +37,10 @@ jobs:
           remotes::install_cran("covr")
         shell: Rscript {0}
 
+      - name: Install CARS2 functionality
+        run: |
+          devtools::install_github("best-practice-and-impact/CARS2")
+
       - name: Test coverage
         run: covr::codecov("carsurvey3")
         shell: Rscript {0}

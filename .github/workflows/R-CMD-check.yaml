@@ -63,6 +63,10 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
+      - name: Install CARS2 functionality
+        run: |
+          devtools::install_github("best-practice-and-impact/CARS2")
+
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
