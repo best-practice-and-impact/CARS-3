@@ -1,8 +1,10 @@
 dummy_data <- data.frame(learn_before_current_role = c("No", "Yes"),
-                         where_learned_to_code = c("Self-taught", "In education"))
-  
+                         where_learned_to_code = c("Self-taught", "In education"),
+                         dummy = c("dummy1", "dummy2"))
+
 expected_output <- data.frame(learn_before_current_role = dummy_data$learn_before_current_role,
-                              where_learned_to_code = c(NA, "In education"))
+                              where_learned_to_code = c(NA, "In education"),
+                              dummy = c("dummy1", "dummy2"))
 
 dummy_output <- enforce_prev_exp_streaming(dummy_data)
 
