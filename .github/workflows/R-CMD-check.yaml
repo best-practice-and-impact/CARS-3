@@ -62,7 +62,6 @@ jobs:
           remotes::install_deps("carsurvey3", dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_github("best-practice-and-impact/CARS2", dependencies = TRUE, upgrade = "always", force = TRUE)
-          .libPaths("/Users/runner/work/_temp/Library")
         shell: Rscript {0}
 
       - name: Check
