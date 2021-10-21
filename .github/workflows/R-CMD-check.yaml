@@ -60,14 +60,18 @@ jobs:
       - name: Install dependencies
         run: |
           remotes::install_deps("carsurvey3", dependencies = TRUE)
-          remotes::install_github("best-practice-and-impact/CARS2", dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck("carsurvey3", args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
+        run: |
+          download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = "D:/a/CARS-3/.github/CARS2.zip")
+          unzip(zipfile = "D:/a/CARS-3/.github/CARS2.zip", exdir = ".github")
+          devtools::install_deps("D:/a/CARS-3/.github/CARS2-master")
+
+          rcmdcheck::rcmdcheck("carsurvey3", args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 
       - name: Upload check results

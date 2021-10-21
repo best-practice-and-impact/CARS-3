@@ -86,6 +86,6 @@ test_that("Frequencies are correct", {
 # Integration test with plot function 
 
 test_that("output can be used with plotting function", {
-  expect_s3_class(carsurvey2::plot_stacked(dummy_knowledge_output, xlab = "xlab", ylab = "ylab", n = 6), c("plotly", "htmlwidget"))
-  expect_s3_class(carsurvey2::plot_stacked(dummy_access_output, xlab = "xlab", ylab = "ylab", n = 6), c("plotly", "htmlwidget"))
+  expect_s3_class(plot_stacked(dummy_knowledge_output, xlab = "xlab", ylab = "ylab", n = 6), c("plotly", "htmlwidget"))
+  expect_s3_class(plot_stacked(dummy_access_output, xlab = "xlab", ylab = "ylab", n = 6), c("plotly", "htmlwidget"))
 })

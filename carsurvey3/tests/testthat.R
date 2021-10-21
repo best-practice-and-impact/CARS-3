@@ -1,4 +1,11 @@
 library(testthat)
-library("carsurvey3")
+library(carsurvey3)
+
+tryCatch(
+  library(package = carsurvey2),
+  error = function(e) {
+    devtools::load_all("D:/a/CARS-3/.github/CARS2-master") # Used by GitHub actions
+  }
+)
 
 test_check("carsurvey3")

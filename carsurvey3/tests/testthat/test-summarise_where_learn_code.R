@@ -40,5 +40,5 @@ test_that("Values in output are correct", expect_equal(dummy_output[[2]], c(2, 0
 # Integration test with plot function 
 
 test_that("output can be used with plotting function", {
-  expect_s3_class(carsurvey2::plot_freqs(dummy_output, xlab = "xlab", ylab = "ylab", n = 6), c("plotly", "htmlwidget"))
+  expect_s3_class(plot_freqs(dummy_output, xlab = "xlab", ylab = "ylab", n = 6), c("plotly", "htmlwidget"))
 })
