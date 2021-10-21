@@ -118,11 +118,22 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
 #'
 
 summarise_where_learned_code <- function(data){
- 
-   # Validation checks
+  
+  # Validation checks
   if (!"where_learned_to_code" %in% colnames(data)) {
     stop("unexpected_input: no column called 'where_learned_to_code")
   }
+  if (!"where_learned_to_code" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'code_freq")
+  }
+  if (!"where_learned_to_code" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'learn_before_current_role")
+  }
+  
+  
+  data$where_learned_to_code[(is.na(data$learn_before_current_role) |
+                               (data$learn_before_current_role == "No")) &
+                               data$code_freq != "Never"] <- "In current role"
   
   levels = c("In current role",
              "In education",
@@ -141,5 +152,46 @@ summarise_where_learned_code <- function(data){
   colnames(freqs) <- c("First coding experience", "Count")
   
   return(freqs)
+}
+
+
+#' @title Summarise data practices questions
+#'
+#' @description calculate frequency table for data practices
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return frequency table 
+#' @export
+#'
+
+summarise_coding_practices <- function(data) {
+  
+  selected_data <- dplyr::select(data, .data$use_open_source:.data$AQUA_book )
+  
+  levels <- c("I don't understand this question",
+              "Never",
+              "Rarely",
+              "Sometimes",
+              "Regularly",
+              "All the time")
+  
+  labels <- c("I use open source software when programming",
+              "My team open sources its code",
+              "I use a source code version control system e.g. Git",
+              "Code my team writes is reviewed by a colleague",
+              "I write repetitive elements in my code as functions",
+              "I unit test my code",
+              "I collect my code and supporting material into packages",
+              "I follow a standard directory structure when programming",
+              "I follow coding guidelines or style guides when programming",
+              "I write code to automatically quality assure data",
+              "My team applies the principles set out in the Aqua book when carrying out analysis as code")
+  
+  frequencies <- carsurvey3::calc_multi_col_freqs(data = selected_data, levels = levels, labels = labels, calc_props = TRUE)
+ 
+  colnames(frequencies) <- c("Question", levels)
+  
+  return(frequencies)
   
 }
