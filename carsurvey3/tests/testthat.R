@@ -4,7 +4,7 @@ library(carsurvey3)
 tryCatch(
   library(package = carsurvey2),
   error = function(e) {
-    print("carsurvey2 not installed")
+    devtools::load_all(".github/CARS2-master") # Used by GitHub actions
   }
 )
 
