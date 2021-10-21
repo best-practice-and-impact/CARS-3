@@ -61,16 +61,15 @@ jobs:
         run: |
           remotes::install_deps("carsurvey3", dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
-          remotes::install_cran("devtools")
         shell: Rscript {0}
 
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: |
-          download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = "D:/github/CARS2.zip")
-          unzip(zipfile = "D:/github/CARS2.zip", exdir = "D:/github")
-          devtools::install_deps("D:/github/CARS2-master")
+          download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = ".github/CARS2.zip")
+          unzip(zipfile = ".github/CARS2.zip", exdir = ".github")
+          devtools::install_deps(".github.CARS2-master")
 
           rcmdcheck::rcmdcheck("carsurvey3", args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
