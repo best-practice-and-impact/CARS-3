@@ -187,7 +187,7 @@ summarise_coding_practices <- function(data) {
               "I follow coding guidelines or style guides when programming",
               "I write code to automatically quality assure data")
   
-  frequencies <- carsurvey3::calc_multi_col_freqs(data = selected_data, levels = levels, labels = labels, calc_props = TRUE)
+  frequencies <- calc_multi_col_freqs(data = selected_data, levels = levels, labels = labels, calc_props = TRUE)
  
   colnames(frequencies) <- c("Question", levels)
   
