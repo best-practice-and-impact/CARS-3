@@ -18,7 +18,15 @@ Depends:
 Imports:
     dplyr,
     yaml,
-    devtools
+    devtools,
+    zoo,
+    rmarkdown,
+    plotly,
+    reshape2,
+    kableExtra,
+    htmlwidgets,
+    htmltools,
+    lexicon
 Suggests: 
     testthat (>= 2.1.0)
 LazyData: true
