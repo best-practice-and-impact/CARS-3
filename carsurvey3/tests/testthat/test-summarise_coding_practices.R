@@ -16,7 +16,7 @@ test_that("output is a dataframe", expect_s3_class(dummy_output, "data.frame"))
 
 test_that("output has seven columns", expect_equal(ncol(dummy_output), 7))
 
-test_that("output has eleven rows", expect_equal(nrow(dummy_output), 11))
+test_that("output has eleven rows", expect_equal(nrow(dummy_output), 10))
 
 test_that("output does not contain missing values", expect_false(any(is.na.data.frame(dummy_output))))
 
@@ -40,17 +40,16 @@ test_that("output has the correct question names", {
                                     "I collect my code and supporting material into packages",
                                     "I follow a standard directory structure when programming",
                                     "I follow coding guidelines or style guides when programming",
-                                    "I write code to automatically quality assure data",
-                                    "My team applies the principles set out in the Aqua book when carrying out analysis as code"))
+                                    "I write code to automatically quality assure data"))
 })
 
 test_that("frequencies are correct", {
-  expect_equal(dummy_output[[2]], c(0, 2, 0, 0, 3, 0, 0, 0, 0, 0, 3)/8)
-  expect_equal(dummy_output[[3]], c(3, 0, 1, 1, 2, 1, 3, 1, 2, 1, 2)/17)
-  expect_equal(dummy_output[[4]], c(0, 0, 3, 0, 1, 2, 1, 2, 3, 0, 0)/12)
-  expect_equal(dummy_output[[5]], c(2, 3, 0, 0, 0, 0, 2, 3, 1, 2, 1)/14)
-  expect_equal(dummy_output[[6]], c(0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0)/6)
-  expect_equal(dummy_output[[7]], c(0, 1, 2, 2, 0, 3, 0, 0, 0, 0, 0)/8)
+  expect_equal(dummy_output[[2]], c(0, 2, 0, 0, 3, 0, 0, 0, 0, 0)/5)
+  expect_equal(dummy_output[[3]], c(3, 0, 1, 1, 2, 1, 3, 1, 2, 1)/15)
+  expect_equal(dummy_output[[4]], c(0, 0, 3, 0, 1, 2, 1, 2, 3, 0)/12)
+  expect_equal(dummy_output[[5]], c(2, 3, 0, 0, 0, 0, 2, 3, 1, 2)/13)
+  expect_equal(dummy_output[[6]], c(0, 0, 0, 3, 0, 0, 0, 0, 0, 3)/6)
+  expect_equal(dummy_output[[7]], c(0, 1, 2, 2, 0, 3, 0, 0, 0, 0)/8)
 })
 
 # Integration test with plot function 

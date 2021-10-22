@@ -36,5 +36,3 @@ test_that("Check the values in output", {
   expect_equal(dummy_output[[3]], c(1/3, 2/3, 0))
   expect_equal(dummy_output[[4]], c(2/3, 0, 1/3))
 })
-
-integration test with a table functions
