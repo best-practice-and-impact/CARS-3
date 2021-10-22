@@ -68,7 +68,7 @@ jobs:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: |
           download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = "D:/a/CARS-3/CARS2.zip")
-          unzip(zipfile = "D:/a/.github/CARS2.zip", exdir = "D:/a/CARS-3/")
+          unzip(zipfile = "D:/a/CARS3/CARS2.zip", exdir = "D:/a/CARS-3/")
           devtools::install_deps("D:/a/CARS-3/CARS2-master")
 
           rcmdcheck::rcmdcheck("carsurvey3", args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
