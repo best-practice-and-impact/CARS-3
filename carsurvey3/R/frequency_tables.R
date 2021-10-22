@@ -167,7 +167,7 @@ summarise_where_learned_code <- function(data){
 
 summarise_coding_practices <- function(data) {
   
-  selected_data <- dplyr::select(data, .data$use_open_source:.data$AQUA_book )
+  selected_data <- dplyr::select(data, .data$use_open_source:.data$automated_QA )
   
   levels <- c("I don't understand this question",
               "Never",
@@ -185,8 +185,7 @@ summarise_coding_practices <- function(data) {
               "I collect my code and supporting material into packages",
               "I follow a standard directory structure when programming",
               "I follow coding guidelines or style guides when programming",
-              "I write code to automatically quality assure data",
-              "My team applies the principles set out in the Aqua book when carrying out analysis as code")
+              "I write code to automatically quality assure data")
   
   frequencies <- carsurvey3::calc_multi_col_freqs(data = selected_data, levels = levels, labels = labels, calc_props = TRUE)
  
