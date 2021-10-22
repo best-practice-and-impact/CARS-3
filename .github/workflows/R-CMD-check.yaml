@@ -37,7 +37,15 @@ jobs:
       - name: Query dependencies
         run: |
           install.packages('remotes')
-          saveRDS(remotes::dev_package_deps("carsurvey3", dependencies = TRUE), ".github/depends.Rds", version = 2)
+
+          dir.create(".github/")
+          download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = ".github/CARS2.zip")
+          unzip(zipfile = ".github/CARS2.zip", exdir = ".github")
+          cars2_deps <- remotes::dev_package_deps(".github/CARS2-master", dependencies = TRUE)
+
+          cars3_deps <- remotes::dev_package_deps("carsurvey3", dependencies = TRUE)
+
+          saveRDS(rbind(cars2_deps, cars3_deps), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
 
@@ -67,9 +75,7 @@ jobs:
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: |
-          download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = "D:/a/CARS-3/CARS2.zip")
-          unzip(zipfile = "D:/a/CARS3/CARS2.zip", exdir = "D:/a/CARS-3/")
-          devtools::install_deps("D:/a/CARS-3/CARS2-master")
+
 
           rcmdcheck::rcmdcheck("carsurvey3", args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
