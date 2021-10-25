@@ -194,3 +194,41 @@ summarise_coding_practices <- function(data) {
   return(frequencies)
   
 }
+
+#' @title Summarise basic rap score
+#'
+#' @description calculate frequency table for basic rap scores
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return frequency table 
+#' @export
+#'
+
+calc_freqs_rap_basic <- function(data){
+  
+  basic_freqs <- data.frame(table(data$basic_rap_score))
+  colnames(basic_freqs) <- c("Basic RAP score", "Count")
+  
+  return(basic_freqs)
+  
+}
+
+#' @title Summarise Advanced rap score
+#'
+#' @description calculate frequency table for Advanced rap scores
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return frequency table 
+#' @export
+#'
+
+calc_freqs_rap_advanced <- function(data){
+  
+  advanced_freqs <- data.frame(table(data$advanced_rap_score))
+  colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
+  
+  return(advanced_freqs)
+  
+}
