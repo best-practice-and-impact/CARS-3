@@ -268,3 +268,44 @@ calc_freqs_knowledge_of_rap <- function(data){
   
   return(rap_knowledge)
 }
+
+#' @title Opinions of RAP
+#' 
+#' @description Create frequency table of opinions of RAP
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return data.frame
+#' @export
+
+calc_freqs_opinions_of_rap <- function(data) {
+  
+  opinion_rap_data <- data[data$heard_of_RAP == "Yes", ]
+  opinion_rap_data <- dplyr::select(opinion_rap_data, "RAP_confident":"RAP_planning_to_implement")
+  
+  levels = c("Strongly Disagree",
+             "Disagree", 
+             "Neutral", 
+             "Agree", 
+             "Strongly Agree")
+  
+  labels = c("I feel confident implementing RAP in my work",
+             "I feel supported to implement RAP in my work",
+             "I know where to find resources to help me implement RAP",
+             "I understand what the key components of the RAP methodology are",
+             "I think it is important to implement RAP in my work",
+             "I and/or my team are currently implementing RAP",
+             "I or my team are planning on implementing RAP in the next 12 months")
+  
+  freq_rap_opinions <- calc_multi_col_freqs(opinion_rap_data, levels = levels, labels = labels, calc_props = TRUE)
+  
+  colnames(freq_rap_opinions) <- c("Question",
+                                   "Strongly disagree",
+                                   "Disagree",
+                                   "Neutral",
+                                   "Agree",
+                                   "Strongly agree")
+  
+  return(freq_rap_opinions)
+  
+}

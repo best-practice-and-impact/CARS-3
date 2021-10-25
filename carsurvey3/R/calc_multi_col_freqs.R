@@ -30,7 +30,7 @@ calc_multi_col_freqs <- function(data, levels, labels, calc_props = FALSE){
   })
   
   if (calc_props) {
-    frequencies <- frequencies/rowSums(frequencies)
+    frequencies <- frequencies/colSums(frequencies)
   }
   
   frequencies <- data.frame(labels = labels, t(frequencies))
