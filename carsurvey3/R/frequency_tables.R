@@ -309,3 +309,42 @@ calc_freqs_opinions_of_rap <- function(data) {
   return(freq_rap_opinions)
   
 }
+
+#' @title Frequency of documentation use
+#' 
+#' @description Create frequency table of documentation use
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return data.frame
+#' @export
+
+calc_freq_doc <- function(data) {
+  
+  documentation_data <- data[data$code_freq != "Never", ]
+  documentation_data <- dplyr::select(documentation_data, "desk_notes":"flow_charts")
+  
+  levels = c("I don't understand this question",
+             "Never",
+             "Rarely",
+             "Sometimes",
+             "Regularly",
+             "All the time")
+  
+  labels = c("Desk notes",
+             "Documentation for each function or class",
+             "README files",
+             "Analytical Quality Assurance (AQA) logs",
+             "Data or assumptions registers",
+             "Code comments",
+             "Flow charts")
+  
+  
+  freq_documentation_data <- calc_multi_col_freqs(documentation_data, levels = levels, labels = labels, calc_props = TRUE)
+  
+  colnames(freq_documentation_data) <- c("Question",
+                                         levels)
+  
+  return(freq_documentation_data)
+  
+}
