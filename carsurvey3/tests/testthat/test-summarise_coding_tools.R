@@ -73,13 +73,13 @@ test_that("Frequencies are correct", {
   access_data <- dummy_data[1:11]
   knowledge_data <- dummy_data[12:22]
   
-  expect_equal(dummy_knowledge_output[[2]], unname(colSums(knowledge_data == "Yes")))
-  expect_equal(dummy_knowledge_output[[3]], unname(colSums(knowledge_data == "Don't Know")))
-  expect_equal(dummy_knowledge_output[[4]], unname(colSums(knowledge_data == "No")))
+  expect_true(all(dummy_knowledge_output[[2]], colSums(knowledge_data == "Yes")))
+  expect_true(all(dummy_knowledge_output[[3]], colSums(knowledge_data == "Don't Know")))
+  expect_true(all(dummy_knowledge_output[[4]], colSums(knowledge_data == "No")))
   
-  expect_equal(dummy_access_output[[2]], unname(colSums(access_data == "Yes")))
-  expect_equal(dummy_access_output[[3]], unname(colSums(access_data == "Don't Know")))
-  expect_equal(dummy_access_output[[4]], unname(colSums(access_data == "No")))
+  expect_true(all(dummy_access_output[[2]] == colSums(access_data == "Yes")))
+  expect_true(all(dummy_access_output[[3]] == colSums(access_data == "Don't Know")))
+  expect_true(all(dummy_access_output[[4]] == colSums(access_data == "No")))
 })
 
 
