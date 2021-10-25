@@ -2,8 +2,8 @@ dummy_data <- data.frame(heard_of_RAP = c("No", "Yes", "Yes", "Yes", "Yes"),
                          RAP_confident = c("Strongly Agree" , "Agree", "Neutral", "Disagree", "Strongly Disagree"), 
                          RAP_supported = c("Strongly Disagree", "Strongly Agree" , "Agree", "Neutral", "Disagree"), 
                          RAP_resources = c("Disagree", "Strongly Disagree", "Strongly Agree" , "Agree", "Neutral"), 
-                         RAP_understand_key_components = c("Neutral", "Disagree", "Strongly Disagree", "Strongly Agree" , "Agree"), 
-                         RAP_important = c("Strongly Agree" , "Agree", "Neutral", "Disagree", "Strongly Agree" ), 
+                         RAP_understand_key_components = c("Neutral", "Disagree", "Disagree", "Strongly Agree" , "Agree"), 
+                         RAP_important = c("Strongly Agree" , "Agree", NA, "Disagree", "Strongly Agree" ), 
                          RAP_implementing = c("Strongly Agree" , "Agree", "Neutral", "Disagree", "Strongly Disagree"), 
                          RAP_planning_to_implement = c("Strongly Disagree", "Strongly Agree" , "Agree", "Neutral", "Disagree"))
 
@@ -38,11 +38,11 @@ test_that("Labels are in correct order",{
 
 
 test_that("Check output values are correct",{
-  expect_equal(dummy_output[[2]], c(0.25, 0, 0.25, 0.25, 0, 0.25, 0))
-  expect_equal(dummy_output[[3]], c(0.25, 0.25, 0, 0.25, 0.25, 0.25, 0.25))
-  expect_equal(dummy_output[[4]], c(0.25, 0.25, 0.25, 0, 0.25, 0.25, 0.25))
-  expect_equal(dummy_output[[5]], c(0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25))
-  expect_equal(dummy_output[[6]], c(0, 0.25, 0.25, 0.25, 0.25, 0, 0.25))
+  expect_equal(dummy_output[[2]], c(1/4, 0, 1/4, 0, 0, 1/4, 0))
+  expect_equal(dummy_output[[3]], c(1/4, 1/4, 0, 1/2, 1/3, 1/4, 1/4))
+  expect_equal(dummy_output[[4]], c(1/4, 1/4, 1/4, 0, 0, 1/4, 1/4))
+  expect_equal(dummy_output[[5]], c(1/4, 1/4, 1/4, 1/4, 1/3, 1/4, 1/4))
+  expect_equal(dummy_output[[6]], c(0, 1/4, 1/4, 1/4, 1/3, 0, 1/4))
   
 })
 
