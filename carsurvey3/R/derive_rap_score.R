@@ -93,6 +93,8 @@ derive_advanced_rap_scores <- function(data) {
     )
   }
   
+  high_vals <- c("Regularly", "All the time")
+  
   data$function_score <- ifelse(data$functions %in% high_vals, 1, 0)
   data$unit_test_score <- ifelse(data$unit_tests %in% high_vals, 1, 0)
   data$function_doc_score <- ifelse(data$function_docs %in% high_vals, 1, 0)
