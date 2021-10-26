@@ -441,3 +441,29 @@ summarise_dep_man_freq <- function(data) {
   colnames(freqs) <- c("Dependency Management Frequency", "Count")
   return(freqs)
 }
+
+#' @title Summarise dependency_management frequency
+#'
+#' @description calculate frequency table for dependency_management. 
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return
+#' @export
+#'
+summarise_rep_workflow_freq <- function(data) {
+  
+  # Validation checks
+  if (!"reproducible_workflow" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'reproducible_workflow")
+  }
+  
+  data$reproducible_workflow <- factor(data$reproducible_workflow, levels = c(c("Yes",
+                                                                                "No",
+                                                                                "I don't know what reproducible workflows are")))
+  
+  freqs <- data.frame(table(data$reproducible_workflow))
+  
+  colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
+  return(freqs)
+}
