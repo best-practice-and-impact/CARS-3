@@ -4,7 +4,7 @@
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return
+#' @return frequency table (data.frame)
 #' 
 #' @export
 
@@ -34,7 +34,7 @@ summarise_code_freq <- function(data) {
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return
+#' @return frequency table (data.frame)
 #' 
 #' @export
 #'
@@ -70,7 +70,7 @@ summarise_operations <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #' @param type type of table (knowledge or access)
 #'
-#' @return
+#' @return frequency table (data.frame)
 #' 
 #' @export
 #'
@@ -115,7 +115,7 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
 #'
 #'@param data full CARS wave 3 data.frame after preprocessing
 #'
-#'@return frequency table
+#' @return frequency table (data.frame)
 #'
 #'@export 
 #'
@@ -133,9 +133,8 @@ summarise_where_learned_code <- function(data){
     stop("unexpected_input: no column called 'learn_before_current_role")
   }
   
-  
-  data$where_learned_to_code[(is.na(data$learn_before_current_role) |
-                                (data$learn_before_current_role == "No")) &
+  # 
+  data$where_learned_to_code[(is.na(data$learn_before_current_role) | (data$learn_before_current_role == "No")) & 
                                data$code_freq != "Never"] <- "In current role"
   
   levels = c("In current role",
@@ -164,7 +163,7 @@ summarise_where_learned_code <- function(data){
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return frequency table 
+#' @return frequency table (data.frame)
 #' 
 #' @export
 #'
@@ -205,7 +204,7 @@ summarise_coding_practices <- function(data) {
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return frequency table 
+#' @return frequency table (data.frame)
 #' 
 #' @export
 #'
@@ -225,7 +224,7 @@ calc_freqs_rap_basic <- function(data){
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return frequency table 
+#' @return frequency table (data.frame)
 #' 
 #' @export
 #'
@@ -245,7 +244,7 @@ calc_freqs_rap_advanced <- function(data){
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return data.frame
+#' @return frequency table (data.frame)
 #' 
 #' @export
 
@@ -287,7 +286,7 @@ calc_freqs_knowledge_of_rap <- function(data){
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return data.frame
+#' @return frequency table (data.frame)
 #' 
 #' @export
 
@@ -334,7 +333,7 @@ calc_freqs_opinions_of_rap <- function(data) {
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return data.frame
+#' @return frequency table (data.frame)
 #' 
 #' @export
 
@@ -379,7 +378,7 @@ calc_freq_doc <- function(data) {
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return data.frame
+#' @return frequency table (data.frame)
 #' 
 #' @export
 
@@ -421,9 +420,10 @@ calc_freq_rap_comp <- function(data){
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return
+#' @return frequency table (data.frame)
+#' 
 #' @export
-#'
+
 summarise_ci_freq <- function(data) {
   
   # Validation checks
@@ -447,9 +447,10 @@ return(freqs)
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return
+#' @return frequency table (data.frame)
+#' 
 #' @export
-#'
+
 summarise_dep_man_freq <- function(data) {
   
   # Validation checks
@@ -473,9 +474,10 @@ return(freqs)
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return
+#' @return frequency table (data.frame)
+#' 
 #' @export
-#'
+
 summarise_rep_workflow_freq <- function(data) {
   
   # Validation checks
@@ -499,9 +501,10 @@ return(freqs)
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
-#' @return
+#' @return frequency table (data.frame)
+#' 
 #' @export
-#'
+
 summarise_ability_change_freq <- function(data) {
   
   # Validation checks
