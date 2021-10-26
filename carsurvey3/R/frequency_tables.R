@@ -348,3 +348,44 @@ calc_freq_doc <- function(data) {
   return(freq_documentation_data)
   
 }
+
+#' @title RAP score components
+#' 
+#' @description Create frequency table of basic and advanced RAP score components
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return data.frame
+#' @export
+
+calc_freq_rap_comp <- function(data){
+  
+  labels <- c("use_open_source_score" = "Use open source software",
+              "open_code_score" = "Team open source code",
+              "version_control_score" = "Version control",
+              "peer_review_score" = "Peer review",
+              "doc_score" = "Documentation",
+              "function_score" = "Functions",
+              "unit_test_score" = "Unit testing",
+              "function_doc_score" = "Function documentation",
+              "package_score" = "Code packages",
+              "code_style_score" = "Follow code style guidelines",
+              "cont_integreation_score" = "Continuous integration",
+              "dep_management_score" = "Dependency management")
+  
+  rap_score <- data[grepl("_score", colnames(data))]
+  
+  components <- rap_score[!colnames(rap_score) %in% c("basic_rap_score", "advanced_rap_score", "AQUA_book_score")]
+  components[is.na(components)] <- 0
+  components <- data.frame(Component = labels,
+                           Type = c(rep("Basic", 5), rep("Advanced", 7)),
+                           Count = unname(colSums(components))
+  )
+  
+  rownames(components) <- NULL
+  components <- components[order(-rank(components$Type),components$Component),]
+  components$Component <- factor(components$Component, levels = components$Component)
+  
+  return(components)
+  
+}
