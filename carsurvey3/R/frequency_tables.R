@@ -415,3 +415,29 @@ summarise_ci_freq <- function(data) {
   colnames(freqs) <- c("Continuous Integration Frequency", "Count")
   return(freqs)
 }
+
+#' @title Summarise dependency management frequency
+#'
+#' @description calculate frequency table for dependency management. 
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return
+#' @export
+#'
+summarise_dep_man_freq <- function(data) {
+  
+  # Validation checks
+  if (!"dependency_management" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'dependency_management")
+  }
+  
+  data$dependency_management <- factor(data$dependency_management, levels = c(c("Yes",
+                                                                                "No",
+                                                                                "I don't know what dependency management is")))
+  
+  freqs <- data.frame(table(data$dependency_management))
+  
+  colnames(freqs) <- c("Dependency Management Frequency", "Count")
+  return(freqs)
+}
