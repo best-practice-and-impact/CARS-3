@@ -86,7 +86,7 @@ rename_cols <- function(data) {
     "knowledge_java_scala",
     "access_java_scala",
     "knowledge_C",
-    "access_c",
+    "access_C",
     "knowledge_matlab",
     "access_matlab",
     "other_tools",

@@ -13,5 +13,5 @@ rename_cols(data)
 data.frame
 }
 \description{
-Rename columns
+add meaningful column names to dataset ingested from smartsurvey API.
 }
