@@ -5,9 +5,9 @@
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return
+#' 
 #' @export
-#'
-#' @examples
+
 summarise_code_freq <- function(data) {
   
   # Validation checks
@@ -35,6 +35,7 @@ summarise_code_freq <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return
+#' 
 #' @export
 #'
 
@@ -70,6 +71,7 @@ summarise_operations <- function(data) {
 #' @param type type of table (knowledge or access)
 #'
 #' @return
+#' 
 #' @export
 #'
 
@@ -114,6 +116,7 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
 #'@param data full CARS wave 3 data.frame after preprocessing
 #'
 #'@return frequency table
+#'
 #'@export 
 #'
 
@@ -162,6 +165,7 @@ summarise_where_learned_code <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table 
+#' 
 #' @export
 #'
 
@@ -202,6 +206,7 @@ summarise_coding_practices <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table 
+#' 
 #' @export
 #'
 
@@ -221,6 +226,7 @@ calc_freqs_rap_basic <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table 
+#' 
 #' @export
 #'
 
@@ -240,6 +246,7 @@ calc_freqs_rap_advanced <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return data.frame
+#' 
 #' @export
 
 calc_freqs_knowledge_of_rap <- function(data){
@@ -281,6 +288,7 @@ calc_freqs_knowledge_of_rap <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return data.frame
+#' 
 #' @export
 
 calc_freqs_opinions_of_rap <- function(data) {
@@ -327,6 +335,7 @@ calc_freqs_opinions_of_rap <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return data.frame
+#' 
 #' @export
 
 calc_freq_doc <- function(data) {
@@ -371,6 +380,7 @@ calc_freq_doc <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return data.frame
+#' 
 #' @export
 
 calc_freq_rap_comp <- function(data){
@@ -509,4 +519,48 @@ summarise_ability_change_freq <- function(data) {
   
   colnames(freqs) <- c("Ability Change Frequency", "Count")
   return(freqs)
+}
+
+#' @title Summarise programming language status
+#' 
+#' @description calculate counts of responents reporting access to, knowledge of, or both for each programming language.
+#' 
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#' 
+#' @return frequency table (data.frame)
+#' 
+#' @export
+
+summarise_language_status <- function(data) {
+   selected_data <- dplyr::select(data, status_R:status_matlab)
+   
+   select_data <- selected_data[order(colnames(selected_data))]
+   
+   frequencies <- data.frame(apply(selected_data, 2, function(x) {
+     x <- factor(x, levels = c("access", "both", "knowledge"))
+     
+     table(x)
+   }))
+   
+   frequencies <- frequencies[order(colnames(frequencies))]
+   
+   languages <- c(
+     "C++ / C#",
+     "Java / Scala",
+     "Javascript / Typescript",
+     "Matlab",
+     "Python",
+     "R", 
+     "SAS",
+     "SPSS", 
+     "SQL",
+     "Stata",
+     "VBA"
+   )
+   
+   frequencies <- data.frame(languages, t(frequencies), check.names = FALSE)
+   
+   colnames(frequencies) <- c("Programming language", "Access only", "Access and knowledge", "Knowledge only")
+   
+   frequencies
 }
