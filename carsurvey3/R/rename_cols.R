@@ -125,7 +125,7 @@ rename_cols <- function(data) {
     "flow_charts",
     "other_docs",
     "CI",
-    "depdendency_management",
+    "dependency_management",
     "reproducible_workflow",
     "coding_practices_comments",
     "support_comments",
