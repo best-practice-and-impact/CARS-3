@@ -1,0 +1,74 @@
+---
+title: "Summary statistics"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: 
+      collapsed: false
+---
+```{r global-options, include=FALSE}
+# Set echo=FALSE for all chunks
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+# Coding frequency and tools
+
+
+## Coding frequency
+
+
+## Access to and knowledge of programming languages
+
+
+### Knowledge of programming tools
+
+
+### Access to programming tools
+
+
+### Access and knowledge gaps
+
+
+## What are people using code for?
+
+
+# Coding capability 
+
+
+## Change in coding ability during current role
+
+
+## Where respondents have learned to code
+
+
+# Coding practices
+
+
+## General coding practices
+
+## Documentation
+
+
+## Reproducible workflow packages
+
+## Source control platform
+
+# RAP knowledge and opinions
+
+
+## Knowledge of RAP and RAP champions
+
+
+## Opinions on RAP
+# RAP scores
+
+
+
+## RAP components
+
+
+## Basic RAP scores
+
+
+## Advanced RAP scores

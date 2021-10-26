@@ -1,0 +1,14 @@
+name: "cars-findings"
+output_dir: "docs"
+output:
+  html_document:
+    css: "style.css"
+navbar:
+  title: "Coding in Analysis and Research Survey"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Summary statistics"
+      href: page1.html
+    - text: "Department profiles"
+      href: page2.html

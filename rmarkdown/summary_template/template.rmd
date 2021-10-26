@@ -1,0 +1,13 @@
+---
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: 
+      collapsed: false
+params: 
+  title: "Default"
+  tables: NULL
+  samples: NULL
+title: "`r params$title`"
+---

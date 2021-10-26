@@ -1,0 +1,11 @@
+---
+title: "Grade profiles"
+---
+
+```{r global-options, include=FALSE}
+# Set echo=false for all chunks
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+## Grade sample sizes
+

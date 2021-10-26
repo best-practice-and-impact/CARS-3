@@ -1,0 +1,11 @@
+---
+title: "Department profiles"
+---
+
+```{r global-options, include=FALSE}
+# Set echo=false for all chunks
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+## Department sample sizes
+
