@@ -83,7 +83,7 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
     
     table(x)
   })
-    
+  
   languages <- c(
     "R", 
     "SQL",
@@ -132,7 +132,7 @@ summarise_where_learned_code <- function(data){
   
   
   data$where_learned_to_code[(is.na(data$learn_before_current_role) |
-                               (data$learn_before_current_role == "No")) &
+                                (data$learn_before_current_role == "No")) &
                                data$code_freq != "Never"] <- "In current role"
   
   levels = c("In current role",
@@ -188,7 +188,7 @@ summarise_coding_practices <- function(data) {
               "I write code to automatically quality assure data")
   
   frequencies <- calc_multi_col_freqs(data = selected_data, levels = levels, labels = labels, calc_props = TRUE)
- 
+  
   colnames(frequencies) <- c("Question", levels)
   
   return(frequencies)
@@ -244,6 +244,11 @@ calc_freqs_rap_advanced <- function(data){
 
 calc_freqs_knowledge_of_rap <- function(data){
   
+  # Validation checks
+  if (!"heard_of_RAP" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'heard_of_RAP")
+  }
+  
   data$RAP_knowledge[data$heard_of_RAP == "No"] <- "Have not heard of RAP"
   
   data$RAP_knowledge <- factor(data$RAP_knowledge, levels = c(
@@ -279,6 +284,11 @@ calc_freqs_knowledge_of_rap <- function(data){
 #' @export
 
 calc_freqs_opinions_of_rap <- function(data) {
+  
+  # Validation checks
+  if (!"heard_of_RAP" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'heard_of_RAP")
+  }
   
   opinion_rap_data <- data[data$heard_of_RAP == "Yes", ]
   opinion_rap_data <- dplyr::select(opinion_rap_data, "RAP_confident":"RAP_planning_to_implement")
@@ -320,6 +330,11 @@ calc_freqs_opinions_of_rap <- function(data) {
 #' @export
 
 calc_freq_doc <- function(data) {
+  
+  # Validation checks
+  if (!"code_freq" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'code_freq")
+  }
   
   documentation_data <- data[data$code_freq != "Never", ]
   documentation_data <- dplyr::select(documentation_data, "desk_notes":"flow_charts")
@@ -407,13 +422,13 @@ summarise_ci_freq <- function(data) {
   }
   
   data$CI <- factor(data$CI, levels = c("Yes",
-                                          "No",
-                                          "I don't know what continuous integration is")))
-  
-  freqs <- data.frame(table(data$CI))
-  
-  colnames(freqs) <- c("Continuous Integration Frequency", "Count")
-  return(freqs)
+                                        "No",
+                                        "I don't know what continuous integration is")))
+
+freqs <- data.frame(table(data$CI))
+
+colnames(freqs) <- c("Continuous Integration Frequency", "Count")
+return(freqs)
 }
 
 #' @title Summarise dependency management frequency
@@ -433,13 +448,13 @@ summarise_dep_man_freq <- function(data) {
   }
   
   data$dependency_management <- factor(data$dependency_management, levels = c("Yes",
-                                                                                "No",
-                                                                                "I don't know what dependency management is")))
-  
-  freqs <- data.frame(table(data$dependency_management))
-  
-  colnames(freqs) <- c("Dependency Management Frequency", "Count")
-  return(freqs)
+                                                                              "No",
+                                                                              "I don't know what dependency management is")))
+
+freqs <- data.frame(table(data$dependency_management))
+
+colnames(freqs) <- c("Dependency Management Frequency", "Count")
+return(freqs)
 }
 
 #' @title Summarise dependency_management frequency
@@ -459,13 +474,13 @@ summarise_rep_workflow_freq <- function(data) {
   }
   
   data$reproducible_workflow <- factor(data$reproducible_workflow, levels = c("Yes",
-                                                                                "No",
-                                                                                "I don't know what reproducible workflows are")))
-  
-  freqs <- data.frame(table(data$reproducible_workflow))
-  
-  colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
-  return(freqs)
+                                                                              "No",
+                                                                              "I don't know what reproducible workflows are")))
+
+freqs <- data.frame(table(data$reproducible_workflow))
+
+colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
+return(freqs)
 }
 
 #' @title Summarise ability change frequency
