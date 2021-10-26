@@ -423,7 +423,7 @@ summarise_ci_freq <- function(data) {
   
   data$CI <- factor(data$CI, levels = c("Yes",
                                         "No",
-                                        "I don't know what continuous integration is")))
+                                        "I don't know what continuous integration is"))
 
 freqs <- data.frame(table(data$CI))
 
@@ -449,7 +449,7 @@ summarise_dep_man_freq <- function(data) {
   
   data$dependency_management <- factor(data$dependency_management, levels = c("Yes",
                                                                               "No",
-                                                                              "I don't know what dependency management is")))
+                                                                              "I don't know what dependency management is"))
 
 freqs <- data.frame(table(data$dependency_management))
 
@@ -475,8 +475,8 @@ summarise_rep_workflow_freq <- function(data) {
   
   data$reproducible_workflow <- factor(data$reproducible_workflow, levels = c("Yes",
                                                                               "No",
-                                                                              "I don't know what reproducible workflows are")))
-
+                                                                              "I don't know what reproducible workflows are"))
+  
 freqs <- data.frame(table(data$reproducible_workflow))
 
 colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
