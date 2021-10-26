@@ -7,7 +7,7 @@ dummy_output <- summarise_ci_freq(dummy_data)
 
 test_that("output is a dataframe", expect_s3_class(dummy_output, "data.frame"))
 
-test_that("output has four columns", expect_equal(ncol(dummy_output), 2))
+test_that("output has two columns", expect_equal(ncol(dummy_output), 2))
 
 test_that("output does not contain missing values", expect_false(any(is.na.data.frame(dummy_output))))
 

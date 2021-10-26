@@ -406,7 +406,7 @@ summarise_ci_freq <- function(data) {
     stop("unexpected_input: no column called 'CI")
   }
   
-  data$CI <- factor(data$CI, levels = c(c("Yes",
+  data$CI <- factor(data$CI, levels = c("Yes",
                                           "No",
                                           "I don't know what continuous integration is")))
   
@@ -432,7 +432,7 @@ summarise_dep_man_freq <- function(data) {
     stop("unexpected_input: no column called 'dependency_management")
   }
   
-  data$dependency_management <- factor(data$dependency_management, levels = c(c("Yes",
+  data$dependency_management <- factor(data$dependency_management, levels = c("Yes",
                                                                                 "No",
                                                                                 "I don't know what dependency management is")))
   
@@ -458,12 +458,40 @@ summarise_rep_workflow_freq <- function(data) {
     stop("unexpected_input: no column called 'reproducible_workflow")
   }
   
-  data$reproducible_workflow <- factor(data$reproducible_workflow, levels = c(c("Yes",
+  data$reproducible_workflow <- factor(data$reproducible_workflow, levels = c("Yes",
                                                                                 "No",
                                                                                 "I don't know what reproducible workflows are")))
   
   freqs <- data.frame(table(data$reproducible_workflow))
   
   colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
+  return(freqs)
+}
+
+#' @title Summarise ability change frequency
+#'
+#' @description calculate frequency table for ability change 
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return
+#' @export
+#'
+summarise_ability_change_freq <- function(data) {
+  
+  # Validation checks
+  if (!"ability_change" %in% colnames(data)) {
+    stop("unexpected_input: no column called 'ability_change")
+  }
+  
+  data$ability_change <- factor(data$ability_change,levels = c("Significantly worse",
+                                                               "Slightly worse",
+                                                               "No change",
+                                                               "Slightly better",
+                                                               "Significantly better"))
+  
+  freqs <- data.frame(table(data$ability_change))
+  
+  colnames(freqs) <- c("Ability Change Frequency", "Count")
   return(freqs)
 }
