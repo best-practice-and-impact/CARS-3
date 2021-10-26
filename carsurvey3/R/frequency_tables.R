@@ -82,7 +82,8 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
     x <- factor(x, levels = c("Yes", "Don't Know", "No"))
     
     table(x)
-
+  }))
+  
   frequencies <- frequencies[order(colnames(frequencies))]
 
   languages <- c(
