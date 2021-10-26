@@ -78,31 +78,31 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
   
   selected_data <- data[grepl(paste0(type, "_"), colnames(data))]
   
-  frequencies <- apply(selected_data, 2, function(x) {
+  frequencies <- data.frame(apply(selected_data, 2, function(x) {
     x <- factor(x, levels = c("Yes", "Don't Know", "No"))
     
     table(x)
-  })
+  }))
     
+  frequencies <- frequencies[order(colnames(frequencies))]
+  
   languages <- c(
-    "R", 
-    "SQL",
-    "SAS",
-    "VBA",
-    "Python", 
-    "SPSS", 
-    "Stata",
-    "Javascript / Typescript",
-    "Java / Scala",
     "C++ / C#",
-    "Matlab"
+    "Java / Scala",
+    "Javascript / Typescript",
+    "Matlab",
+    "Python",
+    "R", 
+    "SAS",
+    "SPSS", 
+    "SQL",
+    "Stata",
+    "VBA"
   )
   
   frequencies <- data.frame("Programming language" = languages, t(frequencies), check.names = FALSE)
   
   rownames(frequencies) <- NULL
-  
-  frequencies <- frequencies[order(languages), ]
   
   return(frequencies)
 }

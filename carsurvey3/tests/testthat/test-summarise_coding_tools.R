@@ -73,15 +73,14 @@ test_that("Frequencies are correct", {
   access_data <- dummy_data[1:11]
   knowledge_data <- dummy_data[12:22]
   
-  expect_true(all(dummy_knowledge_output[[2]], colSums(knowledge_data == "Yes")))
-  expect_true(all(dummy_knowledge_output[[3]], colSums(knowledge_data == "Don't Know")))
-  expect_true(all(dummy_knowledge_output[[4]], colSums(knowledge_data == "No")))
+  expect_true(all(dummy_knowledge_output[[2]] == colSums(knowledge_data == "Yes")))
+  expect_true(all(dummy_knowledge_output[[3]] == colSums(knowledge_data == "Don't Know")))
+  expect_true(all(dummy_knowledge_output[[4]] == colSums(knowledge_data == "No")))
   
   expect_true(all(dummy_access_output[[2]] == colSums(access_data == "Yes")))
   expect_true(all(dummy_access_output[[3]] == colSums(access_data == "Don't Know")))
   expect_true(all(dummy_access_output[[4]] == colSums(access_data == "No")))
 })
-
 
 # Integration test with plot function 
 
