@@ -29,7 +29,8 @@ Imports:
     lexicon,
     rlang,
     knitr,
-    magrittr
+    magrittr,
+    carsurvey2 
 Suggests: 
     testthat (>= 2.1.0)
 LazyData: true

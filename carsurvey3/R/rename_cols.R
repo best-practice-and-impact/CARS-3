@@ -10,9 +10,9 @@
 
 rename_cols <- function(data) {
   
-  if (class(tidied_data) != "data.frame") {
+  if (class(data) != "data.frame") {
     stop("Unexpected input: data is not a data.frame.")
-  } else if (length(tidied_data) != 120) {
+  } else if (length(data) != 120) {
     stop("unexpected value: expecting data frame with 120 ")
   }
   

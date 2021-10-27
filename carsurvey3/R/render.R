@@ -1,5 +1,3 @@
-# High Level functions that are called to build the site. Prefixed render_
-
 #' @title Render main site
 #'
 #' @description Processes the Smart survey data to generate a series of tables. 
@@ -15,6 +13,14 @@
 render_main_site <- function(data, markdown_file_path = "rmarkdown/main") {
   
   knitr::opts_chunk$set(warning = FALSE)
+  
+  samples <- list(
+    all = nrow(data),
+    coders = sum(data$code_freq != "Never"),
+    heard_of_rap = sum(data$heard_of_RAP == "Yes"),
+    code_outside_current_role = sum(data$experience_outside_role == "Yes"),
+    any_code_experience = sum(data$experience_outside_role == "Yes" | data$code_freq != "Never")
+  )
   
   # Remove old site and knit
   knitr::opts_chunk$set(message = FALSE, warning = FALSE)
