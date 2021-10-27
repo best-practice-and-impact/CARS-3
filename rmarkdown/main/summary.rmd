@@ -1,0 +1,13 @@
+---
+title: "Summary statistics"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: 
+      collapsed: false
+---
+
+## heading
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fermentum porta nisl et dictum. Quisque interdum justo massa, sit amet consectetur massa elementum sed. Aliquam erat volutpat. Aliquam rhoncus massa felis, eu ultricies ligula eleifend vel. Nulla facilisi. Vestibulum sit amet orci erat. Maecenas tellus justo, convallis consequat luctus sed, tincidunt varius est. Pellentesque condimentum lorem felis, sit amet molestie dolor rhoncus sed. Proin enim velit, luctus sed diam ac, mollis posuere nibh. Donec varius ante eleifend cursus rutrum. Aliquam mattis non dui vitae sagittis. Cras nisi metus, blandit eu tempus eget, egestas nec velit.
