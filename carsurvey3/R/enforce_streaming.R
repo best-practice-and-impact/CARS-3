@@ -1,12 +1,12 @@
-#'@title API to enforce streaming rules
+#' @title API to enforce streaming rules
 #'
-#'@description Enforce all streaming rules across all questions
+#' @description Enforce all streaming rules across all questions
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data
+#' @return data
 #'
-#'@export
+#' @export
 
 enforce_streaming <- function(data){
   
@@ -24,13 +24,13 @@ enforce_streaming <- function(data){
 }
 
 
-#'@title Enforce degree streaming
+#' @title Enforce degree streaming
 #'
-#'@description Enforce the streaming rules that if highest qualification isn't degree then no degree subject has "Yes" returned 
+#' @description Enforce the streaming rules that if highest qualification isn't degree then no degree subject has "Yes" returned 
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_degree_streaming <- function(data){
   
@@ -41,13 +41,13 @@ enforce_degree_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce code frequency streaming
+#' @title Enforce code frequency streaming
 #'
-#'@description Enforce the streaming rules that if code frequency is never then multiple questions are skipped
+#' @description Enforce the streaming rules that if code frequency is never then multiple questions are skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_code_freq_streaming <- function(data){
   
@@ -62,13 +62,15 @@ enforce_code_freq_streaming <- function(data){
   
 }
 
-#'@title Enforce code frequency streaming on coding practices
+#' @title Enforce code frequency streaming on coding practices
 #'
-#'@description Enforce the streaming rules that if code frequency is never then coding practices is skipped
+#' @description Enforce the streaming rules that if code frequency is never then coding practices is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
+#'
+#' @importFrom rlang .data
 
 enforce_codefreq_coding_prac <- function(data){
   
@@ -79,13 +81,15 @@ enforce_codefreq_coding_prac <- function(data){
   return(data)
 }
 
-#'@title Enforce code frequency streaming on documentation questions
+#' @title Enforce code frequency streaming on documentation questions
 #'
-#'@description Enforce the streaming rules that if code frequency is never then documentation practices is skipped
+#' @description Enforce the streaming rules that if code frequency is never then documentation practices is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
+#'
+#' @importFrom rlang .data
 
 enforce_codefreq_doc <- function(data){
   
@@ -96,13 +100,13 @@ enforce_codefreq_doc <- function(data){
   return(data)
 }
 
-#'@title Enforce code frequency streaming on continuous integration questions
+#' @title Enforce code frequency streaming on continuous integration questions
 #'
-#'@description Enforce the streaming rules that if code frequency is never then continuous integration questions is skipped
+#' @description Enforce the streaming rules that if code frequency is never then continuous integration questions is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_codefreq_ci <- function(data){
   
@@ -111,13 +115,13 @@ enforce_codefreq_ci <- function(data){
   return(data)
 }
 
-#'@title Enforce code frequency streaming on dependency management questions
+#' @title Enforce code frequency streaming on dependency management questions
 #'
-#'@description Enforce the streaming rules that if code frequency is never then dependency management questions is skipped
+#' @description Enforce the streaming rules that if code frequency is never then dependency management questions is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_codefreq_dep_man <- function(data){
   
@@ -126,13 +130,13 @@ enforce_codefreq_dep_man <- function(data){
   return(data)
 }
 
-#'@title Enforce code frequency streaming on reproducible workflow questions
+#' @title Enforce code frequency streaming on reproducible workflow questions
 #'
-#'@description Enforce the streaming rules that if code frequency is never then reproducible workflow questions is skipped
+#' @description Enforce the streaming rules that if code frequency is never then reproducible workflow questions is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_codefreq_rep_wf <- function(data){
   
@@ -141,13 +145,13 @@ enforce_codefreq_rep_wf <- function(data){
   return(data)
 }
 
-#'@title Enforce code frequency streaming on extra comment question
+#' @title Enforce code frequency streaming on extra comment question
 #'
-#'@description Enforce the streaming rules that if code frequency is never then extra comment question is skipped
+#' @description Enforce the streaming rules that if code frequency is never then extra comment question is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_codefreq_comment <- function(data){
   
@@ -156,13 +160,13 @@ enforce_codefreq_comment <- function(data){
   return(data)
 }
 
-#'@title Enforce coding experience outside current role streaming
+#' @title Enforce coding experience outside current role streaming
 #'
-#'@description Enforce the streaming rules that if coding experience outside current role is no then follow up questions are skipped
+#' @description Enforce the streaming rules that if coding experience outside current role is no then follow up questions are skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_outside_role_streaming <- function(data){
   
@@ -173,13 +177,13 @@ enforce_outside_role_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce previous coding experience streaming
+#' @title Enforce previous coding experience streaming
 #'
-#'@description Enforce the streaming rules that if previous coding experience is no then where learned to code is skipped
+#' @description Enforce the streaming rules that if previous coding experience is no then where learned to code is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_prev_exp_streaming <- function(data){
   
@@ -188,13 +192,13 @@ enforce_prev_exp_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce heard of RAP streaming
+#' @title Enforce heard of RAP streaming
 #'
-#'@description Enforce the streaming rules that if heard of RAP is "No" then skip various RAP based questions
+#' @description Enforce the streaming rules that if heard of RAP is "No" then skip various RAP based questions
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_heard_of_rap_streaming <- function(data){
 
@@ -204,13 +208,13 @@ enforce_heard_of_rap_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce heard of RAP streaming on RAP_champion and RAP_knowledge
+#' @title Enforce heard of RAP streaming on RAP_champion and RAP_knowledge
 #'
-#'@description Enforce the streaming rules that if heard of RAP is "No" then are you RAP_champion and RAP_knowledge are skipped
+#' @description Enforce the streaming rules that if heard of RAP is "No" then are you RAP_champion and RAP_knowledge are skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_rap_champ_knowl_streaming <- function(data){
   
@@ -221,13 +225,13 @@ enforce_rap_champ_knowl_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce heard of RAP streaming on RAP statements
+#' @title Enforce heard of RAP streaming on RAP statements
 #'
-#'@description Enforce the streaming rules that if heard of RAP is "No" then statements on RAP are skipped
+#' @description Enforce the streaming rules that if heard of RAP is "No" then statements on RAP are skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_rap_state_streaming <- function(data){
   
@@ -238,13 +242,13 @@ enforce_rap_state_streaming <- function(data){
   return(data)
 }
 
-#'@title Enforce RAP champion streaming
+#' @title Enforce RAP champion streaming
 #'
-#'@description Enforce the streaming rules that if RAP champion is yes then Do you know your RAP champion is skipped
+#' @description Enforce the streaming rules that if RAP champion is yes then Do you know your RAP champion is skipped
 #'
-#'@param data pre-processed data
+#' @param data pre-processed data
 #'
-#'@return data frame
+#' @return data frame
 
 enforce_rap_champ_streaming <- function(data){
   

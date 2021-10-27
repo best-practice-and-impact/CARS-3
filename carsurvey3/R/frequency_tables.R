@@ -68,6 +68,7 @@ summarise_code_freq <- function(data) {
 #'
 #' @return frequency table (data.frame)
 #' 
+#' @importFrom rlang .data
 
 summarise_operations <- function(data) {
   
@@ -188,7 +189,8 @@ summarise_where_learned_code <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
+#'
+#' @importFrom rlang .data
 
 summarise_coding_practices <- function(data) {
   
@@ -536,6 +538,8 @@ summarise_ability_change <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #' 
 #' @return frequency table (data.frame)
+#' 
+#' @importFrom rlang .data
 
 summarise_language_status <- function(data) {
    selected_data <- dplyr::select(data, .data$status_R:.data$status_matlab)
