@@ -6,7 +6,7 @@ dummy_data <- data.frame(basic_rap_score <- c(0,
                                               rep(5,6), 
                                               rep(6,7)))
 
-dummy_output <- calc_freqs_rap_basic(dummy_data)
+dummy_output <- summarise_rap_basic(dummy_data)
 
 test_that("Check output is dataframe" , expect_s3_class(dummy_output, "data.frame"))
 

@@ -5,7 +5,7 @@ dummy_data <- data.frame(ability_change = c(NA,
                                             rep("Slightly better", 5),
                                             rep("Significantly better", 6)))
 
-dummy_output <- summarise_ability_change_freq(dummy_data)
+dummy_output <- summarise_ability_change(dummy_data)
 
 test_that("output is a dataframe", expect_s3_class(dummy_output, "data.frame"))
 

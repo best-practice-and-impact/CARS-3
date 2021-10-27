@@ -1,9 +1,9 @@
-dummy_data <- data.frame(CI = c(NA, 
-                                rep("Yes", 2), 
-                                rep("No", 3), 
-                                rep("I don't know what continuous integration is", 4)))
+dummy_data <- data.frame(reproducible_workflow = c(NA, 
+                                                   rep("Yes", 2), 
+                                                   rep("No", 3), 
+                                                   rep("I don't know what reproducible workflows are", 4)))
 
-dummy_output <- summarise_ci_freq(dummy_data)
+dummy_output <- summarise_rep_workflow(dummy_data)
 
 test_that("output is a dataframe", expect_s3_class(dummy_output, "data.frame"))
 
@@ -15,10 +15,10 @@ test_that("labels are in the correct order", {
   expect_identical(dummy_output[[1]], 
                    factor(c("Yes",
                             "No",
-                            "I don't know what continuous integration is"), 
+                            "I don't know what reproducible workflows are"), 
                           levels = c("Yes",
                                      "No",
-                                     "I don't know what continuous integration is"))
+                                     "I don't know what reproducible workflows are"))
   )
 })
 

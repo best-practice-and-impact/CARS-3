@@ -5,7 +5,7 @@ dummy_data <- data.frame(heard_of_RAP = c("No", rep("Yes", 13)),
                                            rep("I know who the RAP champion in my department is", 5)
                          ))
 
-dummy_output <- calc_freqs_knowledge_of_rap(dummy_data)
+dummy_output <- summarise_rap_knowledge(dummy_data)
 
 test_that("Check output is dataframe" , expect_s3_class(dummy_output, "data.frame"))
 

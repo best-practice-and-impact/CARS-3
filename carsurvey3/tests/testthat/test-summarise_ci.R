@@ -1,9 +1,9 @@
-dummy_data <- data.frame(dependency_management = c(NA, 
-                                                   rep("Yes", 2), 
-                                                   rep("No", 3), 
-                                                   rep("I don't know what dependency management is", 4)))
+dummy_data <- data.frame(CI = c(NA, 
+                                rep("Yes", 2), 
+                                rep("No", 3), 
+                                rep("I don't know what continuous integration is", 4)))
 
-dummy_output <- summarise_dep_man_freq(dummy_data)
+dummy_output <- summarise_ci(dummy_data)
 
 test_that("output is a dataframe", expect_s3_class(dummy_output, "data.frame"))
 
@@ -15,10 +15,10 @@ test_that("labels are in the correct order", {
   expect_identical(dummy_output[[1]], 
                    factor(c("Yes",
                             "No",
-                            "I don't know what dependency management is"), 
+                            "I don't know what continuous integration is"), 
                           levels = c("Yes",
                                      "No",
-                                     "I don't know what dependency management is"))
+                                     "I don't know what continuous integration is"))
   )
 })
 

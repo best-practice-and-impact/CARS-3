@@ -12,7 +12,7 @@ dummy_data <- data.frame(use_open_source_score = c(1, 3, 5, 7),
                          cont_integreation_score = c(1, 3, 5, 7), 
                          dep_management_score = c(2, 4, 6, 8))
 
-dummy_output <- calc_freq_rap_comp(dummy_data)
+dummy_output <-summarise_rap_comp(dummy_data)
 
 
 test_that("Check output is dataframe" , expect_s3_class(dummy_output, "data.frame"))

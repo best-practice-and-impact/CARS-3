@@ -72,7 +72,7 @@ enforce_code_freq_streaming <- function(data){
 
 enforce_codefreq_coding_prac <- function(data){
   
-  coding_prac_data <- dplyr::select(data, use_open_source:AQUA_book)
+  coding_prac_data <- dplyr::select(data, .data$use_open_source:.data$AQUA_book)
   coding_prac_data[!is.na(data$code_freq) & (data$code_freq %in% c("Never")),] <- NA
   data[colnames(coding_prac_data)] <- coding_prac_data
   
@@ -89,7 +89,7 @@ enforce_codefreq_coding_prac <- function(data){
 
 enforce_codefreq_doc <- function(data){
   
-  doc_data <- dplyr::select(data, desk_notes:other_docs)
+  doc_data <- dplyr::select(data, .data$desk_notes:.data$other_docs)
   doc_data[!is.na(data$code_freq) & (data$code_freq %in% c("Never")),] <- NA
   data[colnames(doc_data)] <- doc_data
   

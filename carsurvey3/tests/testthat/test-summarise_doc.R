@@ -8,7 +8,7 @@ dummy_data <- data.frame(code_freq = c("Never", rep("Sometimes", 5)),
                          flow_charts = c("Never", NA, "Rarely", "Sometimes", "Regularly", "All the time")
                          )
 
-dummy_output <- calc_freq_doc(dummy_data) 
+dummy_output <- summarise_doc(dummy_data) 
 
 test_that("output is a dataframe", expect_s3_class(dummy_output, "data.frame"))
 

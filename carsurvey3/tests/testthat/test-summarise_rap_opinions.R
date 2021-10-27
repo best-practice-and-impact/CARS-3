@@ -8,7 +8,7 @@ dummy_data <- data.frame(heard_of_RAP = c("No", "Yes", "Yes", "Yes", "Yes"),
                          RAP_planning_to_implement = c("Strongly Disagree", "Strongly Agree" , "Agree", "Neutral", "Disagree"))
 
 
-dummy_output <- calc_freqs_opinions_of_rap(dummy_data)
+dummy_output <- summarise_rap_opinions(dummy_data)
 
 test_that("Check output is dataframe" , expect_s3_class(dummy_output, "data.frame"))
 
