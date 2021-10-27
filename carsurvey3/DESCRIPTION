@@ -27,7 +27,9 @@ Imports:
     htmlwidgets,
     htmltools,
     lexicon,
-    rlang
+    rlang,
+    knitr,
+    magrittr
 Suggests: 
     testthat (>= 2.1.0)
 LazyData: true

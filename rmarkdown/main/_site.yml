@@ -4,15 +4,9 @@ output:
   html_document:
     css: "style.css"
 navbar:
-  title: "Coding in Analysis and Research Survey"
+  title: "Coding in Analysis and Research Survey 2021 - DRAFT"
   left:
     - text: "Home"
       href: index.html
     - text: "Summary statistics"
       href: summary.html
-    - text: "Department profiles"
-      href: departments.html
-    - text: "Grade Profiles"
-      href: grades.html
-    - text: "Profession Profiles"
-      href: professions.html

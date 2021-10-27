@@ -1,3 +1,48 @@
+#' Derive variables
+#'
+#' @description API function for deriving additional variables.
+#' 
+#' @param data tidied and relabelled CARS wave 3 dataset.
+#' 
+#' @return data (data.frame).
+#' 
+#' @export
+
+derive_vars <- function(data) {
+  data <- data %>%
+    derive_language_status %>%
+    derive_rap_score
+}
+
+#' Derive language status
+#'
+#' @description Derve the status of each programmming language as "access" (access only), "knowledge" (knowledge only), "both" or "neither".  
+#'
+#' @param data tidied CARS wave 3 data (data.frame).
+#'
+#' @return data.frame
+
+derive_language_status <- function(data) {
+  lang_list <- colnames(data)[grepl("access_", colnames(data))]
+  
+  lang_list <- gsub("access_", "", lang_list)
+  
+  new_vars <- sapply(lang_list, function(lang) {
+    access_col <- data[paste0("access_", lang)]
+    
+    knowledge_col <- data[paste0("knowledge_", lang)]
+    
+    dplyr::case_when(access_col == "Yes" & knowledge_col == "Yes" ~ "both",
+                     access_col == "Yes" & knowledge_col != "Yes" ~ "access",
+                     access_col != "Yes" & knowledge_col == "Yes" ~ "knowledge",
+                     access_col != "Yes" & knowledge_col!= "Yes" ~ "neither")
+  })
+  
+  colnames(new_vars) <- paste0("status_", lang_list)
+  
+  return(data.frame(data, new_vars))
+}
+
 #'@title Derive RAP scores
 #'
 #'@description Derive basic and advanced RAP score columns from existing variables and add to the dataframe.
@@ -6,7 +51,6 @@
 #'
 #'@return dataframe containing the additional RAP score columns
 #'
-#'@export
 
 derive_rap_score <- function(data){
   data <- derive_basic_rap_scores(data)
@@ -24,7 +68,6 @@ derive_rap_score <- function(data){
 #'
 #'@return dataframe containing the additional basic RAP score columns
 #'
-#'@export
 
 derive_basic_rap_scores <- function(data) {
   
@@ -64,6 +107,7 @@ derive_basic_rap_scores <- function(data) {
   
 }
 
+
 #'@title Derive advanced RAP scores
 #'
 #'@description Derive advanced RAP score columns from existing variables and add to the dataframe.
@@ -72,7 +116,6 @@ derive_basic_rap_scores <- function(data) {
 #'
 #'@return dataframe containing the additional advanced RAP score columns
 #'
-#'@export
 
 derive_advanced_rap_scores <- function(data) {
   
