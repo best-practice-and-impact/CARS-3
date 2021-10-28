@@ -9,23 +9,23 @@
 #' @export
 
 summarise_all <- function(data) {
-  output_list <- c(
-    code_freq <- summarise_code_freq(data),
-    operations <- summarise_operations(data),
-    knowledge <- summarise_coding_tools(data, "knowledge"),
-    access <- summarise_coding_tools(data, "access"),
-    langguage_status <- summarise_language_status(data),
-    where_learned <- summarise_where_learned_code(data),
-    ability_change <- summarise_ability_change(data),
-    coding_practices <- summarise_coding_practices(data),
-    rap_knowlegde <- summarise_rap_knowledge(data),
-    rap_opinions <- summarise_rap_opinions(data),
-    basic_rap_scores <- summarise_rap_basic(data),
-    advanced_rap_scores <- summarise_rap_advanced(data),
-    rap_components <- summarise_rap_comp(data),
-    ci <- summarise_ci(data),
-    dependency_management <- summarise_dep_man(data),
-    rep_workflow <- summarise_rep_workflow(data)
+  output_list <- list(
+    code_freq = summarise_code_freq(data),
+    operations = summarise_operations(data),
+    knowledge = summarise_coding_tools(data, "knowledge"),
+    access = summarise_coding_tools(data, "access"),
+    language_status = summarise_language_status(data),
+    where_learned = summarise_where_learned_code(data),
+    ability_change = summarise_ability_change(data),
+    coding_practices = summarise_coding_practices(data),
+    rap_knowlegde = summarise_rap_knowledge(data),
+    rap_opinions = summarise_rap_opinions(data),
+    basic_rap_scores = summarise_rap_basic(data),
+    advanced_rap_scores = summarise_rap_advanced(data),
+    rap_components = summarise_rap_comp(data),
+    ci = summarise_ci(data),
+    dependency_management = summarise_dep_man(data),
+    rep_workflow = summarise_rep_workflow(data)
   )
   
   return(output_list)

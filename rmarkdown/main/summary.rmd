@@ -10,4 +10,56 @@ output:
 ```{r global-options, include=FALSE}
 # Set echo=FALSE for all chunks
 knitr::opts_chunk$set(echo=FALSE)
+
+library(magrittr)
+
+tables <- carsurvey3::summarise_all(data)
+
+```
+
+# Coding frequency and tools
+
+## Coding frequency
+
+```{r}
+plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$code_freq)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("coding-freq", plot, table)
+
+```
+
+## Access to coding tools
+
+```{r}
+plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE)) %>%  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("tools-access", plot, table)
+```
+
+## Knowledge of coding tools
+
+```{r}
+plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$knowledge, row.names = FALSE)) %>%  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("tools-knowledge", plot, table)
+```
+
+## Access and knowledge gaps
+
+```{r}
+
+plot <- carsurvey2::plot_stacked(tables$language_status, colour_scale = "3scale", xlab = "Count", ylab = "Programming tool", n = samples$all, font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$language_status, row.names = FALSE)) %>%
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("tools-status", plot, table)
+
 ```

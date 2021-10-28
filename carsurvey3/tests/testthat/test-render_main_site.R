@@ -9,3 +9,5 @@ test_that("the output folder contains the right files",  {
   
   expect_true(setequal(expected_files, file_list))
 })
+
+rmarkdown::clean_site("../docs")

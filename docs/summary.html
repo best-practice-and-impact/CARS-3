@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Summary statistics</title>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+  <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-controls="nav-primary" aria-label="Display main menu">
+          Main menu
+        </button>
+        <a class="navbar-brand" href="index.html">Coding in Analysis and Research Survey 2021 - DRAFT</a>
+          </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                      <li>
+                    <a href="index.html">Home  </a>
+                  </li>
+                  <li>
+                    <a href="summary.html">Summary statistics  </a>
+                  </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container -->
+        </div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Summary statistics</h1>
+
+</div>
+
+
+<div id="coding-frequency-and-tools" class="section level1">
+<h1>Coding frequency and tools</h1>
+<div id="coding-frequency" class="section level2">
+<h2>Coding frequency</h2>
+
+  <script>
+    function show_table(output_name) {
+      $("#show-table-" + output_name).hide();
+      $("#show-chart-" + output_name).show();
+      $("#" + output_name + "-chart").hide();
+      $("#" + output_name + "-table").show();
+      $("#show-chart-" + output_name).focus();
+    }
+  
+    function show_chart(output_name) {
+      $("#show-table-" + output_name).show();
+      $("#show-chart-" + output_name).hide();
+      $("#" + output_name + "-chart").show();
+      $("#" + output_name + "-table").hide();
+      $("#show-table-" + output_name).focus();
+    }
+  </script>
+
+<a role="button" class="toggle-button" id="show-chart-coding-freq" href="#coding-freq" onclick="show_chart('coding-freq')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-coding-freq" href="#coding-freq" onclick="show_table('coding-freq')"> Show table </a>
+<style> #show-chart-coding-freq {display: none;} #coding-freq-table {display: none;} </style>
+<div id="coding-freq-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">
+<div id="htmlwidget-9cba53c1a10d5785a483" style="width:600px;height:480px;" class="plotly html-widget"></div>
+</div>
+<div id="coding-freq-table">
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Coding frequency </th>
+   <th style="text-align:right;"> Count </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Never </td>
+   <td style="text-align:right;"> 109 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Rarely </td>
+   <td style="text-align:right;"> 119 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Sometimes </td>
+   <td style="text-align:right;"> 168 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Regularly </td>
+   <td style="text-align:right;"> 282 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> All the time </td>
+   <td style="text-align:right;"> 234 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr>
+<td style = 'padding: 0; border:0;' colspan='100%'><sup>a</sup> Sample size = 912</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<script type="application/json" data-for="htmlwidget-9cba53c1a10d5785a483">{"x":{"visdat":{"3b8c64144c4":["function () ","plotlyVisDat"]},"cur_data":"3b8c64144c4","attrs":{"3b8c64144c4":{"x":["Never","Rarely","Sometimes","Regularly","All the time"],"y":[109,119,168,282,234],"marker":{"color":"#004556"},"orientation":"v","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":600,"margin":{"b":100,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Coding frequency","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["Never","Rarely","Sometimes","Regularly","All the time"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"","tickfont":{"size":14},"titlefont":{"size":16.8}},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"annotations":[{"x":1,"y":0,"text":"Sample size = 912","showarrow":false,"xanchor":"right","yanchor":"auto","xshift":0,"yshift":-100,"xref":"paper","yref":"paper","font":{"size":14}},{"text":"Count","y":1,"x":"min","showarrow":false,"yshift":30,"xref":"paper","yref":"paper","font":{"size":16.8}}],"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false},"data":[{"x":["Never","Rarely","Sometimes","Regularly","All the time"],"y":[109,119,168,282,234],"marker":{"color":"#004556","line":{"color":"rgba(31,119,180,1)"}},"orientation":"v","type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="access-to-coding-tools" class="section level2">
+<h2>Access to coding tools</h2>
+
+  <script>
+    function show_table(output_name) {
+      $("#show-table-" + output_name).hide();
+      $("#show-chart-" + output_name).show();
+      $("#" + output_name + "-chart").hide();
+      $("#" + output_name + "-table").show();
+      $("#show-chart-" + output_name).focus();
+    }
+  
+    function show_chart(output_name) {
+      $("#show-table-" + output_name).show();
+      $("#show-chart-" + output_name).hide();
+      $("#" + output_name + "-chart").show();
+      $("#" + output_name + "-table").hide();
+      $("#show-table-" + output_name).focus();
+    }
+  </script>
+
+<a role="button" class="toggle-button" id="show-chart-tools-access" href="#tools-access" onclick="show_chart('tools-access')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-tools-access" href="#tools-access" onclick="show_table('tools-access')"> Show table </a>
+<style> #show-chart-tools-access {display: none;} #tools-access-table {display: none;} </style>
+<div id="tools-access-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">
+<div id="htmlwidget-565c6fa4dd24f0724b96" style="width:600px;height:480px;" class="plotly html-widget"></div>
+</div>
+<div id="tools-access-table">
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Programming language </th>
+   <th style="text-align:right;"> Yes </th>
+   <th style="text-align:right;"> Don't Know </th>
+   <th style="text-align:right;"> No </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> C++ / C# </td>
+   <td style="text-align:right;"> 62 </td>
+   <td style="text-align:right;"> 488 </td>
+   <td style="text-align:right;"> 362 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Java / Scala </td>
+   <td style="text-align:right;"> 86 </td>
+   <td style="text-align:right;"> 487 </td>
+   <td style="text-align:right;"> 339 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Javascript / Typescript </td>
+   <td style="text-align:right;"> 136 </td>
+   <td style="text-align:right;"> 462 </td>
+   <td style="text-align:right;"> 314 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Matlab </td>
+   <td style="text-align:right;"> 36 </td>
+   <td style="text-align:right;"> 457 </td>
+   <td style="text-align:right;"> 419 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Python </td>
+   <td style="text-align:right;"> 603 </td>
+   <td style="text-align:right;"> 164 </td>
+   <td style="text-align:right;"> 145 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R </td>
+   <td style="text-align:right;"> 808 </td>
+   <td style="text-align:right;"> 52 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SAS </td>
+   <td style="text-align:right;"> 412 </td>
+   <td style="text-align:right;"> 289 </td>
+   <td style="text-align:right;"> 211 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SPSS </td>
+   <td style="text-align:right;"> 283 </td>
+   <td style="text-align:right;"> 350 </td>
+   <td style="text-align:right;"> 279 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SQL </td>
+   <td style="text-align:right;"> 618 </td>
+   <td style="text-align:right;"> 206 </td>
+   <td style="text-align:right;"> 88 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Stata </td>
+   <td style="text-align:right;"> 200 </td>
+   <td style="text-align:right;"> 431 </td>
+   <td style="text-align:right;"> 281 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> VBA </td>
+   <td style="text-align:right;"> 529 </td>
+   <td style="text-align:right;"> 272 </td>
+   <td style="text-align:right;"> 111 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr>
+<td style = 'padding: 0; border:0;' colspan='100%'><sup>a</sup> Sample size = 912</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<script type="application/json" data-for="htmlwidget-565c6fa4dd24f0724b96">{"x":{"visdat":{"3b8c528e2d25":["function () ","plotlyVisDat"]},"cur_data":"3b8c528e2d25","attrs":{"3b8c528e2d25":{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#","VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#","VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[529,200,618,283,412,808,603,36,136,86,62,272,431,206,350,289,52,164,457,462,487,488,111,281,88,279,211,52,145,419,314,339,362],"orientation":"h","hoverinfo":"text","text":["Yes, 529","Yes, 200","Yes, 618","Yes, 283","Yes, 412","Yes, 808","Yes, 603","Yes, 36","Yes, 136","Yes, 86","Yes, 62","Don't Know, 272","Don't Know, 431","Don't Know, 206","Don't Know, 350","Don't Know, 289","Don't Know, 52","Don't Know, 164","Don't Know, 457","Don't Know, 462","Don't Know, 487","Don't Know, 488","No, 111","No, 281","No, 88","No, 279","No, 211","No, 52","No, 145","No, 419","No, 314","No, 339","No, 362"],"marker":{"color":["#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300"]},"color":["Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","No","No","No","No","No","No","No","No","No","No","No"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":600,"margin":{"b":100,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","yanchor":"bottom","x":0.5,"y":1,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"annotations":[{"x":1,"y":0,"text":"Sample size = 912","showarrow":false,"xanchor":"right","yanchor":"auto","xshift":0,"yshift":-100,"xref":"paper","yref":"paper","font":{"size":14}},{"text":"Programming tool","y":1,"x":"min","showarrow":false,"yshift":30,"xref":"paper","yref":"paper","font":{"size":16.8}}],"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[529,200,618,283,412,808,603,36,136,86,62],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Yes, 529","Yes, 200","Yes, 618","Yes, 283","Yes, 412","Yes, 808","Yes, 603","Yes, 36","Yes, 136","Yes, 86","Yes, 62"],"marker":{"color":["#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Yes","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[272,431,206,350,289,52,164,457,462,487,488],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Don't Know, 272","Don't Know, 431","Don't Know, 206","Don't Know, 350","Don't Know, 289","Don't Know, 52","Don't Know, 164","Don't Know, 457","Don't Know, 462","Don't Know, 487","Don't Know, 488"],"marker":{"color":["#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Don't Know","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[111,281,88,279,211,52,145,419,314,339,362],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["No, 111","No, 281","No, 88","No, 279","No, 211","No, 52","No, 145","No, 419","No, 314","No, 339","No, 362"],"marker":{"color":["#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"No","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="knowledge-of-coding-tools" class="section level2">
+<h2>Knowledge of coding tools</h2>
+
+  <script>
+    function show_table(output_name) {
+      $("#show-table-" + output_name).hide();
+      $("#show-chart-" + output_name).show();
+      $("#" + output_name + "-chart").hide();
+      $("#" + output_name + "-table").show();
+      $("#show-chart-" + output_name).focus();
+    }
+  
+    function show_chart(output_name) {
+      $("#show-table-" + output_name).show();
+      $("#show-chart-" + output_name).hide();
+      $("#" + output_name + "-chart").show();
+      $("#" + output_name + "-table").hide();
+      $("#show-table-" + output_name).focus();
+    }
+  </script>
+
+<a role="button" class="toggle-button" id="show-chart-tools-knowledge" href="#tools-knowledge" onclick="show_chart('tools-knowledge')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-tools-knowledge" href="#tools-knowledge" onclick="show_table('tools-knowledge')"> Show table </a>
+<style> #show-chart-tools-knowledge {display: none;} #tools-knowledge-table {display: none;} </style>
+<div id="tools-knowledge-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">
+<div id="htmlwidget-4dcdc7ddb49f0d693635" style="width:600px;height:480px;" class="plotly html-widget"></div>
+</div>
+<div id="tools-knowledge-table">
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Programming language </th>
+   <th style="text-align:right;"> Yes </th>
+   <th style="text-align:right;"> Don't Know </th>
+   <th style="text-align:right;"> No </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> C++ / C# </td>
+   <td style="text-align:right;"> 79 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 793 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Java / Scala </td>
+   <td style="text-align:right;"> 51 </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 824 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Javascript / Typescript </td>
+   <td style="text-align:right;"> 90 </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 785 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Matlab </td>
+   <td style="text-align:right;"> 178 </td>
+   <td style="text-align:right;"> 46 </td>
+   <td style="text-align:right;"> 688 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Python </td>
+   <td style="text-align:right;"> 379 </td>
+   <td style="text-align:right;"> 34 </td>
+   <td style="text-align:right;"> 499 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R </td>
+   <td style="text-align:right;"> 623 </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 264 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SAS </td>
+   <td style="text-align:right;"> 305 </td>
+   <td style="text-align:right;"> 28 </td>
+   <td style="text-align:right;"> 579 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SPSS </td>
+   <td style="text-align:right;"> 305 </td>
+   <td style="text-align:right;"> 37 </td>
+   <td style="text-align:right;"> 570 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SQL </td>
+   <td style="text-align:right;"> 560 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 332 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Stata </td>
+   <td style="text-align:right;"> 142 </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 730 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> VBA </td>
+   <td style="text-align:right;"> 281 </td>
+   <td style="text-align:right;"> 38 </td>
+   <td style="text-align:right;"> 593 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr>
+<td style = 'padding: 0; border:0;' colspan='100%'><sup>a</sup> Sample size = 912</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<script type="application/json" data-for="htmlwidget-4dcdc7ddb49f0d693635">{"x":{"visdat":{"3b8c2d67589a":["function () ","plotlyVisDat"]},"cur_data":"3b8c2d67589a","attrs":{"3b8c2d67589a":{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#","VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#","VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[281,142,560,305,305,623,379,178,90,51,79,38,40,20,37,28,25,34,46,37,37,40,593,730,332,570,579,264,499,688,785,824,793],"orientation":"h","hoverinfo":"text","text":["Yes, 281","Yes, 142","Yes, 560","Yes, 305","Yes, 305","Yes, 623","Yes, 379","Yes, 178","Yes, 90","Yes, 51","Yes, 79","Don't Know, 38","Don't Know, 40","Don't Know, 20","Don't Know, 37","Don't Know, 28","Don't Know, 25","Don't Know, 34","Don't Know, 46","Don't Know, 37","Don't Know, 37","Don't Know, 40","No, 593","No, 730","No, 332","No, 570","No, 579","No, 264","No, 499","No, 688","No, 785","No, 824","No, 793"],"marker":{"color":["#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300"]},"color":["Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Yes","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","Don't Know","No","No","No","No","No","No","No","No","No","No","No"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":600,"margin":{"b":100,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","yanchor":"bottom","x":0.5,"y":1,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"annotations":[{"x":1,"y":0,"text":"Sample size = 912","showarrow":false,"xanchor":"right","yanchor":"auto","xshift":0,"yshift":-100,"xref":"paper","yref":"paper","font":{"size":14}},{"text":"Programming tool","y":1,"x":"min","showarrow":false,"yshift":30,"xref":"paper","yref":"paper","font":{"size":16.8}}],"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[281,142,560,305,305,623,379,178,90,51,79],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Yes, 281","Yes, 142","Yes, 560","Yes, 305","Yes, 305","Yes, 623","Yes, 379","Yes, 178","Yes, 90","Yes, 51","Yes, 79"],"marker":{"color":["#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Yes","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[38,40,20,37,28,25,34,46,37,37,40],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Don't Know, 38","Don't Know, 40","Don't Know, 20","Don't Know, 37","Don't Know, 28","Don't Know, 25","Don't Know, 34","Don't Know, 46","Don't Know, 37","Don't Know, 37","Don't Know, 40"],"marker":{"color":["#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Don't Know","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[593,730,332,570,579,264,499,688,785,824,793],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["No, 593","No, 730","No, 332","No, 570","No, 579","No, 264","No, 499","No, 688","No, 785","No, 824","No, 793"],"marker":{"color":["#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"No","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="access-and-knowledge-gaps" class="section level2">
+<h2>Access and knowledge gaps</h2>
+
+  <script>
+    function show_table(output_name) {
+      $("#show-table-" + output_name).hide();
+      $("#show-chart-" + output_name).show();
+      $("#" + output_name + "-chart").hide();
+      $("#" + output_name + "-table").show();
+      $("#show-chart-" + output_name).focus();
+    }
+  
+    function show_chart(output_name) {
+      $("#show-table-" + output_name).show();
+      $("#show-chart-" + output_name).hide();
+      $("#" + output_name + "-chart").show();
+      $("#" + output_name + "-table").hide();
+      $("#show-table-" + output_name).focus();
+    }
+  </script>
+
+<a role="button" class="toggle-button" id="show-chart-tools-status" href="#tools-status" onclick="show_chart('tools-status')"> Show chart </a>
+<a role="button" class="toggle-button" id="show-table-tools-status" href="#tools-status" onclick="show_table('tools-status')"> Show table </a>
+<style> #show-chart-tools-status {display: none;} #tools-status-table {display: none;} </style>
+<div id="tools-status-chart" role="img" aria-label="Chart. Click the show table button to present the data as a text table instead.">
+<div id="htmlwidget-161553ff5446d8a5c720" style="width:600px;height:480px;" class="plotly html-widget"></div>
+</div>
+<div id="tools-status-table">
+<table class="table" style="margin-left: auto; margin-right: auto;">
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Programming language </th>
+   <th style="text-align:right;"> Access only </th>
+   <th style="text-align:right;"> Access and knowledge </th>
+   <th style="text-align:right;"> Knowledge only </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> C++ / C# </td>
+   <td style="text-align:right;"> 45 </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 62 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Java / Scala </td>
+   <td style="text-align:right;"> 73 </td>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:right;"> 38 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Javascript / Typescript </td>
+   <td style="text-align:right;"> 75 </td>
+   <td style="text-align:right;"> 61 </td>
+   <td style="text-align:right;"> 29 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Matlab </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:right;"> 167 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Python </td>
+   <td style="text-align:right;"> 295 </td>
+   <td style="text-align:right;"> 308 </td>
+   <td style="text-align:right;"> 71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> R </td>
+   <td style="text-align:right;"> 211 </td>
+   <td style="text-align:right;"> 597 </td>
+   <td style="text-align:right;"> 26 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SAS </td>
+   <td style="text-align:right;"> 175 </td>
+   <td style="text-align:right;"> 237 </td>
+   <td style="text-align:right;"> 68 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SPSS </td>
+   <td style="text-align:right;"> 136 </td>
+   <td style="text-align:right;"> 147 </td>
+   <td style="text-align:right;"> 158 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> SQL </td>
+   <td style="text-align:right;"> 144 </td>
+   <td style="text-align:right;"> 474 </td>
+   <td style="text-align:right;"> 86 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Stata </td>
+   <td style="text-align:right;"> 129 </td>
+   <td style="text-align:right;"> 71 </td>
+   <td style="text-align:right;"> 71 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> VBA </td>
+   <td style="text-align:right;"> 273 </td>
+   <td style="text-align:right;"> 256 </td>
+   <td style="text-align:right;"> 25 </td>
+  </tr>
+</tbody>
+<tfoot>
+<tr>
+<td style = 'padding: 0; border:0;' colspan='100%'><sup>a</sup> Sample size = 912</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<script type="application/json" data-for="htmlwidget-161553ff5446d8a5c720">{"x":{"visdat":{"3b8c5f53224a":["function () ","plotlyVisDat"]},"cur_data":"3b8c5f53224a","attrs":{"3b8c5f53224a":{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#","VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#","VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[273,129,144,136,175,211,295,25,75,73,45,256,71,474,147,237,597,308,11,61,13,17,25,71,86,158,68,26,71,167,29,38,62],"orientation":"h","hoverinfo":"text","text":["Access only, 273","Access only, 129","Access only, 144","Access only, 136","Access only, 175","Access only, 211","Access only, 295","Access only, 25","Access only, 75","Access only, 73","Access only, 45","Access and knowledge, 256","Access and knowledge, 71","Access and knowledge, 474","Access and knowledge, 147","Access and knowledge, 237","Access and knowledge, 597","Access and knowledge, 308","Access and knowledge, 11","Access and knowledge, 61","Access and knowledge, 13","Access and knowledge, 17","Knowledge only, 25","Knowledge only, 71","Knowledge only, 86","Knowledge only, 158","Knowledge only, 68","Knowledge only, 26","Knowledge only, 71","Knowledge only, 167","Knowledge only, 29","Knowledge only, 38","Knowledge only, 62"],"marker":{"color":["#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300"]},"color":["Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access only","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Access and knowledge","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only","Knowledge only"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"width":600,"margin":{"b":100,"l":60,"t":25,"r":10},"barmode":"stack","clickmode":"none","legend":{"orientation":"h","xanchor":"center","yanchor":"bottom","x":0.5,"y":1,"traceorder":"normal","font":{"size":14}},"xaxis":{"domain":[0,1],"automargin":true,"title":"Count","tickfont":{"size":14},"titlefont":{"size":16.8}},"yaxis":{"domain":[0,1],"automargin":true,"title":"","tickfont":{"size":14},"titlefont":{"size":16.8},"type":"category","categoryorder":"array","categoryarray":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"]},"hoverlabel":{"bgcolor":"white","font":{"size":14}},"annotations":[{"x":1,"y":0,"text":"Sample size = 912","showarrow":false,"xanchor":"right","yanchor":"auto","xshift":0,"yshift":-100,"xref":"paper","yref":"paper","font":{"size":14}},{"text":"Programming tool","y":1,"x":"min","showarrow":false,"yshift":30,"xref":"paper","yref":"paper","font":{"size":16.8}}],"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false},"data":[{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[273,129,144,136,175,211,295,25,75,73,45],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Access only, 273","Access only, 129","Access only, 144","Access only, 136","Access only, 175","Access only, 211","Access only, 295","Access only, 25","Access only, 75","Access only, 73","Access only, 45"],"marker":{"color":["#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900","#FF6900"],"line":{"color":"rgba(102,194,165,1)"}},"type":"bar","name":"Access only","textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[256,71,474,147,237,597,308,11,61,13,17],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Access and knowledge, 256","Access and knowledge, 71","Access and knowledge, 474","Access and knowledge, 147","Access and knowledge, 237","Access and knowledge, 597","Access and knowledge, 308","Access and knowledge, 11","Access and knowledge, 61","Access and knowledge, 13","Access and knowledge, 17"],"marker":{"color":["#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556","#004556"],"line":{"color":"rgba(252,141,98,1)"}},"type":"bar","name":"Access and knowledge","textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"xaxis":"x","yaxis":"y","frame":null},{"y":["VBA","Stata","SQL","SPSS","SAS","R","Python","Matlab","Javascript / Typescript","Java / Scala","C++ / C#"],"x":[25,71,86,158,68,26,71,167,29,38,62],"orientation":"h","hoverinfo":["text","text","text","text","text","text","text","text","text","text","text"],"text":["Knowledge only, 25","Knowledge only, 71","Knowledge only, 86","Knowledge only, 158","Knowledge only, 68","Knowledge only, 26","Knowledge only, 71","Knowledge only, 167","Knowledge only, 29","Knowledge only, 38","Knowledge only, 62"],"marker":{"color":["#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300","#FFD300"],"line":{"color":"rgba(141,160,203,1)"}},"type":"bar","name":"Knowledge only","textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

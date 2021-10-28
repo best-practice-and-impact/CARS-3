@@ -11,3 +11,5 @@ data <- tidied_data %>% carsurvey3::rename_cols() %>% carsurvey3::enforce_stream
 # Render site
 
 carsurvey2::render_navbar("rmarkdown/main/_site.yml") %>% carsurvey2::save_navbar("rmarkdown/main")
+
+carsurvey3::render_main_site(data = data)
