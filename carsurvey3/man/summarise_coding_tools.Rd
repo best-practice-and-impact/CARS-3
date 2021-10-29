@@ -12,7 +12,7 @@ summarise_coding_tools(data, type = list("knowledge", "access"))
 \item{type}{type of table (knowledge or access)}
 }
 \value{
-
+frequency table (data.frame)
 }
 \description{
 calculate frequency table coding tools (knowledge or access)

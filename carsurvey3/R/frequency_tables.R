@@ -1,3 +1,38 @@
+#' Produce all summary tables
+#' 
+#' @description Produce all summary tables and return as a named list.
+#' 
+#' @param data full CARS wave 3 data.frame after preprocessing
+#' 
+#' @return list of frequency tables
+#' 
+#' @export
+
+summarise_all <- function(data) {
+  output_list <- list(
+    code_freq = summarise_code_freq(data),
+    operations = summarise_operations(data),
+    knowledge = summarise_coding_tools(data, "knowledge"),
+    access = summarise_coding_tools(data, "access"),
+    language_status = summarise_language_status(data),
+    where_learned = summarise_where_learned_code(data),
+    ability_change = summarise_ability_change(data),
+    coding_practices = summarise_coding_practices(data),
+    doc = summarise_doc(data),
+    rap_knowledge = summarise_rap_knowledge(data),
+    rap_opinions = summarise_rap_opinions(data),
+    basic_rap_scores = summarise_rap_basic(data),
+    advanced_rap_scores = summarise_rap_advanced(data),
+    rap_components = summarise_rap_comp(data),
+    ci = summarise_ci(data),
+    dependency_management = summarise_dep_man(data),
+    rep_workflow = summarise_rep_workflow(data)
+  )
+  
+  return(output_list)
+}
+
+
 #' Summarise coding frequency
 #'
 #' @description calculate frequency table for coding frequency. 
@@ -6,7 +41,6 @@
 #'
 #' @return frequency table (data.frame)
 #' 
-#' @export
 
 summarise_code_freq <- function(data) {
   
@@ -27,7 +61,6 @@ summarise_code_freq <- function(data) {
   return(freqs)
 }
 
-
 #' Summarise data operations
 #'
 #' @description calculate frequency table for data operations
@@ -36,8 +69,7 @@ summarise_code_freq <- function(data) {
 #'
 #' @return frequency table (data.frame)
 #' 
-#' @export
-#'
+#' @importFrom rlang .data
 
 summarise_operations <- function(data) {
   
@@ -49,7 +81,7 @@ summarise_operations <- function(data) {
     table(x)
   })
   
-  labels <- c("Analysis", "Data cleaning", "Data linking", "Data transfer", "Data visualisastion", "Machine learning", "Modelling")
+  labels <- c("Analysis", "Data cleaning", "Data linking", "Data transfer", "Data visualisation", "Machine learning", "Modelling")
   
   frequencies <- data.frame("Data operation" = labels, t(frequencies))
   
@@ -62,7 +94,6 @@ summarise_operations <- function(data) {
   
 }
 
-
 #' Summarise coding tools
 #'
 #' @description calculate frequency table coding tools (knowledge or access)
@@ -72,8 +103,6 @@ summarise_operations <- function(data) {
 #'
 #' @return frequency table (data.frame)
 #' 
-#' @export
-#'
 
 summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
   type <- match.arg(type, several.ok = FALSE)
@@ -109,15 +138,13 @@ summarise_coding_tools <- function(data, type = list("knowledge", "access")) {
   return(frequencies)
 }
 
-#'@title Summarise where respondents learned to code 
+#' @title Summarise where respondents learned to code 
 #'
-#'@description calculate frequency table of where respondents learned to code
+#' @description calculate frequency table of where respondents learned to code
 #'
-#'@param data full CARS wave 3 data.frame after preprocessing
+#' @param data full CARS wave 3 data.frame after preprocessing
 #'
 #' @return frequency table (data.frame)
-#'
-#'@export 
 #'
 
 summarise_where_learned_code <- function(data){
@@ -156,7 +183,6 @@ summarise_where_learned_code <- function(data){
   return(freqs)
 }
 
-
 #' @title Summarise data practices questions
 #'
 #' @description calculate frequency table for data practices
@@ -164,9 +190,8 @@ summarise_where_learned_code <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 #'
+#' @importFrom rlang .data
 
 summarise_coding_practices <- function(data) {
   
@@ -206,10 +231,8 @@ summarise_coding_practices <- function(data) {
 #'
 #' @return frequency table (data.frame)
 #' 
-#' @export
-#'
 
-calc_freqs_rap_basic <- function(data){
+summarise_rap_basic <- function(data){
   
   basic_freqs <- data.frame(table(data$basic_rap_score))
   colnames(basic_freqs) <- c("Basic RAP score", "Count")
@@ -226,10 +249,8 @@ calc_freqs_rap_basic <- function(data){
 #'
 #' @return frequency table (data.frame)
 #' 
-#' @export
-#'
 
-calc_freqs_rap_advanced <- function(data){
+summarise_rap_advanced <- function(data){
   
   advanced_freqs <- data.frame(table(data$advanced_rap_score))
   colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
@@ -245,10 +266,8 @@ calc_freqs_rap_advanced <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-calc_freqs_knowledge_of_rap <- function(data){
+summarise_rap_knowledge <- function(data){
   
   # Validation checks
   if (!"heard_of_RAP" %in% colnames(data)) {
@@ -287,10 +306,8 @@ calc_freqs_knowledge_of_rap <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-calc_freqs_opinions_of_rap <- function(data) {
+summarise_rap_opinions <- function(data) {
   
   # Validation checks
   if (!"heard_of_RAP" %in% colnames(data)) {
@@ -334,10 +351,8 @@ calc_freqs_opinions_of_rap <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-calc_freq_doc <- function(data) {
+summarise_doc <- function(data) {
   
   # Validation checks
   if (!"code_freq" %in% colnames(data)) {
@@ -379,10 +394,8 @@ calc_freq_doc <- function(data) {
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-calc_freq_rap_comp <- function(data){
+summarise_rap_comp <- function(data){
   
   labels <- c("use_open_source_score" = "Use open source software",
               "open_code_score" = "Team open source code",
@@ -421,10 +434,8 @@ calc_freq_rap_comp <- function(data){
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-summarise_ci_freq <- function(data) {
+summarise_ci <- function(data) {
   
   # Validation checks
   if (!"CI" %in% colnames(data)) {
@@ -448,10 +459,8 @@ return(freqs)
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-summarise_dep_man_freq <- function(data) {
+summarise_dep_man <- function(data) {
   
   # Validation checks
   if (!"dependency_management" %in% colnames(data)) {
@@ -475,10 +484,8 @@ return(freqs)
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
 #' @return frequency table (data.frame)
-#' 
-#' @export
 
-summarise_rep_workflow_freq <- function(data) {
+summarise_rep_workflow <- function(data) {
   
   # Validation checks
   if (!"reproducible_workflow" %in% colnames(data)) {
@@ -489,10 +496,11 @@ summarise_rep_workflow_freq <- function(data) {
                                                                               "No",
                                                                               "I don't know what reproducible workflows are"))
   
-freqs <- data.frame(table(data$reproducible_workflow))
-
-colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
-return(freqs)
+  freqs <- data.frame(table(data$reproducible_workflow))
+  
+  colnames(freqs) <- c("Use reproducible workflow packages", "Count")
+  
+  return(freqs)
 }
 
 #' @title Summarise ability change frequency
@@ -505,7 +513,7 @@ return(freqs)
 #' 
 #' @export
 
-summarise_ability_change_freq <- function(data) {
+summarise_ability_change <- function(data) {
   
   # Validation checks
   if (!"ability_change" %in% colnames(data)) {
@@ -520,7 +528,7 @@ summarise_ability_change_freq <- function(data) {
   
   freqs <- data.frame(table(data$ability_change))
   
-  colnames(freqs) <- c("Ability Change Frequency", "Count")
+  colnames(freqs) <- c("Ability Change", "Count")
   return(freqs)
 }
 
@@ -532,10 +540,10 @@ summarise_ability_change_freq <- function(data) {
 #' 
 #' @return frequency table (data.frame)
 #' 
-#' @export
+#' @importFrom rlang .data
 
 summarise_language_status <- function(data) {
-   selected_data <- dplyr::select(data, status_R:status_matlab)
+   selected_data <- dplyr::select(data, .data$status_R:.data$status_matlab)
    
    select_data <- selected_data[order(colnames(selected_data))]
    

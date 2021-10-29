@@ -23,7 +23,7 @@ test_that("output has the correct column order", {
 })
 
 test_that("output has the correct question names", {
-  expect_equal(dummy_output[[1]], c("Analysis", "Data cleaning", "Data linking", "Data transfer", "Data visualisastion", "Machine learning", "Modelling"))
+  expect_equal(dummy_output[[1]], c("Analysis", "Data cleaning", "Data linking", "Data transfer", "Data visualisation", "Machine learning", "Modelling"))
 })
 
 test_that("frequencies are correct", {
