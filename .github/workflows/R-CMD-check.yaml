@@ -41,6 +41,8 @@ jobs:
           dir.create(".github/")
           download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = ".github/CARS2.zip")
           unzip(zipfile = ".github/CARS2.zip", exdir = ".github")
+          devtools::install(".github/CARS2-master")
+
           cars2_deps <- remotes::dev_package_deps(".github/CARS2-master", dependencies = TRUE)
 
           cars3_deps <- remotes::dev_package_deps("carsurvey3", dependencies = TRUE)

@@ -18,7 +18,8 @@ summarise_all <- function(data) {
     where_learned = summarise_where_learned_code(data),
     ability_change = summarise_ability_change(data),
     coding_practices = summarise_coding_practices(data),
-    rap_knowlegde = summarise_rap_knowledge(data),
+    doc = summarise_doc(data),
+    rap_knowledge = summarise_rap_knowledge(data),
     rap_opinions = summarise_rap_opinions(data),
     basic_rap_scores = summarise_rap_basic(data),
     advanced_rap_scores = summarise_rap_advanced(data),
@@ -80,7 +81,7 @@ summarise_operations <- function(data) {
     table(x)
   })
   
-  labels <- c("Analysis", "Data cleaning", "Data linking", "Data transfer", "Data visualisastion", "Machine learning", "Modelling")
+  labels <- c("Analysis", "Data cleaning", "Data linking", "Data transfer", "Data visualisation", "Machine learning", "Modelling")
   
   frequencies <- data.frame("Data operation" = labels, t(frequencies))
   
@@ -497,7 +498,7 @@ summarise_rep_workflow <- function(data) {
   
   freqs <- data.frame(table(data$reproducible_workflow))
   
-  colnames(freqs) <- c("Reproducible Workflow Frequency", "Count")
+  colnames(freqs) <- c("Use reproducible workflow packages", "Count")
   
   return(freqs)
 }
@@ -527,7 +528,7 @@ summarise_ability_change <- function(data) {
   
   freqs <- data.frame(table(data$ability_change))
   
-  colnames(freqs) <- c("Ability Change Frequency", "Count")
+  colnames(freqs) <- c("Ability Change", "Count")
   return(freqs)
 }
 
