@@ -7,6 +7,8 @@ output:
     toc_float: 
       collapsed: false
 ---
+<<<<<<< HEAD
+=======
 ```{r global-options, include=FALSE}
 # Set echo=FALSE for all chunks
 knitr::opts_chunk$set(echo=FALSE)
@@ -16,9 +18,13 @@ library(magrittr)
 tables <- carsurvey3::summarise_all(data)
 
 ```
+>>>>>>> origin/summary_page_mvp
 
-# Coding frequency and tools
+## heading
 
+<<<<<<< HEAD
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fermentum porta nisl et dictum. Quisque interdum justo massa, sit amet consectetur massa elementum sed. Aliquam erat volutpat. Aliquam rhoncus massa felis, eu ultricies ligula eleifend vel. Nulla facilisi. Vestibulum sit amet orci erat. Maecenas tellus justo, convallis consequat luctus sed, tincidunt varius est. Pellentesque condimentum lorem felis, sit amet molestie dolor rhoncus sed. Proin enim velit, luctus sed diam ac, mollis posuere nibh. Donec varius ante eleifend cursus rutrum. Aliquam mattis non dui vitae sagittis. Cras nisi metus, blandit eu tempus eget, egestas nec velit.
+=======
 ## Coding frequency
 
 ```{r}
@@ -223,3 +229,4 @@ table <- kableExtra::kable_styling(knitr::kable(tables$advanced_rap_scores, row.
 carsurvey2::wrap_outputs("advanced_score", plot, table)
 
 ```
+>>>>>>> origin/summary_page_mvp

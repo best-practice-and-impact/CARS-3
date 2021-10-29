@@ -1,7 +1,10 @@
 ---
 title: "Home"
 ---
+<<<<<<< HEAD
+=======
 
 # The Coding in Analysis and Research survey (CARS) 2021
 
 This is a draft document. 
+>>>>>>> origin/summary_page_mvp

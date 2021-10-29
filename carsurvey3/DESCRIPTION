@@ -27,10 +27,11 @@ Imports:
     htmlwidgets,
     htmltools,
     lexicon,
+    knitr,
     rlang,
     knitr,
     magrittr,
-    carsurvey2 
+    carsurvey2
 Suggests: 
     testthat (>= 2.1.0)
 LazyData: true
