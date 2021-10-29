@@ -10,7 +10,7 @@ summarise_operations(data)
 \item{data}{full CARS wave 3 data.frame after preprocessing}
 }
 \value{
-
+frequency table (data.frame)
 }
 \description{
 calculate frequency table for data operations

@@ -7,5 +7,3 @@ tryCatch(
     devtools::load_all("../../../.github/CARS2-master") # Used by GitHub actions
   }
 )
-
-test_check("carsurvey3")
