@@ -48,7 +48,7 @@ prof_freqs$Profession <- dplyr::recode(prof_freqs$Profession, !!!recode_vals)
 
 plot_freqs <- prof_freqs
 plot_freqs$Profession <- carsurvey2::break_q_names(prof_freqs$Profession)
-plot <- carsurvey2::plot_freqs(plot_freqs, "", "Sample size", n = samples$all, orientation = "h", width = 700, height = 700)
+plot <- carsurvey2::plot_freqs(plot_freqs, "", "Sample size", font_size = 14, n = samples$all, orientation = "h", width = 700, height = 700)
 
 table <- kableExtra::kable_styling(knitr::kable(prof_freqs, row.names = FALSE)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))

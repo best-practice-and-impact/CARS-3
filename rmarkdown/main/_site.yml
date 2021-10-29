@@ -10,3 +10,9 @@ navbar:
       href: index.html
     - text: "Summary statistics"
       href: summary.html
+    - text: "Department profiles"
+      href: departments.html
+    - text: "Profession profiles"
+      href: professions.html
+    - text: "Grade profiles"
+      href: grades.html

@@ -11,7 +11,7 @@ Authors@R:
              role = c("aut"),
              email = "gsshelp@ons.gov.uk"))
 Description: Data ingestion, cleaning and analysis for the coding in analysis and research survey (CARS) wave 3 (Sep-Oct 2021).
-License: License: MIT + file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: 
 	R (>= 4.0.0),
