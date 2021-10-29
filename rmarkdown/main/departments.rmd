@@ -1,0 +1,59 @@
+---
+title: "Department profiles"
+---
+
+```{r global-options, include=FALSE}
+# Set echo=false for all chunks
+knitr::opts_chunk$set(echo=FALSE)
+```
+
+Below are links to department-specific profiles. These contain the outputs present on the summary statistics page, filtered by department. Only departments with 20 or more respondents are included.
+
+## Department sample sizes
+
+``` {r}
+
+library(magrittr)
+
+if(!exists("data")) stop("Dataframe called data not available. This should be in the 
+                                      function enviroment of render_main_site. Check that this is available in this
+                                      enviroment.")
+
+dep_freqs <- data.frame(table(data$department))
+dep_freqs <- dep_freqs[dep_freqs[2] >= 20, ]
+dep_freqs[1] <- as.character(dep_freqs[[1]])
+colnames(dep_freqs) <- c("Department", "Sample size")
+
+```
+
+``` {r}
+
+dep_freqs_plot <- dep_freqs
+dep_freqs_plot[1] <- stringr::str_wrap(dep_freqs_plot[[1]], width = 40)
+dep_freqs_plot[1] <- gsub("\\n", "<br>", dep_freqs_plot[[1]])
+dep_freqs_plot <- dep_freqs_plot[(order(dep_freqs_plot[1])), ]
+dep_freqs_plot[1] <- factor(dep_freqs_plot[[1]], levels = dep_freqs_plot[[1]])
+
+plot <- carsurvey2::plot_freqs(dep_freqs_plot, "", "Sample size", n = samples$all, font_size = 14, orientation = "h", width = 700, height = 1000)
+
+table <- kableExtra::kable_styling(knitr::kable(dep_freqs_plot, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("dep-freqs", plot, table)
+
+```
+
+
+``` {r}
+
+department <- data.frame(table(data$department))
+dep_list <- department[department[2] >= 20, ]
+
+alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])
+urls <- carsurvey2::format_filter_path(alphabetical)
+links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")
+html <- paste(links, collapse="\n\n")
+html <- paste0("<ol>", html, "</ol>")
+knitr::raw_html(html)
+
+```
