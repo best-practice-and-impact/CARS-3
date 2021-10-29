@@ -36,7 +36,7 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
+          install.packages(c('remotes', 'devtools'))
 
           dir.create(".github/")
           download.file(url = "https://github.com/best-practice-and-impact/CARS2/archive/refs/heads/master.zip", destfile = ".github/CARS2.zip")
