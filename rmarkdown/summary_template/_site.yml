@@ -7,12 +7,12 @@ navbar:
   title: "Coding in Analysis and Research Survey 2021 - DRAFT"
   left:
     - text: "Home"
-      href: index.html
+      href: ../index.html
     - text: "Summary statistics"
-      href: summary.html
+      href: ../summary.html
     - text: "Department profiles"
-      href: departments.html
+      href: ../departments.html
     - text: "Profession profiles"
-      href: professions.html
+      href: ../professions.html
     - text: "Grade profiles"
-      href: grades.html
+      href: ../grades.html

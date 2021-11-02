@@ -11,6 +11,7 @@ data <- tidied_data %>% carsurvey3::rename_cols() %>% carsurvey3::enforce_stream
 # Render site
 
 carsurvey2::render_navbar("rmarkdown/main/_site.yml") %>% carsurvey2::save_navbar("rmarkdown/main")
+carsurvey2::render_navbar("rmarkdown/summary_template/_site.yml") %>% carsurvey2::save_navbar("rmarkdown/summary_template")
 
 carsurvey3::render_main_site(data = data)
 carsurvey3::render_filtered_pages(data, filter_variable = "department", page_title = "Department")
