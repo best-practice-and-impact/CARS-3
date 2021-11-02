@@ -13,3 +13,6 @@ data <- tidied_data %>% carsurvey3::rename_cols() %>% carsurvey3::enforce_stream
 carsurvey2::render_navbar("rmarkdown/main/_site.yml") %>% carsurvey2::save_navbar("rmarkdown/main")
 
 carsurvey3::render_main_site(data = data)
+carsurvey3::render_filtered_pages(data, filter_variable = "department", page_title = "Department")
+carsurvey3::render_filtered_pages(data, filter_variable = "grade", page_title = "Grade")
+carsurvey3::render_prof_pages(data, page_title = "Profession")

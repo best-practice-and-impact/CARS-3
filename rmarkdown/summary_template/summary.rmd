@@ -7,8 +7,6 @@ output:
       collapsed: false
 params: 
   title: "Default"
-  tables: NULL
-  samples: NULL
 title: "`r params$title`"
 ---
 
@@ -18,9 +16,14 @@ knitr::opts_chunk$set(echo=FALSE)
 
 library(magrittr)
 
-tables <- carsurvey3::summarise_all(data)
+tables <- carsurvey3::summarise_all(filtered_data)
 
 ```
+
+This is a draft document. 
+
+Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+
 
 # Coding frequency and tools
 

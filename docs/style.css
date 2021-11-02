@@ -6,17 +6,18 @@ h3, h4 {
   font-weight: 550;
 }
 
-@media (min-width:1200px) {
-  h2 {
-    padding-top: 3em !important;
-  }
+h1 {
+  margin-bottom: 1em !important; 
 }
 
+/*
 @media (min-width:1200px) {
-  h3, h4 {
-    padding-top: 4em !important;
+  h1 {
+    margin-top: 0em !important;
   }
+
 }
+*/
 
 .title {
   padding-top: 0 !important;
@@ -115,25 +116,37 @@ ol > li > a:focus {
   }
 }
 
-/*
 @media (max-width:1199px) and (min-width:768px){
+  / *h1 {
+    margin-top: 2em !important;
+  } */
+
   h2 {
-    padding-top: 5em !important;
+    padding-top: 3em !important;
   }
 
   h3, h4 {
-    padding-top: 6em !important;
+    padding-top: 3em !important;
   }
 }
 
 
-@media (max-width:767pxpx) {
+@media (max-width:767px) {
+  /* h1 {
+    margin-top: 0em !important;
+  } */
+
   h3, h4 {
-    padding-top: 7em !important;
+    padding-top: 3em !important;
   }
 
   h2 {
-    padding-top: 5em !important;
+    padding-top: 3em !important;
   }
 }
-*/
+
+@media (max-width: 594px) {
+  /* h1 {
+    margin-top: 2em !important;
+  } */
+}

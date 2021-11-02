@@ -18,6 +18,13 @@ tables <- carsurvey3::summarise_all(data)
 
 ```
 
+
+This is a draft document. 
+
+Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+
+
+
 # Coding frequency and tools
 
 ```{r}

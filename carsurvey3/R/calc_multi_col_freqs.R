@@ -11,7 +11,12 @@
 #'
 #'@export
 
-calc_multi_col_freqs <- function(data, levels, labels, calc_props = FALSE){
+calc_multi_col_freqs <- function(data, levels, labels, calc_props = FALSE) {
+  
+  if (missing(labels)) {
+    labels <- colnames(data)
+  }
+  
   # Validate inputs
   if (class(data) != "data.frame") {
     stop("Unexpected input - cols is not a data.frame")

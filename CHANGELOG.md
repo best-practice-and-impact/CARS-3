@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] 2021-11-02
+
+### Added
+= Text to indicate these outputs are provisional
+
+### Changed
+- Output paths for filtered pages. These are now in separate folders by category
+- Single data science output page
+
+### Fixed
+- Formatting issues on main site and filtered pages
+
 ## [0.4.0] 2021-10-29
 ### Added
 - Filtered page rendering functions and rmarkdown templates

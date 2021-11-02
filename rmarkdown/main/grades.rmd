@@ -7,6 +7,13 @@ title: "Grade profiles"
 knitr::opts_chunk$set(echo=FALSE)
 ```
 
+
+This is a draft document. 
+
+Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+
+
+
 Below are links to grade-specific profiles. These contain the outputs present on the summary statistics page, filtered by grade. Only grades with 20 or more respondents are included.
 
 ## Grade sample sizes
@@ -58,7 +65,7 @@ grades_list$Var1 <- factor(grades_list$Var1, levels = order)
 grades_list <- grades_list[order(grades_list$Var1), ]
 
 urls <- carsurvey2::format_filter_path(grades_list$Var1)
-links <- paste0('<li><a href="', urls, '.html">', grades_list$Var1, "</a></li>")
+links <- paste0('<li><a href="grade/', urls, '.html">', grades_list$Var1, "</a></li>")
 html <- paste(links, collapse="\n\n")
 html <- paste0("<ol>", html, "</ol>")
 knitr::raw_html(html)

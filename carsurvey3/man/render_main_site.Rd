@@ -7,7 +7,7 @@
 render_main_site(data, markdown_file_path = "rmarkdown/main")
 }
 \arguments{
-\item{data}{This is generated using the carsurvey2::data_ functions.}
+\item{data}{full CARS wave 3 data.frame after pre-processing}
 
 \item{markdown_file_path}{the path containing the rmarkdown site documents}
 }

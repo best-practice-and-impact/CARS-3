@@ -7,6 +7,13 @@ title: "Analytical profession profiles"
 knitr::opts_chunk$set(echo=FALSE)
 ```
 
+
+This is a draft document. 
+
+Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+
+
+
 Below are links to profession-specific profiles. These contain the outputs present on the summary statistics page, filtered by profession. Only professions with 20 or more respondents are included.
 
 ## Profession sample sizes
@@ -17,7 +24,9 @@ library(magrittr)
 
 if(!exists("data")) stop("Dataframe called data not available. This should be in the function enviroment of render_main_site. Check that this is available in this enviroment.")
 
-profs <- dplyr::select(data, prof_non_CS:prof_none_CS)
+data$prof_DS <- ifelse(data$prof_DS_GSG_GORS == "Yes" | data$prof_DS_other == "Yes", "Yes", "No"
+                       )
+profs <- dplyr::select(data, prof_non_CS, prof_DDAT:prof_none_CS, prof_DS)
 prof_freqs <- carsurvey2::calc_multi_col_freqs(profs, c("Yes", "No"))
 prof_freqs <- prof_freqs[c(1,2)]
 
@@ -27,8 +36,7 @@ colnames(prof_freqs) <- c("Profession", "Sample size")
 
 recode_vals <- c(
   prof_non_CS = "Non-Civil Service",
-  prof_DS_GSG_GORS = "Data Scientist (GSG/GORS)",
-  prof_DS_other = "Data Scientist (Non-GSG/GORS)",
+  prof_DS = "Government Data Scientist",
   prof_DDAT = "Digital, Data and Technology Profession",
   prof_GAD = "Government Actuary's Department",
   prof_GES = "Government Economic Service",
@@ -61,7 +69,7 @@ carsurvey2::wrap_outputs("prof-freqs", plot, table)
 
 alphabetical <- as.character(prof_freqs$Profession[order(prof_freqs$Profession)])
 urls <- carsurvey2::format_filter_path(alphabetical)
-links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")
+links <- paste0('<li><a href="profession/', urls, '.html">', alphabetical, "</a></li>")
 html <- paste(links, collapse="\n\n")
 html <- paste0("<ol>", html, "</ol>")
 knitr::raw_html(html)

@@ -25,7 +25,7 @@ rename_cols <- function(data) {
     "department_other",
     "prof_non_CS",
     "prof_DS_GSG_GORS",
-    "prof_DA_other",
+    "prof_DS_other",
     "prof_DDAT",
     "prof_GAD",
     "prof_GES",

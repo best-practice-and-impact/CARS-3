@@ -7,6 +7,13 @@ title: "Department profiles"
 knitr::opts_chunk$set(echo=FALSE)
 ```
 
+
+This is a draft document. 
+
+Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+
+
+
 Below are links to department-specific profiles. These contain the outputs present on the summary statistics page, filtered by department. Only departments with 20 or more respondents are included.
 
 ## Department sample sizes
@@ -51,7 +58,7 @@ dep_list <- department[department[2] >= 20, ]
 
 alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])
 urls <- carsurvey2::format_filter_path(alphabetical)
-links <- paste0('<li><a href="', urls, '.html">', alphabetical, "</a></li>")
+links <- paste0('<li><a href="department/', urls, '.html">', alphabetical, "</a></li>")
 html <- paste(links, collapse="\n\n")
 html <- paste0("<ol>", html, "</ol>")
 knitr::raw_html(html)
