@@ -58,7 +58,7 @@ dep_list <- department[department[2] >= 20, ]
 
 alphabetical <- as.character(dep_list$Var1[order(dep_list[[1]])])
 urls <- carsurvey2::format_filter_path(alphabetical)
-links <- paste0('<li><a href="department/', urls, '.html">', alphabetical, "</a></li>")
+links <- paste0('<li><a href="Department/', urls, '.html">', alphabetical, "</a></li>")
 html <- paste(links, collapse="\n\n")
 html <- paste0("<ol>", html, "</ol>")
 knitr::raw_html(html)
