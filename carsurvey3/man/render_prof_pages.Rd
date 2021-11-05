@@ -7,7 +7,7 @@
 render_prof_pages(
   data,
   page_title = "",
-  output_folder = "../../docs",
+  output_folder = "docs",
   template_path = "rmarkdown/summary_template/summary.rmd"
 )
 }

@@ -40,16 +40,17 @@ test_that("output has the correct question names", {
                                     "I collect my code and supporting material into packages",
                                     "I follow a standard directory structure when programming",
                                     "I follow coding guidelines or style guides when programming",
-                                    "I write code to automatically quality assure data"))
+                                    "I write code to automatically quality assure data",
+                                    "My team applies the principles set out in the Aqua book when carrying out analysis as code"))
 })
 
 test_that("frequencies are correct", {
-  expect_equal(dummy_output[[2]], c(0, 1/3, 0, 0, 1/2, 0, 0, 0, 0, 0))
-  expect_equal(dummy_output[[3]], c(3/5, 0, 1/6, 1/6, 1/3, 1/6, 1/2, 1/6, 1/3, 1/6))
-  expect_equal(dummy_output[[4]], c(0, 0, 1/2, 0, 1/6, 1/3, 1/6, 1/3, 1/2, 0))
-  expect_equal(dummy_output[[5]], c(2/5, 1/2, 0, 0, 0, 0, 1/3, 1/2, 1/6, 1/3))
-  expect_equal(dummy_output[[6]], c(0, 0, 0, 1/2, 0, 0, 0, 0, 0, 1/2))
-  expect_equal(dummy_output[[7]], c(0, 1/6, 1/3, 1/3, 0, 1/2, 0, 0, 0, 0))
+  expect_equal(dummy_output[[2]], c(0, 1/3, 0, 0, 1/2, 0, 0, 0, 0, 0, 1/2))
+  expect_equal(dummy_output[[3]], c(3/5, 0, 1/6, 1/6, 1/3, 1/6, 1/2, 1/6, 1/3, 1/6, 1/3))
+  expect_equal(dummy_output[[4]], c(0, 0, 1/2, 0, 1/6, 1/3, 1/6, 1/3, 1/2, 0, 1/6))
+  expect_equal(dummy_output[[5]], c(2/5, 1/2, 0, 0, 0, 0, 1/3, 1/2, 1/6, 1/3, 0))
+  expect_equal(dummy_output[[6]], c(0, 0, 0, 1/2, 0, 0, 0, 0, 0, 1/2, 0))
+  expect_equal(dummy_output[[7]], c(0, 1/6, 1/3, 1/3, 0, 1/2, 0, 0, 0, 0, 0))
 })
 
 # Integration test with plot function 

@@ -8,7 +8,7 @@ render_filtered_pages(
   data,
   filter_variable,
   page_title = "",
-  output_folder = "../../docs",
+  output_folder = "docs",
   template_path = "rmarkdown/summary_template/summary.rmd"
 )
 }
