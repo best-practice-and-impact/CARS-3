@@ -141,11 +141,25 @@ carsurvey2::wrap_outputs("doc", plot, table)
 
 ```
 
+## Dependency management
+
+```{r}
+
+plot <- carsurvey2::plot_freqs(tables$dependency_management, xlab = "Use dependency management software", ylab = "count", n = samples$coders, break_q_names_col = "Use dependency management software", font_size = 14, width = 600)
+
+
+table <- kableExtra::kable_styling(knitr::kable(tables$dependency_management)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
+
+carsurvey2::wrap_outputs("dep_management", plot, table)
+
+```
+
 
 ## Reproducible workflow packages
 
 
-``` {r}
+```{r}
 
 plot <- carsurvey2::plot_freqs(tables$rep_workflow, xlab = "Use reproducible workflows packages", ylab = "count", n = samples$coders, break_q_names_col = "Use reproducible workflow packages", font_size = 14, width = 600)
 

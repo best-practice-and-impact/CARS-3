@@ -473,8 +473,10 @@ summarise_dep_man <- function(data) {
 
 freqs <- data.frame(table(data$dependency_management))
 
-colnames(freqs) <- c("Dependency Management Frequency", "Count")
+colnames(freqs) <- c("Use dependency management software", "Count")
+
 return(freqs)
+
 }
 
 #' @title Summarise dependency_management frequency
