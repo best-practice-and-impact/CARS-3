@@ -361,7 +361,7 @@ summarise_doc <- function(data) {
   }
   
   documentation_data <- data[data$code_freq != "Never", ]
-  documentation_data <- dplyr::select(documentation_data, "desk_notes":"flow_charts")
+  documentation_data <- dplyr::select(documentation_data, "code_comments":"flow_charts")
   
   levels = c("I don't understand this question",
              "Never",
@@ -370,19 +370,18 @@ summarise_doc <- function(data) {
              "Regularly",
              "All the time")
   
-  labels = c("Desk notes",
+  labels = c("Code comments",       
              "Documentation for each function or class",
              "README files",
+             "Desk notes",
              "Analytical Quality Assurance (AQA) logs",
              "Data or assumptions registers",
-             "Code comments",
              "Flow charts")
   
   
   freq_documentation_data <- calc_multi_col_freqs(documentation_data, levels = levels, labels = labels, calc_props = TRUE)
   
-  colnames(freq_documentation_data) <- c("Question",
-                                         levels)
+  colnames(freq_documentation_data) <- c("Question", levels)
   
   return(freq_documentation_data)
   

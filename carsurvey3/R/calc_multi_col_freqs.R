@@ -8,8 +8,7 @@
 #'@param calc_props whether or not to calculate proportions (logical, FALSE by default)
 #'
 #'@return frequencies data frame with the frequencies of response options by column
-#'
-#'@export
+
 
 calc_multi_col_freqs <- function(data, levels, labels, calc_props = FALSE) {
   

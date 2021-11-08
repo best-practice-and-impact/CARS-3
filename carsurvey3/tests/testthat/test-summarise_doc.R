@@ -1,10 +1,10 @@
 dummy_data <- data.frame(code_freq = c("Never", rep("Sometimes", 5)), 
-                         desk_notes = c("I don't understand this question", "Never", "Rarely", "Sometimes", "Regularly", "All the time"),
+                         code_comments = c("Sometimes", "Never", "Never", "Regularly", "All the time", "I don't understand this question"), 
                          function_docs = c("All the time", "I don't understand this question", "Never", "Rarely", "Sometimes", "Regularly"), 
                          readme = c("Regularly", "All the time", "I don't understand this question", "Never", "Rarely", "Sometimes"), 
-                         AQA_logs = c("Sometimes", "Regularly", "All the time", "I don't understand this question", "Never", "Rarely"),
+                         desk_notes = c("I don't understand this question", "Never", "Rarely", "Sometimes", "Regularly", "All the time"),
                          registers = c("Rarely", "Sometimes", "Regularly", "All the time", "I don't understand this question", "Never"), 
-                         code_comments = c("Sometimes", "Never", "Never", "Regularly", "All the time", "I don't understand this question"), 
+                         AQA_logs = c("Sometimes", "Regularly", "All the time", "I don't understand this question", "Never", "Rarely"),
                          flow_charts = c("Never", NA, "Rarely", "Sometimes", "Regularly", "All the time")
                          )
 
@@ -29,22 +29,22 @@ test_that("output has the correct column order", {
 })
 
 test_that("output has the correct question names", {
-  expect_equal(dummy_output[[1]], c("Desk notes",
+  expect_equal(dummy_output[[1]], c("Code comments",
                                     "Documentation for each function or class",
                                     "README files",
-                                    "Analytical Quality Assurance (AQA) logs",
+                                    "Desk notes",
                                     "Data or assumptions registers",
-                                    "Code comments",
+                                    "Analytical Quality Assurance (AQA) logs",
                                     "Flow charts"))
 })
 
 test_that("frequencies are correct", {
-  expect_equal(dummy_output[[2]], c(0, 1/5, 1/5, 1/5, 1/5, 1/5, 0))
-  expect_equal(dummy_output[[3]], c(1/5, 1/5, 1/5, 1/5, 1/5, 2/5, 0))
-  expect_equal(dummy_output[[4]], c(1/5, 1/5, 1/5, 1/5, 0, 0, 1/4))
-  expect_equal(dummy_output[[5]], c(1/5, 1/5, 1/5, 0, 1/5, 0, 1/4))
-  expect_equal(dummy_output[[6]], c(1/5, 1/5, 0, 1/5, 1/5, 1/5, 1/4))
-  expect_equal(dummy_output[[7]], c(1/5, 0, 1/5, 1/5, 1/5, 1/5, 1/4))
+  expect_equal(dummy_output[[2]], c(0.2, 0.2, 0.2, 0.2, 0.2, 0, 0))
+  expect_equal(dummy_output[[3]], c(0.2, 0.2, 0.2, 0.4, 0.2, 0.2, 0))
+  expect_equal(dummy_output[[4]], c(0.2, 0.2, 0.2, 0, 0, 0.2, 0.25))
+  expect_equal(dummy_output[[5]], c(0, 0.2, 0.2, 0, 0.2, 0.2, 0.25))
+  expect_equal(dummy_output[[6]], c(0.2, 0.2, 0, 0.2, 0.2, 0.2, 0.25))
+  expect_equal(dummy_output[[7]], c(0.2, 0, 0.2, 0.2, 0.2, 0.2, 0.25))
 })
 
 # Integration test with plot function 
