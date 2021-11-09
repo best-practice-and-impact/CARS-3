@@ -401,6 +401,7 @@ summarise_rap_comp <- function(data){
               "open_code_score" = "Team open source code",
               "version_control_score" = "Version control",
               "peer_review_score" = "Peer review",
+              "AQUA_book_score" = "AQUA book guidance", 
               "doc_score" = "Documentation",
               "function_score" = "Functions",
               "unit_test_score" = "Unit testing",
@@ -412,10 +413,10 @@ summarise_rap_comp <- function(data){
   
   rap_score <- data[grepl("_score", colnames(data))]
   
-  components <- rap_score[!colnames(rap_score) %in% c("basic_rap_score", "advanced_rap_score", "AQUA_book_score")]
+  components <- rap_score[!colnames(rap_score) %in% c("basic_rap_score", "advanced_rap_score")]
   components[is.na(components)] <- 0
   components <- data.frame(Component = labels,
-                           Type = c(rep("Basic", 5), rep("Advanced", 7)),
+                           Type = c(rep("Basic", 6), rep("Advanced", 7)),
                            Count = unname(colSums(components))
   )
   
