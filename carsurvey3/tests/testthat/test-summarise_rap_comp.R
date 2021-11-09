@@ -19,7 +19,7 @@ test_that("Check output is dataframe" , expect_s3_class(dummy_output, "data.fram
 
 test_that("output does not contain missing values", expect_false(any(is.na(dummy_output))))
 
-test_that("Check number of rows in output", expect_equal(nrow(dummy_output), 12))
+test_that("Check number of rows in output", expect_equal(nrow(dummy_output), 13))
 
 test_that("Check number of columns in output", expect_equal(ncol(dummy_output), 3))
 
@@ -29,7 +29,8 @@ test_that("Output column names are correct", expect_equal(colnames(dummy_output)
 
 test_that("Labels are in correct order",{
   expect_identical(dummy_output[[1]], 
-                   factor(c("Documentation",
+                   factor(c("AQUA book guidance",
+                            "Documentation",
                             "Peer review",
                             "Team open source code",
                             "Use open source software",
@@ -41,7 +42,8 @@ test_that("Labels are in correct order",{
                             "Function documentation",
                             "Functions",
                             "Unit testing"), 
-                          levels = c("Documentation",
+                          levels = c("AQUA book guidance",
+                                     "Documentation",
                                      "Peer review",
                                      "Team open source code",
                                      "Use open source software",
@@ -57,9 +59,9 @@ test_that("Labels are in correct order",{
 
 
 test_that("Check output values are correct",{
-  expect_equal(dummy_output[[2]], c("Basic", "Basic", "Basic", "Basic", "Basic",
+  expect_equal(dummy_output[[2]], c("Basic", "Basic", "Basic", "Basic", "Basic", "Basic",
                                     "Advanced", "Advanced", "Advanced", "Advanced", "Advanced", "Advanced", "Advanced"))
-  expect_equal(dummy_output[[3]], c(16, 16, 20, 16, 20, 16, 16, 20, 20, 20, 20, 16))
+  expect_equal(dummy_output[[3]], c(20, 16, 16, 20, 16, 20, 16, 16, 20, 20, 20, 20, 16))
   
 })
 
