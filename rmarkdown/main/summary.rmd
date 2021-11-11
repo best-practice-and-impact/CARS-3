@@ -24,8 +24,12 @@ This is a draft document.
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
 
-
 # Coding frequency and tools
+
+
+## Coding frequency
+
+In response to “In your current role, how often do you write code to complete your work objectives?” most respondents said they code "regularly" or "all the time".
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
@@ -39,6 +43,8 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ## What people are using code for 
 
+When asked what data operations they do in their work, and whether they use code to do them. For each of the data operations the majority response was “I do some or all of this by coding”. The data operation with the highest frequency done without code is visualisation. 
+
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$operations, "Data operation", "Count", n = samples$all, font_size = 14, width = 600)
 
@@ -48,7 +54,19 @@ table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>%
 carsurvey2::wrap_outputs("operations", plot, table)
 ```
 
+
+
+## Access to and knowledge of programming languages
+
+Given a list of programming tools, we asked respondents to answer “Yes”, “No” or “Don’t know” for the following statements;
+
+* This tool is available to use for my work.
+* I know how to program with this tool to a level suitable for my work. 
+
+
 ## Access to coding tools
+
+The three highest access coding tools are all open source; R, SQL and Python. With 88.5% responses having access to R. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -60,6 +78,8 @@ carsurvey2::wrap_outputs("tools-access", plot, table)
 
 ## Knowledge of coding tools
 
+The three most commonly known coding tools are all open source; R, SQL and python respectively. 
+
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
 
@@ -69,6 +89,8 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 ```
 
 ## Access and knowledge gaps
+
+We calculated the number of respondents who have "access but no knowledge", "access and knowledge" and "knowledge but no access" for each programming tool. The tool with the greatest access only was Python and the tool with the greatest access and knowledge was R. The non-open source tool with the greatest access and knowledge is VBA.
 
 ```{r}
 
