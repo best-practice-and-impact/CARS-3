@@ -24,8 +24,15 @@ This is a draft document.
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
 
-
 # Coding frequency and tools
+
+
+## Most respondents use code at least regularly in their current role
+
+Over half of our respondents say they code either regularly or all the time in their current role. 
+
+Please note a key network for advertising this survey was through our RAP champions. This may cause the data may skew towards more frequent coders. This sample may not be representative of all analysts across government.
+
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
@@ -37,10 +44,14 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
 
-## What people are using code for 
+## Respondents preform a variety of data operations with code
+
+For the given list of data operations, the majority of respondents complete them all using at least some code.
+
+The question was only concerned with if people use code at all to complete data operations. This could mean a small amount is done by code and this response would still be selected. 
 
 ```{r}
-plot <- carsurvey2::plot_stacked(tables$operations, "Data operation", "Count", n = samples$all, font_size = 14, width = 600)
+plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
@@ -48,7 +59,21 @@ table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>%
 carsurvey2::wrap_outputs("operations", plot, table)
 ```
 
-## Access to coding tools
+
+
+## Access to and knowledge of programming languages
+
+Given a list of programming tools, we asked respondents to answer “Yes”, “No” or “Don’t know” for the following statements;
+
+* This tool is available to use for my work.
+* I know how to program with this tool to a level suitable for my work. 
+
+
+## Open source tools are the most available for analysts work
+
+The three most available coding tools are all open source; R, SQL and Python respectively. Proprietary tools like SPSS and SAS are still commonly available to analysts. There is also more uncertainty around access to proprietary tools.
+
+We allowed for the respondents to have their own definition of access for this question. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -58,7 +83,13 @@ table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE
 carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
 
-## Knowledge of coding tools
+## Capability is most common in open source tools
+
+More respondents said they were able to carry out their work using open source tools. There is still some common propriety software capability. 
+
+The questions asked if people had enough experience in the tool to produce work which was at an acceptable level. The definition of an acceptable level was left up to the respondent to decide.
+
+
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -69,6 +100,12 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 ```
 
 ## Access and knowledge gaps
+
+Using data collected from previous questions we calculated the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. 
+
+## Many respondents have capability in tools they cannot access in work
+
+Many respondents have knowledge of programming tools which they can use in their work especially for proprietary tools. There are also respondents who have knowledge of Python but no way of accessing. Python has no cost associated unlike proprietary tools.  
 
 ```{r}
 

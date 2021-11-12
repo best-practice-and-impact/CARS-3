@@ -40,7 +40,7 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 ## What people are using code for 
 
 ```{r}
-plot <- carsurvey2::plot_stacked(tables$operations, "Data operation", "Count", n = samples$all, font_size = 14, width = 600)
+plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
