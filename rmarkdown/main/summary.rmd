@@ -155,7 +155,7 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 ## General coding practices
 
 ```{r}
-plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
+plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1000, width = 700, break_q_names_col = "Question", max_lines = 3)
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$coding_practices)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
