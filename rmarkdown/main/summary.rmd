@@ -27,9 +27,12 @@ Please note all data presented here are provisional and intended only for feedba
 # Coding frequency and tools
 
 
-## Coding frequency
+## Most respondents use code at least regularly for various aspects of their work
 
-In response to “In your current role, how often do you write code to complete your work objectives?” most respondents said they code "regularly" or "all the time".
+Over half of our respondents say they code either regularly or all the time in their current role. 
+
+Please note a key network for advertising this survey was through our RAP champions. This may cause the data may skew towards more frequent coders. This sample may not be representative of all analysts across government.
+
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
@@ -41,9 +44,9 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
 
-## What people are using code for 
+## Each data operation is done some or all the time by code
 
-When asked what data operations they do in their work, and whether they use code to do them. For each of the data operations the majority response was “I do some or all of this by coding”. The data operation with the highest frequency done without code is visualisation. 
+All the data operations have a majority that is done by some or all by code. There is no measure of how much is done by code which limits this question. This could mean a small amount is done by code and this response would still be selected. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$operations, "Data operation", "Count", n = samples$all, font_size = 14, width = 600)
@@ -64,9 +67,11 @@ Given a list of programming tools, we asked respondents to answer “Yes”, “
 * I know how to program with this tool to a level suitable for my work. 
 
 
-## Access to coding tools
+## Open source tools are the most accessible
 
-The three highest access coding tools are all open source; R, SQL and Python. With 88.5% responses having access to R. 
+The three most common coding tools are all open source; R, SQL and python respectively. There is still a high frequency of access to propriety software’s but also more uncertainty around them.
+
+Again, the main advertising of the survey was through the RAP champions who will more likely use open source code.
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -76,9 +81,12 @@ table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE
 carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
 
-## Knowledge of coding tools
+## Open source tools are also the most well known
 
-The three most commonly known coding tools are all open source; R, SQL and python respectively. 
+The three highest access coding tools are all open source; R, SQL and Python. Many propriety software are still well known.  
+
+The questions asked if respondents know how to program with the tool to a level suitable for work.
+
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -90,7 +98,11 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 
 ## Access and knowledge gaps
 
-We calculated the number of respondents who have "access but no knowledge", "access and knowledge" and "knowledge but no access" for each programming tool. The tool with the greatest access only was Python and the tool with the greatest access and knowledge was R. The non-open source tool with the greatest access and knowledge is VBA.
+Using data collected from previous questions we calculated the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. 
+
+## Many respondents have experience with tools but no access to them
+
+Many of the highest frequencies are propriety tools but there are also open source tools which respondents only have knowledge of. 
 
 ```{r}
 
