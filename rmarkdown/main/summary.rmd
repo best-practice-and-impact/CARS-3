@@ -27,7 +27,7 @@ Please note all data presented here are provisional and intended only for feedba
 # Coding frequency and tools
 
 
-## Most respondents use code at least regularly for various aspects of their work
+## Most respondents use code at least regularly in their current role
 
 Over half of our respondents say they code either regularly or all the time in their current role. 
 
@@ -44,12 +44,14 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
 
-## Each data operation is done some or all the time by code
+## Respondents preform a variety of data operations with code
 
-All the data operations have a majority that is done by some or all by code. There is no measure of how much is done by code which limits this question. This could mean a small amount is done by code and this response would still be selected. 
+For the given list of data operations, the majority of respondents complete them all using at least some code.
+
+The question was only concerned with if people use code at all to complete data operations. This could mean a small amount is done by code and this response would still be selected. 
 
 ```{r}
-plot <- carsurvey2::plot_stacked(tables$operations, "Data operation", "Count", n = samples$all, font_size = 14, width = 600)
+plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
 
 table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
@@ -67,11 +69,11 @@ Given a list of programming tools, we asked respondents to answer “Yes”, “
 * I know how to program with this tool to a level suitable for my work. 
 
 
-## Open source tools are the most accessible
+## Open source tools are the most available for analysts work
 
-The three most common coding tools are all open source; R, SQL and python respectively. There is still a high frequency of access to propriety software’s but also more uncertainty around them.
+The three most available coding tools are all open source; R, SQL and Python respectively. Proprietary tools like SPSS and SAS are still commonly available to analysts. There is also more uncertainty around access to proprietary tools.
 
-Again, the main advertising of the survey was through the RAP champions who will more likely use open source code.
+We allowed for the respondents to have their own definition of access for this question. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -81,11 +83,12 @@ table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE
 carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
 
-## Open source tools are also the most well known
+## Capability is most common in open source tools
 
-The three highest access coding tools are all open source; R, SQL and Python. Many propriety software are still well known.  
+More respondents said they were able to carry out their work using open source tools. There is still some common propriety software capability. 
 
-The questions asked if respondents know how to program with the tool to a level suitable for work.
+The questions asked if people had enough experience in the tool to produce work which was at an acceptable level. The definition of an acceptable level was left up to the respondent to decide.
+
 
 
 ```{r}
@@ -100,9 +103,9 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 
 Using data collected from previous questions we calculated the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. 
 
-## Many respondents have experience with tools but no access to them
+## Many respondents have capability in tools they cannot access in work
 
-Many of the highest frequencies are propriety tools but there are also open source tools which respondents only have knowledge of. 
+Many respondents have knowledge of programming tools which they can use in their work especially for proprietary tools. There are also respondents who have knowledge of Python but no way of accessing. Python has no cost associated unlike proprietary tools.  
 
 ```{r}
 
