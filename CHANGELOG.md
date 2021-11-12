@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.5.7] 2021-11-12
+### Add
+- max lines variable to likert plot
+
+## [0.5.7] 2021-11-12
 ### Added 
 - Draft text for coding frequency and tools
 
