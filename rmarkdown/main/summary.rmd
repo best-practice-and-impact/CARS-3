@@ -161,7 +161,12 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 # Coding practices
 
 
-## General coding practices
+## Many coding practices are not regularly applied in analysts work
+
+Practices such as version control, AQUA guidance, unit testing and open sourcing code are fundamental to the minimum viable produce (MVP) for RAP. These practices are not regularly done which means respondents are not regularly meeting RAP MVP. 
+
+These practices are important as they make our code more reproducible, auditable and assured. More information can be found out about RAP and the minimum viable product in the quality assurance of code for analysis and research.
+
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1000, width = 700, break_q_names_col = "Question", max_lines = 3)
@@ -174,7 +179,12 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 ```
 
 
-## Documentation
+## Most types of documentation are not regularly used.
+
+Over 50% of respondents use code comments regularly or more, other types of documentation are not regularly used. 
+
+Embedded documentation is one of the components which make up a RAP minimum viable product. Documentation is important to help others be clear on what the code is doing. To find out more about documents check the Quality assurance of code for analysis and research book.
+
 
 
 ```{r}
@@ -187,7 +197,12 @@ carsurvey2::wrap_outputs("doc", plot, table)
 
 ```
 
-## Dependency management
+## Not many respondents are using dependency management or reproducible workflow packages
+
+The environment that your code runs in includes the machine, the operating system, the programming language, and any external packages. It is important to record this information to ensure reproducibility. Reproducibility is important as it allows analysts to prove the result.
+
+For user ease these questions cover a range of topics which in previous years were spread out over multiple questions. We condensed them into two questions as most the responses were “No” or “I don’t know what this is”. 
+
 
 ```{r}
 
