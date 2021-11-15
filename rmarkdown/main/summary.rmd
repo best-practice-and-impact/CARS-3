@@ -121,7 +121,13 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 # Coding capability
 
-## Change in coding ability during current role
+## Most analysts report their coding ability has improved during current role
+
+Capability appears to be increasing as majority of respondents said their coding skill are slightly better or significantly better during current role. While 20% said their coding ability had decreased.
+
+The sample for this question contains respondents who said they have coding experience outside their current role. 
+
+
 
 ``` {r}
 plot <- carsurvey2::plot_freqs(tables$ability_change, xlab = "Change in ability", ylab = "Count", n = samples$code_outside_current_role, break_q_names_col = "Ability Change", font_size = 14, width = 600)
@@ -133,9 +139,12 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ```
 
-## Where respondents learned to code
+## Most respondents learned to code outside of the public sector
 
-Respondents were asked whether they had coding experience outside their current role and, if so, where. Most of the respondents first learnt code in education.
+the highest frequency response was in education this was followed by public sector. 
+
+This survey was for government analysts only and so public sector frequency is a combination of “In public sector employment” and “In current role”. 
+
 
 ``` {r}
 
