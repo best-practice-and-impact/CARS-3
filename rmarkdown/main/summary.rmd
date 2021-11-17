@@ -18,20 +18,15 @@ tables <- carsurvey3::summarise_all(data)
 
 ```
 
-
 This is a draft document. 
 
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
-
 # Coding frequency and tools
-
 
 ## Most respondents use code at least regularly in their current role
 
-Over half of our respondents say they code either regularly or all the time in their current role. 
-
-Please note a key network for advertising this survey was through our RAP champions. This may cause the data may skew towards more frequent coders. This sample may not be representative of all analysts across government.
+Over half of respondents reported using code to achieve their work objectives regularly or all the time. This survey is likely to have attracted many analysts with an interest in programming. Nevertheless, the figures here show that for many government analysts programming has become a key tool in their work. 
 
 
 ```{r}
@@ -44,11 +39,10 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
 
-## Respondents preform a variety of data operations with code
+## Respondents use code to preform a variety of data operations 
 
-For the given list of data operations, the majority of respondents complete them all using at least some code.
+the majority of respondents use code to perform each of the data operations included in the survey, at least in part. While these were the responses to the questions included, many respondents reported other data operations in the free text box provided. Code is currently being used in government at every stage of analysis pipelines, from pre-processing through to analysis and presentation. 
 
-The question was only concerned with if people use code at all to complete data operations. This could mean a small amount is done by code and this response would still be selected. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
@@ -60,7 +54,6 @@ carsurvey2::wrap_outputs("operations", plot, table)
 ```
 
 
-
 ## Access to and knowledge of programming languages
 
 Given a list of programming tools, we asked respondents to answer “Yes”, “No” or “Don’t know” for the following statements;
@@ -68,12 +61,12 @@ Given a list of programming tools, we asked respondents to answer “Yes”, “
 * This tool is available to use for my work.
 * I know how to program with this tool to a level suitable for my work. 
 
+Please note we did not set precise definitions for availability and knowledge here, as these are dependent on individual circumstances. 
+
 
 ## Open source tools are the most available for analysts work
 
-The three most available coding tools are all open source; R, SQL and Python respectively. Proprietary tools like SPSS and SAS are still commonly available to analysts. There is also more uncertainty around access to proprietary tools.
-
-We allowed for the respondents to have their own definition of access for this question. 
+R, SQL and Python were the three most available programming languages to government analysts. All three are open source languages, the use of which is a key component of the [RAP methodology](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). Such tools help analysts make their work more transparent and reproducible to their users, as cost is not a barrier to use. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -85,11 +78,7 @@ carsurvey2::wrap_outputs("tools-access", plot, table)
 
 ## Capability is most common in open source tools
 
-More respondents said they were able to carry out their work using open source tools. There is still some common propriety software capability. 
-
-The questions asked if people had enough experience in the tool to produce work which was at an acceptable level. The definition of an acceptable level was left up to the respondent to decide.
-
-
+More respondents said they were able to carry out their work using Python, SQL and R, showing open source tools also lead the way in capability. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -105,7 +94,7 @@ Using data collected from previous questions we calculated the number of respond
 
 ## Many respondents have capability in tools they cannot access in work
 
-Many respondents have knowledge of programming tools which they can use in their work especially for proprietary tools. There are also respondents who have knowledge of Python but no way of accessing. Python has no cost associated unlike proprietary tools.  
+A large minority respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open source software is that it is easier for analysts' coding skills to be transferrable if they learn an open source language, as they are more likely to have access to the same software at another department in future. 
 
 ```{r}
 
@@ -123,10 +112,9 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 ## Most analysts report their coding ability has improved during current role
 
-Capability appears to be increasing as majority of respondents said their coding skill are slightly better or significantly better during current role. While 20% said their coding ability had decreased.
+Capability appears to be increasing as majority of respondents said their coding skill are slightly better or significantly better during current role. However, the data also indicate the need to maintain existing capability. A large minority of respondents reported a decline in their coding ability, suggesting more work is needed to ensure analysts spend enough time maintaining these skills.
 
-The sample for this question contains respondents who said they have coding experience outside their current role. 
-
+This question was only asked of respondents with coding experience outside of their current role. 
 
 
 ``` {r}
@@ -141,7 +129,7 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ## Most respondents learned to code outside of the public sector
 
-the highest frequency response was in education this was followed by public sector. 
+Analysts are generally learning to code for the first time before joining the public sector, particularly in education. 
 
 This survey was for government analysts only and so public sector frequency is a combination of “In public sector employment” and “In current role”. 
 
