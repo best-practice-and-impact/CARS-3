@@ -10,6 +10,10 @@ h1 {
   margin-bottom: 1em !important; 
 }
 
+.tocify-header {
+  padding-bottom: 0.5em !important;
+}
+
 /*
 @media (min-width:1200px) {
   h1 {
