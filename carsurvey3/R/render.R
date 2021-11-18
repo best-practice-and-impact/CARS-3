@@ -70,14 +70,14 @@ render_filtered_pages <- function(data,
     
     title <- paste0(page_title , " profile: ", filter)
     
-    filtered_tables <- filtered_tables <- summarise_all(filtered_data)
+    filtered_tables <- summarise_all(filtered_data)
     
     samples <- list(
       all = nrow(filtered_data),
       coders = sum(filtered_data$code_freq != "Never"),
       heard_of_rap = sum(filtered_data$heard_of_RAP == "Yes"),
       code_outside_current_role = sum(filtered_data$experience_outside_role == "Yes"),
-      any_code_experience = sum(filtered_data$experience_outside_role == "Yes" | data$code_freq != "Never")
+      any_code_experience = sum(filtered_data$experience_outside_role == "Yes" | filtered_data$code_freq != "Never")
     )
     
     knitr::opts_chunk$set(warning = FALSE)
