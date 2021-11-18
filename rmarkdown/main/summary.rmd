@@ -3,7 +3,7 @@ title: "Summary statistics"
 output:
   html_document:
     toc: true
-    toc_depth: 2
+    toc_depth: 1
     toc_float: 
       collapsed: false
 ---
@@ -94,7 +94,7 @@ Using data collected from previous questions we calculated the number of respond
 
 ## Many respondents have capability in tools they cannot access in work
 
-A large minority respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open source software is that it is easier for analysts' coding skills to be transferrable if they learn an open source language, as they are more likely to have access to the same software at another department in future. 
+A large minority respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open source software is that it is easier for analysts' coding skills to be transferable if they learn an open source language, as they are more likely to have access to the same software at another department in future. 
 
 ```{r}
 
@@ -110,11 +110,11 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 # Coding capability
 
-## Most analysts report their coding ability has improved during current role
+## Most analysts said their coding ability has improved during current role
 
-Capability appears to be increasing as majority of respondents said their coding skill are slightly better or significantly better during current role. However, the data also indicate the need to maintain existing capability. A large minority of respondents reported a decline in their coding ability, suggesting more work is needed to ensure analysts spend enough time maintaining these skills.
+Responses show many analysts in government are either maintaining or actively improving their coding capability. But, this is not true across the board. A large minority reported a decrease in their coding abilities in their current role. 
 
-This question was only asked of respondents with coding experience outside of their current role. 
+This question was only asked of respondents with coding experience outside of their current role. This means the data does not cover those who first learned to code in their current role.
 
 
 ``` {r}
@@ -129,9 +129,7 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ## Most respondents learned to code outside of the public sector
 
-Analysts are generally learning to code for the first time before joining the public sector, particularly in education. 
-
-This survey was for government analysts only and so public sector frequency is a combination of “In public sector employment” and “In current role”. 
+Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well. 
 
 
 ``` {r}
@@ -148,13 +146,11 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 
 # Coding practices
 
+We asked respondents who said they use code in their work how often they carry out various coding practices considered to be good practice. For more information on the practices presented below, please read our guidance on [Quality Assurance of Code for Analysis and Research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
 
-## Many coding practices are not regularly applied in analysts work
+## Many good coding practices are not regularly applied by analysts
 
-Practices such as version control, AQUA guidance, unit testing and open sourcing code are fundamental to the minimum viable produce (MVP) for RAP. These practices are not regularly done which means respondents are not regularly meeting RAP MVP. 
-
-These practices are important as they make our code more reproducible, auditable and assured. More information can be found out about RAP and the minimum viable product in the quality assurance of code for analysis and research.
-
+Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so. However, all these practices are intended to improve the reproducibility, assurance and auditability of code. 
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1000, width = 700, break_q_names_col = "Question", max_lines = 3)
@@ -169,9 +165,9 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 
 ## Most types of documentation are not regularly used.
 
-Over 50% of respondents use code comments regularly or more, other types of documentation are not regularly used. 
+Similarly, most respondents do not write most forms of code documentation regularly, with the exception of code comments. 
 
-Embedded documentation is one of the components which make up a RAP minimum viable product. Documentation is important to help others be clear on what the code is doing. To find out more about documents check the Quality assurance of code for analysis and research book.
+[Embedded documentation](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) is one of the components which make up a RAP minimum viable product. Documentation is important to help others be clear on what the code is doing. 
 
 
 
@@ -185,12 +181,9 @@ carsurvey2::wrap_outputs("doc", plot, table)
 
 ```
 
-## Not many respondents are using dependency management or reproducible workflow packages
+## A minority are using dependency management or reproducible workflow packages
 
-The environment that your code runs in includes the machine, the operating system, the programming language, and any external packages. It is important to record this information to ensure reproducibility. Reproducibility is important as it allows analysts to prove the result.
-
-For user ease these questions cover a range of topics which in previous years were spread out over multiple questions. We condensed them into two questions as most the responses were “No” or “I don’t know what this is”. 
-
+More advanced coding practices are less common still, with only a minority carrying them out at all. 
 
 ```{r}
 
@@ -205,7 +198,6 @@ carsurvey2::wrap_outputs("dep_management", plot, table)
 ```
 
 
-## Reproducible workflow packages
 
 
 ```{r}
@@ -222,7 +214,11 @@ carsurvey2::wrap_outputs("workflow", plot, table)
 
 # RAP knowledge and opinions
 
-# Knowledge of RAP
+We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
+
+# Majority of respondents have heard of RAP
+
+65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. RAP and its principles are considered best practice and help to improve analysis. If respondents haven’t heard of RAP it means these best practices are less likely to be implemented.
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$rap_knowledge, "", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP champion knowledge", max_lines = 3, width = 600)
@@ -235,7 +231,7 @@ carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 ```
 
 
-## Opinions on RAP
+## Respondents are positive about RAP knowledge and implementation
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$rap_opinions, 3, "Frequency", "", n = samples$heard_of_rap, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
@@ -250,7 +246,12 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
-## RAP components
+## Some components are not implemented often
+
+From the responses, you can see the least common practice is open sourcing code. This is required to meet the [minimum viable product](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/) and as we have so few respondents reporting doing it that means we don’t have many products currently being produced which meet MVP even with the other components higher use. 
+
+The frequencies for each RAP component are derived where respondents answered “regularly” or “all the time” to the relevant questions. This graph shows the frequency of basic and advanced RAP components. “Basic” relates to the components which make up MVP. Advanced are practices which although not compulsory for MVP we highly recommend are done for good practice. 
+
 
 ```{r}
 plot <- carsurvey2::plot_grouped(tables$rap_components, "", "Count", n = samples$coders, orientation = "h", font_size = 14, width = 600)
@@ -263,7 +264,11 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 ```
 
 
-## Basic RAP scores
+## Very few respondents are regularly meeting RAP MVP
+
+While 49% of respondents say they feel comfortable implementing RAP only 2% respondents are regularly meeting RAP MVP. A large minority of responses are completing none of the basic RAP principles with 92% of respondents have a basic RAP score of 3 or less.
+
+To calculate a respondent's basic RAP score sum each of the basic rap components used regularly.
 
 ```{r}
 
@@ -280,7 +285,9 @@ carsurvey2::wrap_outputs("basic_score", plot, table)
 ```
 
 
-## Advanced RAP scores
+## Few respondents regularly use multiple advanced RAP components
+
+To calculate a respondent's basic RAP score sum each of the basic rap components used regularly.
 
 ```{r}
 
