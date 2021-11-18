@@ -2,9 +2,72 @@
 title: "Home"
 ---
 
-# The Coding in Analysis and Research survey (CARS) 2021
+## How do analysts use programming and software engineering in the UK Public Sector?
 
-This is a draft document. 
+### The Coding in Analysis and Research survey (CARS) was collected in September - October 2021
 
-Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+CARS was developed to better understand how programming and software engineering is used in government analysis and research. Most questions focused on whether analysts use software engineering practices when coding as part of their work. These coding practices are components of Reproducible Analytical Pipelines (RAP). You can find links to further information on RAP at the bottom of this page. 
+
+The survey was distributed to government analysts and researchers in the Autumn of 2021. The results presented here summarise the key findings from 912 responses from over 50 public sector organisations. This is the third year the survey ran and a similar breakdown was done for the results of the [previous year](https://best-practice-and-impact.github.io/CARS2/).
+
+### Who is this research for?
+
+This research was made with senior analysts and leaders in mind.
+It will be useful for the development of strategies for public sector analysis and research.
+It will also be useful for analysts and researchers in the public sector who are interested in understanding more about how their professions use programming in their work.
+Finally, it will be useful to people outside the public sector who are interested in understanding the tools that are used in the public sector for analysis and research.
+
+### How to use this research
+
+Do:
+
+* Explore the data to gain insights about current coding practices in government analysis and research
+* Re-use the outputs if you wish
+
+Avoid:
+
+* Attempting to estimate absolute frequencies - we did not use random sampling
+* Inferring differences between groups - these outputs are only intended to be descriptive and inferential tests were not carried out
+
+### More information on reproducible analytical pipelines
+
+[Quality assurance for coding in analysis and research](https://best-practice-and-impact.github.io/qa-of-code-guidance/)
+
+[Reproducible Analytical Pipelines (RAP) MVP](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md)
+
+[RAP champions network](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/)
+
+### Contact details
+
+We would like to know what you think of the survey and the outputs. Please contact us if you have feedback on any of the following:
+
+* Outputs/analyses you would like to see added to this research
+* Information you would like to see collected in the next iteration of CARS
+* Any other comments
+
+If you are interested in this survey or any of the questions asked please contact gsshelp@statistics.gov.uk
+
+If you have any queries or feedback related specifically to this site, then please contact daniel.shiloh@ons.gov.uk
+
+### Accessibility statement
+
+This accessibility statement applies to the Coding in Analysis and Research Survey report. Please note that this does not include third-party content that is referenced from this site.
+
+The website is managed by the Methodology and Quality division of the Office for National Statistics. We would like this guidance to be accessible for as many people as possible. This means that you should be able to:
+
+* change colours, contrast levels and fonts
+* zoom in up to 300% without the text spilling off the screen
+* navigate most of the website using just a keyboard
+* navigate most of the website using speech recognition software
+* listen to most of the website using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)
+
+#### Feedback and reporting accessibility problems
+
+We’re always looking to improve the accessibility of our guidance. If you find any problems not listed on this page or think that we’re not meeting accessibility requirements, please contact us by email at gsshelp@statistics.gov.uk. Please also get in touch if you are unable to access any part of this guidance, or require the content in a different format.
+
+We will consider your request and aim to get back to you within 5 working days.
+
+#### Enforcement procedure
+
+The Equality and Human Rights Commission (EHRC) is responsible for enforcing the [Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’)](https://www.legislation.gov.uk/uksi/2018/952/made). If you’re not happy with how we respond to your complaint, you should [contact the Equality Advisory and Support Service (EASS)](https://www.equalityadvisoryservice.com/).
 
