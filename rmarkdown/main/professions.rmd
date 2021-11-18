@@ -38,7 +38,7 @@ recode_vals <- c(
   prof_non_CS = "Non-Civil Service",
   prof_DS = "Government Data Scientist",
   prof_DDAT = "Digital, Data and Technology Profession",
-  prof_GAD = "Government Actuary's Department",
+  prof_GAD = "Government Actuarial Profession",
   prof_GES = "Government Economic Service",
   prof_finance = "Government Finance Profession",
   prof_geography = "Government Geography Profession",
