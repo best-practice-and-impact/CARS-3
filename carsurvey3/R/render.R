@@ -124,13 +124,16 @@ render_prof_pages <- function(data,
   colnames(prof_freqs) <- c("Profession", "Sample size")
   
   recode_vals <- c(
-    prof_non_CS = "Non Civil Service",
-    prof_GSG = "Government Statistician Group",
-    prof_GES = "Government Economic Service",
-    prof_GSR = "Government Social Research",
-    prof_GORS = "Government Operational Research Service",
-    prof_DDAT = "Digital, Data and Technology Profession",
+    prof_non_CS = "Non-Civil Service",
     prof_DS = "Government Data Scientist",
+    prof_DDAT = "Digital, Data and Technology Profession",
+    prof_GAD = "Government Actuarial Profession",
+    prof_GES = "Government Economic Service",
+    prof_finance = "Government Finance Profession",
+    prof_geography = "Government Geography Profession",
+    prof_GORS = "Government Operational Research Service",
+    prof_GSR = "Government Social Research",
+    prof_GSG = "Government Statistician Group",
     prof_none_CS = "Civil Service, no profession membership"
   )
   
