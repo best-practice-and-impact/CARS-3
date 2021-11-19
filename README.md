@@ -5,7 +5,7 @@ coverage](https://codecov.io/gh/best-practice-and-impact/CARS-3/main/freq_tables
 
 # CARS-3
 
-This repository conatains the source code for the processing, analysis and presentation of the Coding in Analysis and Research Survey (CARS) 2021. You can see the current state of the analysis on the (live site)[https://best-practice-and-impact.github.io/CARS-3/].
+This repository contains the source code for the processing, analysis and presentation of the Coding in Analysis and Research Survey (CARS) 2021. You can see the current state of the analysis on the [live site](https://best-practice-and-impact.github.io/CARS-3/).
 
 # Setup
 
@@ -19,7 +19,7 @@ install.packages("remotes")
 remotes::install_github("best-practice-and-impact/CARS2")
 ```
 
-Alternatively, you can manually download the source code from the (GitHub repository)[https://github.com/best-practice-and-impact/CARS2].
+Alternatively, you can manually download the source code from the [GitHub repository](https://github.com/best-practice-and-impact/CARS2).
 
 To install the 2021 analysis package, run the following code with the root directory as the working directory:
 
