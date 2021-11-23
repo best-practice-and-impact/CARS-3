@@ -153,7 +153,7 @@ We asked respondents who said they use code in their work how often they carry o
 Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so. However, all these practices are intended to improve the reproducibility, assurance and auditability of code. 
 
 ```{r}
-plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1000, width = 700, break_q_names_col = "Question", max_lines = 3)
+plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1200, width = 700, break_q_names_col = "Question", max_lines = 3)
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$coding_practices)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
@@ -214,7 +214,7 @@ carsurvey2::wrap_outputs("workflow", plot, table)
 
 # RAP knowledge and opinions
 
-We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
+We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
 
 # Majority of respondents have heard of RAP
 

@@ -27,6 +27,10 @@ Please note all data presented here are provisional and intended only for feedba
 
 # Coding frequency and tools
 
+## Coding frequency
+
+We asked respondents "In your current role, how often do you write code to complete your work objectives?".
+
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
 
@@ -39,6 +43,8 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ## What people are using code for 
 
+We asked respondents what data operations they carry out in their work, and whether they use code to do them. Please note we did not ask how much of each data operation is done with code, or how often.  
+
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
 
@@ -47,6 +53,17 @@ table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>%
 
 carsurvey2::wrap_outputs("operations", plot, table)
 ```
+
+## Access to and knowledge of programming languages
+
+Given a list of programming tools, we asked respondents to answer “Yes”, “No” or “Don’t know” for the following statements;
+
+* This tool is available to use for my work.
+* I know how to program with this tool to a level suitable for my work. 
+
+Access to tools does not necessarily refer to official policy. Some analysts may have access to tools others cannot access within the same organisation. 
+
+Please note that capability in programming languages is self-reported here and was not objectively defined or tested.
 
 ## Access to coding tools
 
@@ -70,6 +87,12 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 
 ## Access and knowledge gaps
 
+Using the data presented above we calculated the number of respondents with:
+
+* Access to tools they do not have the capability to use (access only),
+* Access to tools they are able to use (access and knowledge)
+* Or capability to use tools they cannot access at work (knowledge only)
+
 ```{r}
 
 plot <- carsurvey2::plot_stacked(tables$language_status, colour_scale = "3scale", xlab = "Count", ylab = "Programming tool", n = samples$all, font_size = 14, width = 700)
@@ -86,6 +109,8 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 ## Change in coding ability during current role
 
+This question was only asked of respondents with coding experience outside of their current role. This means analysts who first learned to code in their current role are not included in the data.
+
 ``` {r}
 plot <- carsurvey2::plot_freqs(tables$ability_change, xlab = "Change in ability", ylab = "Count", n = samples$code_outside_current_role, break_q_names_col = "Ability Change", font_size = 14, width = 600)
 
@@ -96,9 +121,11 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ```
 
-## Where respondents learned to code
+## Where respondents first learned to code
 
-Respondents were asked whether they had coding experience outside their current role and, if so, where. Most of the respondents first learnt code in education.
+Respondents with coding experience outside their current role were asked when they first learned to code. This output also includes analysts who code in their current role, but reported no other coding experience.
+
+These data only show where people first learned to code. They do not show all the settings in which they had learned to code, to what extent, or how long ago.
 
 ``` {r}
 
@@ -114,11 +141,12 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 
 # Coding practices
 
+We asked respondents who said they currently use code in their work how often they carry out various coding practices. For more information on the practices presented below, please read our guidance on [Quality Assurance of Code for Analysis and Research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
 
 ## General coding practices
 
 ```{r}
-plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1000, width = 700, break_q_names_col = "Question", max_lines = 3)
+plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1200, width = 700, break_q_names_col = "Question", max_lines = 3)
 
 table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$coding_practices)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$coders))
@@ -130,6 +158,7 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 
 ## Documentation
 
+[Embedded documentation](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) is one of the components which make up a RAP minimum viable product. Documentation is important to help others be clear on how to use the product and what the code is intended to do. 
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$doc, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
@@ -143,6 +172,12 @@ carsurvey2::wrap_outputs("doc", plot, table)
 
 
 ## Dependency management
+
+Respondents who currently use code in their work were asked whether they use any tools for dependency management. We provided examples of tools that may be used for dependency management: 
+
+* Requirements files, e.g. python requirements.txt or R DESCRIPTION files
+* Virtual environments (e.g. venv or renv) or virtual machines
+* Containers e.g Docker
 
 ```{r}
 
@@ -159,6 +194,11 @@ carsurvey2::wrap_outputs("dep_management", plot, table)
 
 ## Reproducible workflow packages
 
+Respondents were asked whether they use continuous integration technologies. As above, respondents were provided with examples of what those might be: 
+
+* Github actions
+* Jenkins
+* Travis
 
 ``` {r}
 
@@ -174,7 +214,11 @@ carsurvey2::wrap_outputs("workflow", plot, table)
 
 # RAP knowledge and opinions
 
+We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
+
 # Knowledge of RAP
+
+We asked our respondents whether they had heard of RAP and what their knowledge is of their own department RAP champion.
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$rap_knowledge, "", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP champion knowledge", max_lines = 3, width = 600)
@@ -189,6 +233,8 @@ carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 
 ## Opinions on RAP
 
+We asked respondents who had heard of RAP what their opinion was on a series of statements.
+
 ```{r}
 plot <- carsurvey2::plot_likert(tables$rap_opinions, 3, "Frequency", "", n = samples$heard_of_rap, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
 
@@ -202,6 +248,10 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
+RAP component scores “regularly” or “all the time” to the relevant questions. For documentation, this included both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. the sum total of each respondent's scores is presented here as "RAP scores". 
+
+"Basic" RAP scores refer to the RAP components that make up the [RAP minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/), as agreed by the RAP champions. "Advanced" components are those which did not part of the minimum standard but are still valuable in making analysis more reproducible. 
+
 ## RAP components
 
 ```{r}
@@ -213,7 +263,6 @@ table <- kableExtra::kable_styling(knitr::kable(tables$rap_components, row.names
 carsurvey2::wrap_outputs("rap_comps", plot, table)
 
 ```
-
 
 ## Basic RAP scores
 
