@@ -88,8 +88,9 @@ carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 ## Access and knowledge gaps
 
 Using the data presented above we calculated the number of respondents with:
+
 * Access to tools they do not have the capability to use (access only),
-* Access to tools they are able to use (access and knowledge) knowledge
+* Access to tools they are able to use (access and knowledge)
 * Or capability to use tools they cannot access at work (knowledge only)
 
 ```{r}
@@ -173,6 +174,7 @@ carsurvey2::wrap_outputs("doc", plot, table)
 ## Dependency management
 
 Respondents who currently use code in their work were asked whether they use any tools for dependency management. We provided examples of tools that may be used for dependency management: 
+
 * Requirements files, e.g. python requirements.txt or R DESCRIPTION files
 * Virtual environments (e.g. venv or renv) or virtual machines
 * Containers e.g Docker
@@ -193,6 +195,7 @@ carsurvey2::wrap_outputs("dep_management", plot, table)
 ## Reproducible workflow packages
 
 Respondents were asked whether they use continuous integration technologies. As above, respondents were provided with examples of what those might be: 
+
 * Github actions
 * Jenkins
 * Travis
