@@ -22,12 +22,13 @@ This is a draft document.
 
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
+While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend referring to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
+
 # Coding frequency and tools
 
 ## Most respondents use code at least regularly in their current role
 
-Over half of respondents reported using code to achieve their work objectives regularly or all the time. This survey is likely to have attracted many analysts with an interest in programming. Nevertheless, the figures here show that for many government analysts programming has become a key tool in their work. 
-
+Over half of respondents reported using code to achieve their work objectives regularly or all the time. This survey is likely to have attracted many analysts with an interest in programming, meaning these figures may be skewed. Nevertheless, the figures here show that for many government analysts programming has become a key tool in their work.
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
@@ -39,10 +40,9 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
 
-## Respondents use code to preform a variety of data operations 
+## Respondents use code to perform a variety of data operations 
 
-the majority of respondents use code to perform each of the data operations included in the survey, at least in part. While these were the responses to the questions included, many respondents reported other data operations in the free text box provided. Code is currently being used in government at every stage of analysis pipelines, from pre-processing through to analysis and presentation. 
-
+Most respondents use code to perform each of the data operations included in the survey, at least in part. While these were the responses to the questions included, many respondents reported other data operations in the free text box provided. Code is currently being used in government at every stage of analysis pipelines, from pre-processing through to analysis and presentation. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
@@ -76,9 +76,9 @@ table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE
 carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
 
-## Capability is most common in open source tools
+## Capability is most common in open-source tools
 
-More respondents said they were able to carry out their work using Python, SQL and R, showing open source tools also lead the way in capability. 
+More respondents said they were able to carry out their work using Python, SQL and R, showing open-source tools also lead the way in capability. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -94,7 +94,8 @@ Using data collected from previous questions we calculated the number of respond
 
 ## Many respondents have capability in tools they cannot access in work
 
-A large minority respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open source software is that it is easier for analysts' coding skills to be transferable if they learn an open source language, as they are more likely to have access to the same software at another department in future. 
+A large minority of respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open-source software is that it is easier for analysts' coding skills to be transferable if they learn an open-source language, as they are more likely to have access to the same software at another department in future.
+
 
 ```{r}
 
@@ -112,7 +113,7 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 ## Most analysts said their coding ability has improved during current role
 
-Responses show many analysts in government are either maintaining or actively improving their coding capability. But, this is not true across the board. A large minority reported a decrease in their coding abilities in their current role. 
+Responses show many analysts in government are either maintaining or actively improving their coding capability. But this is not true across the board. A large minority reported a decrease in their coding abilities in their current role. 
 
 This question was only asked of respondents with coding experience outside of their current role. This means the data does not cover those who first learned to code in their current role.
 
@@ -129,7 +130,7 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ## Most respondents learned to code outside of the public sector
 
-Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well. 
+Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
 
 
 ``` {r}
@@ -146,11 +147,11 @@ carsurvey2::wrap_outputs("first-learn", plot, table)
 
 # Coding practices
 
-We asked respondents who said they use code in their work how often they carry out various coding practices considered to be good practice. For more information on the practices presented below, please read our guidance on [Quality Assurance of Code for Analysis and Research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
+We asked respondents who said they use code in their work how often they carry out various coding practices considered to be good practice. For more information on the practices presented below, please read our guidance on [quality assurance of code for analysis and research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
 
 ## Many good coding practices are not regularly applied by analysts
 
-Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so. However, all these practices are intended to improve the reproducibility, assurance and auditability of code. 
+Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so. However, all these practices are intended to improve the reproducibility, assurance and auditability of code.
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1200, width = 700, break_q_names_col = "Question", max_lines = 3)
@@ -163,12 +164,11 @@ carsurvey2::wrap_outputs("code-prac", plot, table)
 ```
 
 
-## Most types of documentation are not regularly used.
+## Most types of documentation are not regularly used
 
 Similarly, most respondents do not write most forms of code documentation regularly, with the exception of code comments. 
 
-[Embedded documentation](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) is one of the components which make up a RAP minimum viable product. Documentation is important to help others be clear on what the code is doing. 
-
+[Embedded documentation](https://best-practice-and-impact.github.io/qa-of-code-guidance/code_documentation.html) is one of the components which make up a RAP minimum viable product. Documentation is important to help others be clear on what the code is doing.
 
 
 ```{r}
@@ -216,9 +216,10 @@ carsurvey2::wrap_outputs("workflow", plot, table)
 
 We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
 
-# Majority of respondents have heard of RAP
+# Most respondents have heard of RAP
 
 65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. RAP and its principles are considered best practice and help to improve analysis. If respondents haven’t heard of RAP it means these best practices are less likely to be implemented.
+
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$rap_knowledge, "", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP champion knowledge", max_lines = 3, width = 600)
@@ -246,7 +247,7 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
-## Some components are not implemented often
+## Some components of RAP are not implemented often
 
 From the responses, you can see the least common practice is open sourcing code. This is required to meet the [minimum viable product](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/) and as we have so few respondents reporting doing it that means we don’t have many products currently being produced which meet MVP even with the other components higher use. 
 
@@ -264,7 +265,7 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 ```
 
 
-## Very few respondents are regularly meeting RAP MVP
+## Very few respondents are regularly meeting RAP MVP standards
 
 While 49% of respondents say they feel comfortable implementing RAP only 2% respondents are regularly meeting RAP MVP. A large minority of responses are completing none of the basic RAP principles with 92% of respondents have a basic RAP score of 3 or less.
 

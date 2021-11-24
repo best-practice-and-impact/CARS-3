@@ -24,6 +24,7 @@ This is a draft document.
 
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
+While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend referring to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
 
 # Coding frequency and tools
 
@@ -123,9 +124,10 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ## Where respondents first learned to code
 
-Respondents with coding experience outside their current role were asked when they first learned to code. This output also includes analysts who code in their current role, but reported no other coding experience.
+Respondents with coding experience outside their current role were asked when they first learned to code. This output also includes analysts who code in their current role but reported no other coding experience.
 
 These data only show where people first learned to code. They do not show all the settings in which they had learned to code, to what extent, or how long ago.
+
 
 ``` {r}
 
@@ -177,7 +179,7 @@ Respondents who currently use code in their work were asked whether they use any
 
 * Requirements files, e.g. python requirements.txt or R DESCRIPTION files
 * Virtual environments (e.g. venv or renv) or virtual machines
-* Containers e.g Docker
+* Containers e.g. Docker
 
 ```{r}
 
@@ -233,7 +235,7 @@ carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 
 ## Opinions on RAP
 
-We asked respondents who had heard of RAP what their opinion was on a series of statements.
+We asked respondents who had heard of RAP whether they agreed with a series of statements.
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$rap_opinions, 3, "Frequency", "", n = samples$heard_of_rap, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
@@ -248,11 +250,12 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
-RAP component scores “regularly” or “all the time” to the relevant questions. For documentation, this included both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. the sum total of each respondent's scores is presented here as "RAP scores". 
+RAP component scores “regularly” or “all the time” to the relevant questions. For documentation, this included both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". 
 
 "Basic" RAP scores refer to the RAP components that make up the [RAP minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/), as agreed by the RAP champions. "Advanced" components are those which did not part of the minimum standard but are still valuable in making analysis more reproducible. 
 
 ## RAP components
+
 
 ```{r}
 plot <- carsurvey2::plot_grouped(tables$rap_components, "", "Count", n = samples$coders, orientation = "h", font_size = 14, width = 600)
