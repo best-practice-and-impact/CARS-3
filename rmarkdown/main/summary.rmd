@@ -234,6 +234,8 @@ carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 
 ## Respondents are positive about RAP knowledge and implementation
 
+We asked respondents who had heard of RAP whether they agreed with a series of statements.
+
 ```{r}
 plot <- carsurvey2::plot_likert(tables$rap_opinions, 3, "Frequency", "", n = samples$heard_of_rap, font_size = 14, height = 700, width = 700, break_q_names_col = "Question")
 
@@ -269,7 +271,7 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 
 While 49% of respondents say they feel comfortable implementing RAP only 2% respondents are regularly meeting RAP MVP. A large minority of responses are completing none of the basic RAP principles with 92% of respondents have a basic RAP score of 3 or less.
 
-To calculate a respondent's basic RAP score sum each of the basic rap components used regularly.
+To calculate a respondent's basic RAP score sum each of the basic RAP components used regularly.
 
 ```{r}
 
@@ -288,7 +290,7 @@ carsurvey2::wrap_outputs("basic_score", plot, table)
 
 ## Few respondents regularly use multiple advanced RAP components
 
-To calculate a respondent's basic RAP score sum each of the basic rap components used regularly.
+To calculate a respondent's advanced RAP score sum each of the advanced RAP components used regularly.
 
 ```{r}
 
