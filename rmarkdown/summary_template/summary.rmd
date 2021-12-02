@@ -198,7 +198,7 @@ carsurvey2::wrap_outputs("dep_management", plot, table)
 
 Respondents were asked whether they use continuous integration technologies. As above, respondents were provided with examples of what those might be: 
 
-* Github actions
+* GitHub actions
 * Jenkins
 * Travis
 
