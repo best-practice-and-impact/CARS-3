@@ -7,12 +7,11 @@ title: "Grade profiles"
 knitr::opts_chunk$set(echo=FALSE)
 ```
 
-
 This is a draft document. 
 
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
-
+While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend linking to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
 
 Below are links to grade-specific profiles. These contain the outputs present on the summary statistics page, filtered by grade. Only grades with 20 or more respondents are included.
 

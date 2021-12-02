@@ -22,7 +22,7 @@ This is a draft document.
 
 Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
 
-While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend referring to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
+While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend linking to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
 
 # Coding frequency and tools
 
@@ -151,7 +151,7 @@ We asked respondents who said they use code in their work how often they carry o
 
 ## Many good coding practices are not regularly applied by analysts
 
-Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so. However, all these practices are intended to improve the reproducibility, assurance and auditability of code.
+The practices list below are intended to improve the reproducibility, assurance and auditability of code. Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so.
 
 ```{r}
 plot <- carsurvey2::plot_likert(tables$coding_practices, 5, "Frequency", "", n = samples$coders, neutral_mid = FALSE, font_size = 14, height = 1200, width = 700, break_q_names_col = "Question", max_lines = 3)
@@ -249,7 +249,7 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 ## Some components of RAP are not implemented often
 
-From the responses, you can see the least common practice is open sourcing code. This is required to meet the [minimum viable product](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/) and as we have so few respondents reporting doing it that means we don’t have many products currently being produced which meet MVP even with the other components higher use. 
+The least common RAP component is open sourcing code. This is required to meet the [minimum viable product](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
 
 The frequencies for each RAP component are derived where respondents answered “regularly” or “all the time” to the relevant questions. This graph shows the frequency of basic and advanced RAP components. “Basic” relates to the components which make up MVP. Advanced are practices which although not compulsory for MVP we highly recommend are done for good practice. 
 
