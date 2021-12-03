@@ -249,11 +249,11 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
+RAP scores are the sum of scores for each componenet of the [minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
+
 ## Some components of RAP are not implemented often
 
-The least common RAP component is open sourcing code. This is required to meet the [minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
-
-A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
+The least common RAP component is open sourcing code. The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
 
 
 ```{r}
@@ -271,8 +271,6 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 
 While 49% of respondents say they feel comfortable implementing RAP only 2% respondents are regularly meeting RAP MVP. A large minority of responses are completing none of the basic RAP principles with 92% of respondents have a basic RAP score of 3 or less.
 
-To calculate a respondent's basic RAP score sum each of the basic RAP components used regularly.
-
 ```{r}
 
 bar_colour <- carsurvey2::get_2colour_scale(2)[2][[1]]
@@ -289,8 +287,6 @@ carsurvey2::wrap_outputs("basic_score", plot, table)
 
 
 ## Few respondents regularly use multiple advanced RAP components
-
-To calculate a respondent's advanced RAP score sum each of the advanced RAP components used regularly.
 
 ```{r}
 
