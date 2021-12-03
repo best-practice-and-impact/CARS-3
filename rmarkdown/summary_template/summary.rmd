@@ -250,10 +250,9 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
-RAP component scores “regularly” or “all the time” to the relevant questions. For documentation, this included both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". 
+RAP component scores “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". 
 
-"Basic" RAP scores refer to the RAP components that make up the [RAP minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/), as agreed by the RAP champions. "Advanced" components are those which did not part of the minimum standard but are still valuable in making analysis more reproducible. 
-
+A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
 ## RAP components
 
 

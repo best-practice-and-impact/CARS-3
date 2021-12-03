@@ -251,9 +251,9 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 ## Some components of RAP are not implemented often
 
-The least common RAP component is open sourcing code. This is required to meet the [minimum viable product](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
+The least common RAP component is open sourcing code. This is required to meet the [minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
 
-The frequencies for each RAP component are derived where respondents answered “regularly” or “all the time” to the relevant questions. This graph shows the frequency of basic and advanced RAP components. “Basic” relates to the components which make up MVP. Advanced are practices which although not compulsory for MVP we highly recommend are done for good practice. 
+A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
 
 
 ```{r}
