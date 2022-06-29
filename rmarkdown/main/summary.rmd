@@ -128,6 +128,17 @@ carsurvey2::wrap_outputs("ability", plot, table)
 
 ```
 
+``` {r}
+## Change in capability by code frequency
+
+plot <- carsurvey2::plot_likert(tables$capability_change_by_freq, 3, "Capability change", "", 912, font_size = 14, width = 800, height = 800)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$capability_change_by_freq)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("cap-by-freq", plot, table)
+```
+
 ## Most respondents learned to code outside of the public sector
 
 Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
@@ -232,6 +243,18 @@ carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 ```
 
 
+```{r}
+## line manage
+
+plot <- carsurvey2::plot_freqs(tables$line_manage, xlab = "", ylab = "Count", n = samples$all, break_q_names_col = "Line manage anyone who writes codes", orientation = "h", font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$line_manage, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("line-manage", plot, table)
+
+```
+
 ## Respondents are positive about RAP knowledge and implementation
 
 We asked respondents who had heard of RAP whether they agreed with a series of statements.
@@ -298,3 +321,55 @@ table <- kableExtra::kable_styling(knitr::kable(tables$advanced_rap_scores, row.
 carsurvey2::wrap_outputs("advanced_score", plot, table)
 
 ```
+
+```{r}
+#BASIC RAP TO IMPLEMENTATION
+plot <- carsurvey3::plot_stacked(tables$basic_score_by_implementation, "Percent", "I Currently Implement RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$basic_score_by_implementation)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
+
+carsurvey2::wrap_outputs("basic-by-imp", plot, table)
+
+
+```
+
+
+```{r}
+#Advanced RAP TO IMPLEMENTATION
+plot <- carsurvey3::plot_stacked(tables$adv_score_by_implementation , "Percent", "I Currently Implement RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$adv_score_by_implementation)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
+
+carsurvey2::wrap_outputs("adv-by-imp", plot, table)
+
+```
+
+
+
+```{r}
+#basic RAP TO understanding
+plot <- carsurvey3::plot_stacked(tables$basic_score_by_understanding , "Percent", "I Understand Key concepts of RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$basic_score_by_understanding)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
+
+carsurvey2::wrap_outputs("basic-by-und", plot, table)
+
+
+```
+
+```{r}
+#advanced RAP TO understanding 
+plot <- carsurvey3::plot_stacked(tables$adv_score_by_understanding, "Percent", "I Understand Key concepts of RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$adv_score_by_understanding)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
+
+carsurvey2::wrap_outputs("adv-by-und", plot, table)
+
+
+```
+
+
