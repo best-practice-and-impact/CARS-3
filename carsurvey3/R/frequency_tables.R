@@ -615,15 +615,15 @@ summarise_all_further <- function(data) {
     "Strongly Agree"))
   
   output_list <- list(
-    capability_change_by_freq <- summarise_cap_change_by_freq(data), 
-    coding_freq_comparison <- summarise_coding_freq_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
-    coding_tools_comparison <- summarise_coding_tools_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
-    basic_rap_score_comparison <- summarise_baisc_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
-    adv_rap_score_comparison <- summarise_adv_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
-    basic_score_by_implementation <- summarise_basic_score_by_imp(implementing_data),
-    adv_score_by_implementation <- summarise_adv_score_by_imp(implementing_data),
-    basic_score_by_understanding <- summarise_basic_score_by_understanding(implementing_data),
-    adv_score_by_understanding <- summarise_adv_score_by_understanding(implementing_data)
+    capability_change_by_freq = summarise_cap_change_by_freq(data), 
+    coding_freq_comparison = summarise_coding_freq_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
+    coding_tools_comparison = summarise_coding_tools_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
+    basic_rap_score_comparison = summarise_baisc_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
+    adv_rap_score_comparison = summarise_adv_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
+    basic_score_by_implementation = summarise_basic_score_by_imp(implementing_data),
+    adv_score_by_implementation = summarise_adv_score_by_imp(implementing_data),
+    basic_score_by_understanding = summarise_basic_score_by_understanding(implementing_data),
+    adv_score_by_understanding = summarise_adv_score_by_understanding(implementing_data)
   )
   
   return(output_list)
