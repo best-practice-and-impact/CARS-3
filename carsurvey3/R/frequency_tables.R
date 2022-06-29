@@ -10,6 +10,22 @@
 
 summarise_all <- function(data) {
   
+  implementing_data <- data[data$heard_of_RAP == "Yes" & data$code_freq != "Never",]
+  
+  implementing_data$RAP_implementing <- factor(implementing_data$RAP_implementing, levels = c(
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"))
+  
+  implementing_data$RAP_understand_key_components <- factor(implementing_data$RAP_understand_key_components, levels = c(
+    "Strongly Disagree",
+    "Disagree",
+    "Neutral",
+    "Agree",
+    "Strongly Agree"))
+  
   output_list <- list(
     code_freq = summarise_code_freq(data),
     operations = summarise_operations(data),
@@ -27,7 +43,13 @@ summarise_all <- function(data) {
     rap_components = summarise_rap_comp(data),
     ci = summarise_ci(data),
     dependency_management = summarise_dep_man(data),
-    rep_workflow = summarise_rep_workflow(data)
+    rep_workflow = summarise_rep_workflow(data),
+    line_manage = summarise_line_manage(data),
+    capability_change_by_freq = summarise_cap_change_by_freq(data), 
+    basic_score_by_implementation = summarise_basic_score_by_imp(implementing_data),
+    adv_score_by_implementation = summarise_adv_score_by_imp(implementing_data),
+    basic_score_by_understanding = summarise_basic_score_by_understanding(implementing_data),
+    adv_score_by_understanding = summarise_adv_score_by_understanding(implementing_data)
   )
   
   return(output_list)
@@ -580,59 +602,30 @@ summarise_language_status <- function(data) {
    frequencies
 }
 
-#' Produce all summary tables for further analysis
-#' 
-#' @description Produce all summary tables for further analysis and return as a named list.
-#' 
-#' @param data full CARS wave 3 data.frame after preprocessing
-#' 
-#' @return list of frequency tables
-#' 
-#' @export
-
-summarise_all_further <- function(data) {
-  
-  ons_data <- data[data$department == "Office for National Statistics", ]
-  other_deps_data <- data[data$department != "Office for National Statistics", ]
-  
-  ons_tables <- carsurvey3::summarise_all(ons_data)
-  other_deps_tables <- carsurvey3::summarise_all(other_deps_data)
-  
-  implementing_data <- data[data$heard_of_RAP == "Yes" & data$code_freq != "Never",]
-  
-  implementing_data$RAP_implementing <- factor(implementing_data$RAP_implementing, levels = c(
-    "Strongly Disagree",
-    "Disagree",
-    "Neutral",
-    "Agree",
-    "Strongly Agree"))
-  
-  implementing_data$RAP_understand_key_components <- factor(implementing_data$RAP_understand_key_components, levels = c(
-    "Strongly Disagree",
-    "Disagree",
-    "Neutral",
-    "Agree",
-    "Strongly Agree"))
-  
-  output_list <- list(
-    capability_change_by_freq = summarise_cap_change_by_freq(data), 
-    coding_freq_comparison = summarise_coding_freq_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
-    coding_tools_comparison = summarise_coding_tools_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
-    basic_rap_score_comparison = summarise_baisc_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
-    adv_rap_score_comparison = summarise_adv_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
-    basic_score_by_implementation = summarise_basic_score_by_imp(implementing_data),
-    adv_score_by_implementation = summarise_adv_score_by_imp(implementing_data),
-    basic_score_by_understanding = summarise_basic_score_by_understanding(implementing_data),
-    adv_score_by_understanding = summarise_adv_score_by_understanding(implementing_data)
-  )
-  
-  return(output_list)
-}
-
-
 #' @title Summarise manage someone who codes
 #'
 #' @description calculate frequency table for if someone line manages someone who codes
+#'
+#' @param data full CARS wave 3 data.frame after preprocessing 
+#'
+#' @return frequency table (data.frame)
+
+summarise_line_manage <- function(data){
+  
+  data$code_manage <- factor(data$code_manage,levels = c("Yes",
+                                                         "No",
+                                                         "I don't line manage anyone"))
+  
+  table <- data.frame(table(data$code_manage))
+  colnames(table) <- c("Line manage anyone who writes codes", 
+                             "count")
+  return(table)
+  
+}
+
+#' @title Summarise capability change by coding frequency
+#'
+#' @description calculate the cross tab of coding frequency by capability change
 #'
 #' @param data full CARS wave 3 data.frame after preprocessing 
 #'
@@ -665,10 +658,123 @@ summarise_cap_change_by_freq <- function(data){
   capability_change <- data.frame(capability_change, check.names = FALSE)
   capability_change[2:6] <- t(apply(capability_change[2:6], 1, function(x) x / sum(x)))
   
+  colnames(capability_change)[1] <- "Coding frequency"
+
   return(capability_change)
 }
 
 
+#' @title Compare basic RAP score to implementation of RAP
+#'
+#' @description calculate frequency table for basic rap score compared with implementation of RAP
+#'
+#' @param implementing_data carsurvey data filter to people who have heard of RAP and code at least rarely
+#'
+#' @return frequency table (data.frame)
+#' 
+#' @export
+
+summarise_basic_score_by_imp <- function(implementing_data){
+  
+  rap_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$basic_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+  rap_score_by_implementing %<>% data.frame(check.names = FALSE)
+  rap_score_by_implementing[2:8] <- t(apply(rap_score_by_implementing[2:8], 1, function(x) x / sum(x) * 100))  
+  
+  colnames(rap_score_by_implementing)[1] <- "I am Currently Implementing RAP"
+  
+  return(rap_score_by_implementing)
+}
+
+#' @title Compare advanced RAP score to implementation of RAP
+#'
+#' @description calculate frequency table for advanced rap score compared with implementation of RAP
+#'
+#' @param implementing_data carsurvey data filtered to people who have heard of RAP and code at least rarely
+#'
+#' @return frequency table (data.frame)
+#' 
+#' @export
+
+summarise_adv_score_by_imp <- function(implementing_data){
+  
+  advanced_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$advanced_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+  advanced_score_by_implementing %<>% data.frame(check.names = FALSE)
+  advanced_score_by_implementing[2:9] <- t(apply(advanced_score_by_implementing[2:9], 1, function(x) x / sum(x) * 100))
+  
+  colnames(advanced_score_by_implementing)[1] <- "I am Currently Implementing RAP"
+  
+  return(advanced_score_by_implementing)
+}
+
+#' @title Compare basic RAP score to understanding of key RAP components
+#'
+#' @description calculate frequency table for basic rap score compared with understanding of key RAP components
+#'
+#' @param implementing_data carsurvey data filter to people who have heard of RAP and code at least rarely
+#'
+#' @return frequency table (data.frame)
+#' 
+#' @export
+
+summarise_basic_score_by_understanding <- function(implementing_data){
+  
+  rap_score_by_understanding <- data.frame(table(implementing_data$RAP_understand_key_components, implementing_data$basic_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+  rap_score_by_understanding %<>% data.frame(check.names = FALSE)
+  rap_score_by_understanding[2:8] <- t(apply(rap_score_by_understanding[2:8], 1, function(x) x / sum(x) * 100))
+  
+  colnames(rap_score_by_understanding)[1] <- "I Understand Key concepts of RAP"
+  
+  return(rap_score_by_understanding)
+}
+
+#' @title Compare advanced RAP score to understanding of key RAP components
+#'
+#' @description calculate frequency table for advanced rap score compared with understanding of key RAP components
+#'
+#' @param implementing_data carsurvey data filtered to people who have heard of RAP and code at least rarely
+#'
+#' @return frequency table (data.frame)
+#' 
+#' @export
+
+summarise_adv_score_by_understanding <- function(implementing_data){
+  
+  advanced_score_by_understanding <- data.frame(table(implementing_data$RAP_understand_key_components, implementing_data$advanced_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+  advanced_score_by_understanding %<>% data.frame(check.names = FALSE)
+  advanced_score_by_understanding[2:9] <- t(apply(advanced_score_by_understanding[2:9], 1, function(x) x / sum(x) * 100))
+  
+  colnames(advanced_score_by_understanding)[1] <- "I Understand Key concepts of RAP"
+  
+  return(advanced_score_by_understanding)
+}
+
+#' Produce all summary tables for further analysis
+#' 
+#' @description Produce all summary tables for further analysis and return as a named list.
+#' 
+#' @param data full CARS wave 3 data.frame after preprocessing
+#' 
+#' @return list of frequency tables
+#' 
+#' @export
+
+summarise_all_further <- function(data) {
+  
+  ons_data <- data[data$department == "Office for National Statistics", ]
+  other_deps_data <- data[data$department != "Office for National Statistics", ]
+  
+  ons_tables <- carsurvey3::summarise_all(ons_data)
+  other_deps_tables <- carsurvey3::summarise_all(other_deps_data)
+  
+  output_list <- list(
+    coding_freq_comparison = summarise_coding_freq_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
+    coding_tools_comparison = summarise_coding_tools_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
+    basic_rap_score_comparison = summarise_baisc_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
+    adv_rap_score_comparison = summarise_adv_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables)
+  )
+  
+  return(output_list)
+}
 
 #' @title  Compare coding frequency of ONS to other departments
 #'
@@ -784,80 +890,4 @@ summarise_adv_rap_scores_comparison <- function(ons_data, other_deps_data, ons_t
   advanced_scores_combined$department <- factor(advanced_scores_combined$department, levels = c("Other departments", "ONS"))
   
   return(advanced_scores_combined)
-}
-
-#' @title Compare basic RAP score to implementation of RAP
-#'
-#' @description calculate frequency table for basic rap score compared with implementation of RAP
-#'
-#' @param implementing_data carsurvey data filter to people who have heard of RAP and code at least rarely
-#'
-#' @return frequency table (data.frame)
-#' 
-#' @export
-
-summarise_basic_score_by_imp <- function(implementing_data){
-  
-  rap_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$basic_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
-  rap_score_by_implementing %<>% data.frame(check.names = FALSE)
-  rap_score_by_implementing[2:8] <- t(apply(rap_score_by_implementing[2:8], 1, function(x) x / sum(x) * 100))  
-  
-  return(rap_score_by_implementing)
-}
-
-#' @title Compare advanced RAP score to implementation of RAP
-#'
-#' @description calculate frequency table for advanced rap score compared with implementation of RAP
-#'
-#' @param implementing_data carsurvey data filtered to people who have heard of RAP and code at least rarely
-#'
-#' @return frequency table (data.frame)
-#' 
-#' @export
-
-summarise_adv_score_by_imp <- function(implementing_data){
-  
-  advanced_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$advanced_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
-  advanced_score_by_implementing %<>% data.frame(check.names = FALSE)
-  advanced_score_by_implementing[2:9] <- t(apply(advanced_score_by_implementing[2:9], 1, function(x) x / sum(x) * 100))
-  
-  return(advanced_score_by_implementing)
-}
-
-#' @title Compare basic RAP score to understanding of key RAP components
-#'
-#' @description calculate frequency table for basic rap score compared with understanding of key RAP components
-#'
-#' @param implementing_data carsurvey data filter to people who have heard of RAP and code at least rarely
-#'
-#' @return frequency table (data.frame)
-#' 
-#' @export
-
-summarise_basic_score_by_understanding <- function(implementing_data){
-  
-  rap_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$basic_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
-  rap_score_by_implementing %<>% data.frame(check.names = FALSE)
-  rap_score_by_implementing[2:8] <- t(apply(rap_score_by_implementing[2:8], 1, function(x) x / sum(x) * 100))  
-  
-  return(rap_score_by_implementing)
-}
-
-#' @title Compare advanced RAP score to understanding of key RAP components
-#'
-#' @description calculate frequency table for advanced rap score compared with understanding of key RAP components
-#'
-#' @param implementing_data carsurvey data filtered to people who have heard of RAP and code at least rarely
-#'
-#' @return frequency table (data.frame)
-#' 
-#' @export
-
-summarise_adv_score_by_understanding <- function(implementing_data){
-  
-  advanced_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$advanced_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
-  advanced_score_by_implementing %<>% data.frame(check.names = FALSE)
-  advanced_score_by_implementing[2:9] <- t(apply(advanced_score_by_implementing[2:9], 1, function(x) x / sum(x) * 100))
-  
-  return(advanced_score_by_implementing)
 }
