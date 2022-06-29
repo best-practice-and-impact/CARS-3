@@ -22,7 +22,7 @@ NULL
 #' 
 #' @description compute spearmans rank correlation on two variables 
 #' 
-#' @data carsurvey dataset
+#' @param carsurvey dataset
 #' @param first_variable first variable to compare
 #' @param second_variable second variable to compare
 #' 
