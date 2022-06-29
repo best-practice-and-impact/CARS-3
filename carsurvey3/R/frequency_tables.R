@@ -861,5 +861,3 @@ summarise_adv_score_by_understanding <- function(implementing_data){
   
   return(advanced_score_by_implementing)
 }
-
-
