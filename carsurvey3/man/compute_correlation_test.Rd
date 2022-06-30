@@ -7,11 +7,11 @@
 compute_correlation_test(data, first_variable, second_variable)
 }
 \arguments{
+\item{data}{dataset}
+
 \item{first_variable}{first variable to compare}
 
 \item{second_variable}{second variable to compare}
-
-\item{carsurvey}{dataset}
 }
 \value{
 list of correlation test outputs
