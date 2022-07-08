@@ -15,16 +15,17 @@ knitr::opts_chunk$set(echo=FALSE)
 library(magrittr)
 
 tables <- carsurvey3::summarise_all(data)
+prof_langs <- carsurvey3::summarise_languages_by_prof(data)
 
 ```
 
-This is a draft document. 
+This is a living document. 
 
-Please note all data presented here are provisional and intended only for feedback purposes. It is possible that the figures presented here will change in future. 
+We want our users to get as much value as possible from our analysis. Because of that, we will be updating these pages with additional outputs and insights when possible. To make sure you always access the latest insights, we recommend linking to these pages rather than sharing this analysis any other way at this stage. 
 
-While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend linking to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
 
 # Coding frequency and tools
+
 
 ## Most respondents use code at least regularly in their current role
 
@@ -39,6 +40,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$code_freq)) %>%
 carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
+<br>
 
 ## Respondents use code to perform a variety of data operations 
 
@@ -52,7 +54,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>%
 
 carsurvey2::wrap_outputs("operations", plot, table)
 ```
-
+<br>
 
 ## Access to and knowledge of programming languages
 
@@ -63,7 +65,7 @@ Given a list of programming tools, we asked respondents to answer “Yes”, “
 
 Please note we did not set precise definitions for availability and knowledge here, as these are dependent on individual circumstances. 
 
-
+<br>
 ## Open source tools are the most available for analysts work
 
 R, SQL and Python were the three most available programming languages to government analysts. All three are open source languages, the use of which is a key component of the [RAP methodology](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). Such tools help analysts make their work more transparent and reproducible to their users, as cost is not a barrier to use. 
@@ -75,10 +77,11 @@ table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE
 
 carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
+<br>
 
-## Capability is most common in open-source tools
+## Open source tools are leading the way in capability
 
-More respondents said they were able to carry out their work using Python, SQL and R, showing open-source tools also lead the way in capability. 
+More respondents said they were able to carry out their work using Python, SQL and R than any other programming language. R in particular is consistently popular across professions, having the highest or second highest levels of capability across all analytical professions. In contrast, proprietary tools are much more profession-specific.  
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -88,10 +91,24 @@ table <- kableExtra::kable_styling(knitr::kable(tables$knowledge, row.names = FA
 carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 ```
 
+
+```{r}
+plot <- carsurvey3::freq_subplots(prof_langs, "", "Percent", y_margin = .1, x_margin = .15, orientation = "h", height = 900, width = 600, nrows = 4, font_size = 14)
+
+prof_langs[[3]] <- round(prof_langs[[3]], 1)
+colnames(prof_langs) <- c("Programming language", "Profession", "Know how to use (percent)")
+
+table <-  kableExtra::kable_styling(knitr::kable(prof_langs, row.names = FALSE))
+
+carsurvey2::wrap_outputs("prof_langs", plot, table)
+```
+<br>
+
 ## Access and knowledge gaps
 
 Using data collected from previous questions we calculated the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. 
 
+<br>
 ## Many respondents have capability in tools they cannot access in work
 
 A large minority of respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open-source software is that it is easier for analysts' coding skills to be transferable if they learn an open-source language, as they are more likely to have access to the same software at another department in future.
@@ -107,9 +124,27 @@ table <- kableExtra::kable_styling(knitr::kable(tables$language_status, row.name
 carsurvey2::wrap_outputs("tools-status", plot, table)
 
 ```
-
+<br>
 
 # Coding capability
+
+<br>
+## Most respondents learned to code outside of the public sector
+
+Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
+
+
+``` {r}
+
+plot <- carsurvey2::plot_freqs(tables$where_learned, xlab = "", ylab = "Count", n = samples$any_code_experience, break_q_names_col = "First coding experience", orientation = "h", font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$where_learned, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$any_code_experience))
+
+carsurvey2::wrap_outputs("first-learn", plot, table)
+
+```
+<br>
 
 ## Most analysts said their coding ability has improved during current role
 
@@ -127,28 +162,22 @@ table <- kableExtra::kable_styling(knitr::kable(tables$ability_change, row.names
 carsurvey2::wrap_outputs("ability", plot, table)
 
 ```
+<br>
 
-## Most respondents learned to code outside of the public sector
+## How often people code in their work is correlated with changes to their coding abilities
 
-Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
+People who write code to achieve their work objectives more often are more likely to report an improvement to their coding abilities. Conversely, those who do not code in their work are much more likely to report their coding abilities are getting worse. Although this finding is not surprising, it highlights the fact that analysts' coding abilities are not static, and need to be maintained. 
 
-
-``` {r}
-
-plot <- carsurvey2::plot_freqs(tables$where_learned, xlab = "", ylab = "Count", n = samples$any_code_experience, break_q_names_col = "First coding experience", orientation = "h", font_size = 14, width = 600)
-
-table <- kableExtra::kable_styling(knitr::kable(tables$where_learned, row.names = FALSE)) %>% 
-  kableExtra::add_footnote(paste0("Sample size = ", samples$any_code_experience))
-
-carsurvey2::wrap_outputs("first-learn", plot, table)
+```{r}
 
 ```
 
-
+<br>
 # Coding practices
 
 We asked respondents who said they use code in their work how often they carry out various coding practices considered to be good practice. For more information on the practices presented below, please read our guidance on [quality assurance of code for analysis and research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
 
+<br>
 ## Many good coding practices are not regularly applied by analysts
 
 The practices list below are intended to improve the reproducibility, assurance and auditability of code. Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so.
@@ -162,7 +191,7 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$coding
 carsurvey2::wrap_outputs("code-prac", plot, table)
 
 ```
-
+<br>
 
 ## Most types of documentation are not regularly used
 
@@ -180,6 +209,7 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) 
 carsurvey2::wrap_outputs("doc", plot, table)
 
 ```
+<br>
 
 ## A minority are using dependency management or reproducible workflow packages
 
@@ -196,7 +226,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$dependency_management)) %
 carsurvey2::wrap_outputs("dep_management", plot, table)
 
 ```
-
+<br>
 
 
 
@@ -210,12 +240,13 @@ table <- kableExtra::kable_styling(knitr::kable(tables$rep_workflow)) %>%
 carsurvey2::wrap_outputs("workflow", plot, table)
 
 ```
-
+<br>
 
 # RAP knowledge and opinions
 
 We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
 
+<br>
 # Most respondents have heard of RAP
 
 65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. RAP and its principles are considered best practice and help to improve analysis. If respondents haven’t heard of RAP it means these best practices are less likely to be implemented.
@@ -230,7 +261,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$rap_knowledge, row.names 
 carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 
 ```
-
+<br>
 
 ## Respondents are positive about RAP knowledge and implementation
 
@@ -245,12 +276,13 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$rap_op
 carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 ```
-
+<br>
 
 # RAP scores
 
 RAP scores are the sum of scores for each componenet of the [minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
 
+<br<
 ## Some components of RAP are not implemented often
 
 The least common RAP component is open sourcing code. The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
@@ -266,7 +298,7 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 
 ```
 
-
+<br>
 ## Very few respondents are regularly meeting RAP MVP standards
 
 While 49% of respondents say they feel comfortable implementing RAP only 2% respondents are regularly meeting RAP MVP. A large minority of responses are completing none of the basic RAP principles with 92% of respondents have a basic RAP score of 3 or less.
@@ -284,7 +316,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$basic_rap_scores, row.nam
 carsurvey2::wrap_outputs("basic_score", plot, table)
 
 ```
-
+<br>
 
 ## Few respondents regularly use multiple advanced RAP components
 
