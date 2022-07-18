@@ -4,14 +4,14 @@
 \alias{compute_correlation_test}
 \title{compute spearmans rank test}
 \usage{
-compute_correlation_test(data, first_variable, second_variable)
+compute_correlation_test(first_variable, second_variable, method = "spearman")
 }
 \arguments{
-\item{data}{dataset}
-
 \item{first_variable}{first variable to compare}
 
 \item{second_variable}{second variable to compare}
+
+\item{method}{optional: correlation method. Defaults to "spearman"}
 }
 \value{
 list of correlation test outputs

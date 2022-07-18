@@ -258,6 +258,8 @@ summarise_coding_practices <- function(data) {
 
 summarise_rap_basic <- function(data){
   
+  data <- data[data$code_freq != "Never", ]
+    
   basic_freqs <- data.frame(table(data$basic_rap_score))
   colnames(basic_freqs) <- c("Basic RAP score", "Count")
   
@@ -275,6 +277,8 @@ summarise_rap_basic <- function(data){
 #' 
 
 summarise_rap_advanced <- function(data){
+  
+  data <- data[data$code_freq != "Never", ]
   
   advanced_freqs <- data.frame(table(data$advanced_rap_score))
   colnames(advanced_freqs) <- c("Advanced RAP score", "Count")
@@ -890,4 +894,45 @@ summarise_adv_rap_scores_comparison <- function(ons_data, other_deps_data, ons_t
   advanced_scores_combined$department <- factor(advanced_scores_combined$department, levels = c("Other departments", "ONS"))
   
   return(advanced_scores_combined)
+}
+
+#' Summarise programming language knowledge by profession
+#'
+#' @description only used the main summary page. Needs to be turned into wide data for html table.
+#'
+#' @param data CARS data (preprocessed)
+#'
+#' @return data.frame
+#' 
+#' @export
+
+summarise_languages_by_prof <- function(data) {
+  data <- data[data$code_freq <= "Never", ]
+  
+  profs <- c("prof_GAD", "prof_DDAT",  "prof_DS", "prof_GES", "prof_GORS", "prof_GSG", "prof_GSR")
+  langs <- c("knowledge_R", "knowledge_SQL", "knowledge_python", "knowledge_SAS", "knowledge_SPSS",
+             "knowledge_VBA", "knowledge_matlab", "knowledge_stata")
+  lang_names <- c("R", "SQL", "Python", "SAS", "SPSS", "VBA", "Matlab", "Stata")
+  
+  prof_counts <- colSums(data[profs] == "Yes")
+  
+  
+  prof_langs <- sapply(profs, function(prof) {
+    filtered_data <- data[data[prof] == "Yes", ]
+    
+    freqs <- as.vector(colSums(filtered_data[langs] == "Yes")) / prof_counts[prof] * 100
+    
+    return(freqs)
+  }) %>% data.frame
+  
+  prof_langs <- cbind(lang = lang_names, prof_langs)
+  colnames(prof_langs) <- c("lang", "Digital and data (DDAT)", "Data scientists", "Actuaries", "Economists (GES)", 
+                            "Operational researchers (GORS)", "Social researchers (GSR)", "Statisticians (GSG)") 
+  
+  prof_langs_long <- tidyr::pivot_longer(prof_langs, cols = colnames(prof_langs)[2:8]) %>% data.frame
+  prof_langs_long[[1]] <- factor(prof_langs_long[[1]], levels = unique(prof_langs_long[[1]]))
+  prof_langs_long[[2]] <- factor(prof_langs_long[[2]], levels = unique(prof_langs_long[[2]]))
+
+  return(prof_langs_long)
+  
 }
