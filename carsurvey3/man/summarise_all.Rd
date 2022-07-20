@@ -4,10 +4,12 @@
 \alias{summarise_all}
 \title{Produce all summary tables}
 \usage{
-summarise_all(data)
+summarise_all(data, all_tables = FALSE)
 }
 \arguments{
 \item{data}{full CARS wave 3 data.frame after preprocessing}
+
+\item{all_tables}{logical: whether to produce all summary output tables. Defaults to FALSE.}
 }
 \value{
 list of frequency tables

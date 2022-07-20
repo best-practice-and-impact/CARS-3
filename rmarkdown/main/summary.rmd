@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo=FALSE)
 
 library(magrittr)
 
-tables <- carsurvey3::summarise_all(data)
+tables <- carsurvey3::summarise_all(data, all_tables = TRUE)
 prof_langs <- carsurvey3::summarise_languages_by_prof(data)
 
 ```
@@ -390,7 +390,7 @@ carsurvey2::wrap_outputs("basic-by-imp", plot, table)
 
 ## Respondents with a better understanding of RAP use minimum RAP practices more often
 
-There is a positive correlation between self-reported understanding of RAP and basic RAP scores (r(24) = .39, p < .01). This suggests increasing awareness of RAP standards and guidelines could help increase the use of RAP practices. However, this is only a correlation and should be treated with caution, as it does not necessarily imply a causal direction.
+There is a positive correlation between self-reported understanding of RAP and basic RAP scores (r(24) = .39, p < .01). This suggests increasing awareness of RAP standards and guidelines could help increase the use of RAP practices. However, this is only a correlation and should be treated with caution, as it does not necessarily imply a causal direction. It should be noted that access to tools varies across departments and may impact analysts' ability to implement RAP practices. 
 
 ```{r}
 plot <- carsurvey3::plot_stacked(tables$basic_score_by_understanding , "Percent", "I Understand Key concepts of RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)

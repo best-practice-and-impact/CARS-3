@@ -3,12 +3,13 @@
 #' @description Produce all summary tables and return as a named list.
 #' 
 #' @param data full CARS wave 3 data.frame after preprocessing
+#' @param all_tables logical: whether to produce all summary output tables. Defaults to FALSE.
 #' 
 #' @return list of frequency tables
 #' 
 #' @export
 
-summarise_all <- function(data) {
+summarise_all <- function(data, all_tables = FALSE) {
   
   implementing_data <- data[data$heard_of_RAP == "Yes" & data$code_freq != "Never",]
   
@@ -44,13 +45,21 @@ summarise_all <- function(data) {
     ci = summarise_ci(data),
     dependency_management = summarise_dep_man(data),
     rep_workflow = summarise_rep_workflow(data),
-    line_manage = summarise_line_manage(data),
-    capability_change_by_freq = summarise_cap_change_by_freq(data), 
-    basic_score_by_implementation = summarise_basic_score_by_imp(implementing_data),
-    adv_score_by_implementation = summarise_adv_score_by_imp(implementing_data),
-    basic_score_by_understanding = summarise_basic_score_by_understanding(implementing_data),
-    adv_score_by_understanding = summarise_adv_score_by_understanding(implementing_data)
+    line_manage = summarise_line_manage(data)
   )
+  
+  if (all_tables) {
+    
+    output_list <- c(output_list,
+                     list(
+                       capability_change_by_freq = summarise_cap_change_by_freq(data), 
+                       basic_score_by_implementation = summarise_basic_score_by_imp(implementing_data),
+                       adv_score_by_implementation = summarise_adv_score_by_imp(implementing_data),
+                       basic_score_by_understanding = summarise_basic_score_by_understanding(implementing_data),
+                       adv_score_by_understanding = summarise_adv_score_by_understanding(implementing_data)
+                     ))
+    
+  }
   
   return(output_list)
 }
