@@ -42,7 +42,7 @@ Avoid:
 
 [Reproducible Analytical Pipelines (RAP) MVP](https://github.com/best-practice-and-impact/rap_mvp_maturity_guidance/blob/master/Reproducible-Analytical-Pipelines-MVP.md)
 
-[RAP champions network](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/)
+[RAP champions network](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/reproducible-analytical-pipeline-rap-champions/)
 
 <br>
 

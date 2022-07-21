@@ -69,7 +69,7 @@ Please note we did not set precise definitions for availability and knowledge he
 
 ## Open source tools are the most available for analysts work
 
-R, SQL and Python were the three most available programming languages to government analysts. All three are open source languages, the use of which is a key component of the [RAP methodology](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). Such tools help analysts make their work more transparent and accessible to users, as cost is not a barrier to learning these languages. 
+R, SQL and Python were the three most available programming languages to government analysts. All three are open source languages, the use of which is a key component of the [RAP methodology](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/). Such tools help analysts make their work more transparent and accessible to users, as cost is not a barrier to learning these languages. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -82,7 +82,7 @@ carsurvey2::wrap_outputs("tools-access", plot, table)
 
 ## Open source tools are leading the way in capability
 
-More respondents said they were able to carry out their work using Python, SQL and R than any other programming language. R in particular is consistently popular across professions, having the highest or second highest levels of capability across all analytical professions. In contrast, proprietary tools are much more profession-specific. These open source languages present the best opportunity for collaboration and recruitment, as there are l
+More respondents said they were able to carry out their work using Python, SQL and R than any other programming language. R in particular is consistently popular across professions, having the highest or second highest levels of capability across all analytical professions. In contrast, proprietary tools are much more profession-specific. Popular Open source languages present the best opportunity for collaboration both across professions and between departments. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -198,6 +198,7 @@ carsurvey2::wrap_outputs("cap-by-freq", plot, table)
 We asked respondents who said they use code in their work how often they carry out various coding practices considered to be good practice. For more information on the practices presented below, please read our guidance on [quality assurance of code for analysis and research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
 
 <br>
+
 ## Many good coding practices are not regularly applied by analysts
 
 The practices list below are intended to improve the reproducibility, assurance and auditability of code. Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so.
@@ -267,6 +268,7 @@ carsurvey2::wrap_outputs("workflow", plot, table)
 We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
 
 <br>
+
 # Most respondents have heard of RAP, but many do not know who their RAP champions are
 
 65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. Of those who have heard or RAP, most do not know who their department RAP champion is. [RAP champions](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/reproducible-analytical-pipeline-rap-champions/) promote and support RAP development across government. There is clearly more to be done to make sure people are aware of RAP and know where they can find support. 
@@ -403,3 +405,4 @@ carsurvey2::wrap_outputs("basic-by-und", plot, table)
 
 ```
 
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
