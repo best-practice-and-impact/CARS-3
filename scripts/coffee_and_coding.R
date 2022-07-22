@@ -10,6 +10,10 @@ data <- tidied_data %>% carsurvey3::rename_cols() %>% carsurvey3::enforce_stream
 
 data$prof_DS <- ifelse(data$prof_DS_GSG_GORS == "Yes" | data$prof_DS_other == "Yes", "Yes", "No")
 
+# Implementing or planning RAP %
+round(sum(data$RAP_implementing %in% c("Agree", "Strongly Agree") | data$RAP_planning_to_implement %in% c("Agree", "Strongly Agree")) / sum(data$heard_of_RAP == "Yes") * 100)
+
+
 # Coding tools by profession
 
 profs <- grep("prof_", colnames(data), value = TRUE)[c(4:6, 8:11, 14)]
@@ -158,7 +162,7 @@ plot_factorial <- function(table, xlab, ylab, n, font_size = 12, orientation = "
     tickfont = list(size = font_size),
     titlefont = list(size = font_size * 1.2)
   )
-  
+    
   if (orientation == "v") {
     table <- dplyr::arrange(table, table[,1])
     table[,1] <- factor(table[,1], levels = unique(table[,1]))
@@ -166,6 +170,8 @@ plot_factorial <- function(table, xlab, ylab, n, font_size = 12, orientation = "
     y_vals <- table[[3]]
     x_axis <- x
     y_axis <- y
+    trace_order <- "normal"
+    colours <- rev(colours)
   } else if (orientation == "h") {
     table <- dplyr::arrange(table, dplyr::desc(table[,1]))
     table[,1] <- factor(table[,1], levels = unique(table[,1]))
@@ -173,6 +179,7 @@ plot_factorial <- function(table, xlab, ylab, n, font_size = 12, orientation = "
     y_vals <- table[[1]]
     x_axis <- y
     y_axis <- x
+    trace_order <- "reversed"
   }
   
   ylab <- y_axis$title
@@ -192,7 +199,7 @@ plot_factorial <- function(table, xlab, ylab, n, font_size = 12, orientation = "
                         xaxis = x_axis, 
                         yaxis = y_axis, 
                         margin = list(b = 100),
-                        legend = list(traceorder = "reversed", font = list(font_size = font_size)),
+                        legend = list(traceorder = trace_order, font = list(font_size = font_size)),
                         hoverlabel = list(bgcolor = "white", font = list(size = font_size)),
                         annotations = list(x = 1, y = 0, text = paste0("Sample size = ", n), 
                                            showarrow = F, xanchor='right', yanchor='auto', xshift=0, yshift=-100,
@@ -222,7 +229,11 @@ other_deps_tables$code_freq[2] <- other_deps_tables$code_freq[2] / nrow(other_de
 
 freq_combined <- rbind(data.frame(other_deps_tables$code_freq, department = "Other departments", check.names = FALSE), 
                   data.frame(ons_tables$code_freq, department = "ONS", check.names = FALSE))
+
 freq_combined <- freq_combined[c(1,3,2)]
+
+freq_combined$department <- factor(freq_combined$department, levels = c("Other departments", "ONS"))
+
 plot_factorial(freq_combined, "Coding frequency", "Percent", n = nrow(data), font_size = 14, width = 700)
 
 
@@ -241,7 +252,7 @@ langs_combined <- langs_combined[c(1,3,2)]
 
 plot_factorial(langs_combined, "Programming language", "Percent", n = nrow(data), font_size = 14, height = 600, width = 600, orientation = "h")
 
-# Ability change
+## Ability change
 
 wilcox.test(as.numeric(ons_data$ability_change), as.numeric(other_deps_data$ability_change))
 
@@ -250,3 +261,102 @@ other_deps_tables$ability_change[2] <- other_deps_tables$ability_change[2] / sum
 
 freq_combined <- rbind(data.frame(other_deps_tables$ability_change, department = "Other departments", check.names = FALSE), 
                        data.frame(ons_tables$ability_change, department = "ONS", check.names = FALSE))
+
+## RAP components
+
+ons_tables$rap_components[3] <- ons_tables$rap_components[3] / sum(ons_data$code_freq != "Never") * 100
+other_deps_tables$rap_components[3] <- other_deps_tables$rap_components[3] / sum(other_deps_data$code_freq != "Never") * 100
+
+components_combined <- rbind(
+  data.frame(other_deps_tables$rap_components[c(1,3)], department = "Other departments", check.names = FALSE),
+  data.frame(ons_tables$rap_components[c(1,3)], department = "ONS", check.names = FALSE)
+)
+
+components_combined <- components_combined[c(1,3,2)]
+
+## RAP scores
+
+ons_tables$basic_rap_scores[2] <- ons_tables$basic_rap_scores[2] / sum(ons_data$code_freq != "Never") * 100
+other_deps_tables$basic_rap_scores[2] <- other_deps_tables$basic_rap_scores[2] / sum(other_deps_data$code_freq != "Never") * 100
+
+basic_scores_combined <- rbind(
+  data.frame(other_deps_tables$basic_rap_scores, department = "Other departments", check.names = FALSE),
+  data.frame(ons_tables$basic_rap_scores, department = "ONS", check.names = FALSE)
+)
+
+basic_scores_combined <- basic_scores_combined[c(1,3,2)]
+basic_scores_combined$department <- factor(basic_scores_combined$department, levels = c("Other departments", "ONS"))
+wilcox.test(ons_data$basic_rap_score, other_deps_data$basic_rap_score)
+
+plot_factorial(basic_scores_combined, "Basic RAP score", "Percent", 14, n = sum(data$code_freq != "Never"), width = 700, height = 500)
+
+## RAP scores - advanced
+
+ons_tables$advanced_rap_scores[2] <- ons_tables$advanced_rap_scores[2] / sum(ons_data$code_freq != "Never") * 100
+other_deps_tables$advanced_rap_scores[2] <- other_deps_tables$advanced_rap_scores[2] / sum(other_deps_data$code_freq != "Never") * 100
+
+advanced_scores_combined <- rbind(
+  data.frame(other_deps_tables$advanced_rap_scores, department = "Other departments", check.names = FALSE),
+  data.frame(ons_tables$advanced_rap_scores, department = "ONS", check.names = FALSE)
+)
+
+advanced_scores_combined <- advanced_scores_combined[c(1,3,2)]
+advanced_scores_combined$department <- factor(advanced_scores_combined$department, levels = c("Other departments", "ONS"))
+wilcox.test(ons_data$advanced_rap_score, other_deps_data$advanced_rap_score)
+
+plot_factorial(advanced_scores_combined, "advanced RAP score", "Percent", 14, n = sum(data$code_freq != "Never"), width = 700, height = 500)
+
+# Whether people are correctly implementing RAP
+
+implementing_data <- data[data$heard_of_RAP == "Yes" & data$code_freq != "Never",]
+
+implementing_data$RAP_implementing <- factor(implementing_data$RAP_implementing, levels = c(
+  "Strongly Disagree",
+  "Disagree",
+  "Neutral",
+  "Agree",
+  "Strongly Agree"))
+
+rap_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$basic_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+rap_score_by_implementing %<>% data.frame(check.names = FALSE)
+rap_score_by_implementing[2:8] <- t(apply(rap_score_by_implementing[2:8], 1, function(x) x / sum(x) * 100))
+
+carsurvey2::plot_stacked(rap_score_by_implementing, "Percent", "", sum(implementing_data$heard_of_RAP == "Yes" & implementing_data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+corr <- cor.test(as.numeric(implementing_data$RAP_implementing), implementing_data$basic_rap_score, method = "spearman", exact = FALSE)
+corr$estimate
+corr$p.value
+
+advanced_score_by_implementing <- data.frame(table(implementing_data$RAP_implementing, implementing_data$advanced_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+advanced_score_by_implementing %<>% data.frame(check.names = FALSE)
+advanced_score_by_implementing[2:9] <- t(apply(advanced_score_by_implementing[2:9], 1, function(x) x / sum(x) * 100))
+carsurvey2::plot_stacked(advanced_score_by_implementing, "Percent", "", sum(implementing_data$heard_of_RAP == "Yes" & implementing_data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+corr <- cor.test(as.numeric(implementing_data$RAP_implementing), implementing_data$advanced_rap_score, method = "spearman", exact = FALSE)
+corr$estimate
+corr$p.value
+
+implementing_data$RAP_understand_key_components <- factor(implementing_data$RAP_understand_key_components, levels = c(
+  "Strongly Disagree",
+  "Disagree",
+  "Neutral",
+  "Agree",
+  "Strongly Agree"))
+
+rap_score_by_understanding <- data.frame(table(implementing_data$RAP_understand_key_components, implementing_data$basic_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+rap_score_by_understanding %<>% data.frame(check.names = FALSE)
+rap_score_by_understanding[2:8] <- t(apply(rap_score_by_understanding[2:8], 1, function(x) x / sum(x) * 100))
+carsurvey2::plot_stacked(rap_score_by_understanding, "Percent", "", sum(implementing_data$heard_of_RAP == "Yes" & implementing_data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+corr <- cor.test(as.numeric(implementing_data$RAP_understand_key_components), implementing_data$basic_rap_score, method = "spearman", exact = FALSE)
+corr$estimate
+corr$p.value
+
+advanced_score_by_understanding <- data.frame(table(implementing_data$RAP_understand_key_components, implementing_data$advanced_rap_score)) %>% tidyr::pivot_wider(names_from = Var2, values_from = Freq)
+advanced_score_by_understanding %<>% data.frame(check.names = FALSE)
+advanced_score_by_understanding[2:9] <- t(apply(advanced_score_by_understanding[2:9], 1, function(x) x / sum(x) * 100))
+carsurvey2::plot_stacked(advanced_score_by_understanding, "Percent", "", sum(implementing_data$heard_of_RAP == "Yes" & implementing_data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+corr <- cor.test(as.numeric(implementing_data$RAP_understand_key_components), implementing_data$advanced_rap_score, method = "spearman", exact = FALSE)
+corr$estimate
+corr$p.value
