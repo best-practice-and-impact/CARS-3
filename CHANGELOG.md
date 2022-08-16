@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] 2022-08-16
+### Added
+- Additional analysis, including between-profession comparisons and correlations between RAP scores and perceived RAP knowledge
+- Subplots functionality
+
+### Changed
+- Existing text and headings
+
 ## [0.5.20] 2022-06-27
 ### Changed
 - Remove draft text from documentation 
