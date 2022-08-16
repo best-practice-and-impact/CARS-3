@@ -761,34 +761,6 @@ summarise_adv_score_by_understanding <- function(implementing_data){
   return(advanced_score_by_understanding)
 }
 
-#' Produce all summary tables for further analysis
-#' 
-#' @description Produce all summary tables for further analysis and return as a named list.
-#' 
-#' @param data full CARS wave 3 data.frame after preprocessing
-#' 
-#' @return list of frequency tables
-#' 
-#' @export
-
-summarise_all_further <- function(data) {
-  
-  ons_data <- data[data$department == "Office for National Statistics", ]
-  other_deps_data <- data[data$department != "Office for National Statistics", ]
-  
-  ons_tables <- carsurvey3::summarise_all(ons_data)
-  other_deps_tables <- carsurvey3::summarise_all(other_deps_data)
-  
-  output_list <- list(
-    coding_freq_comparison = summarise_coding_freq_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
-    coding_tools_comparison = summarise_coding_tools_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables), 
-    basic_rap_score_comparison = summarise_baisc_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables),
-    adv_rap_score_comparison = summarise_adv_rap_scores_comparison(ons_data, other_deps_data, ons_tables, other_deps_tables)
-  )
-  
-  return(output_list)
-}
-
 #' @title  Compare coding frequency of ONS to other departments
 #'
 #' @description calculate frequency table for coding frequency for ONS and all other departments combined

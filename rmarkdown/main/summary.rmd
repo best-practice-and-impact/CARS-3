@@ -183,8 +183,9 @@ Across government, code capability appears to be increasing. Many are picking up
 
 ``` {r}
 
-plot <- carsurvey2::plot_likert(tables$capability_change_by_freq, 3, "Capability change", "", 912, font_size = 14, width = 800, height = 800)
+plot <- carsurvey2::plot_likert(tables$capability_change_by_freq, 3, "Capability change", "", 912, font_size = 14, width = 600, height = 800)
 
+tables$capability_change_by_freq[2:6] <- round(tables$capability_change_by_freq[2:6], digits = 1)
 table <- kableExtra::kable_styling(knitr::kable(tables$capability_change_by_freq)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", samples$all))
 
@@ -269,7 +270,7 @@ We asked respondents about their knowledge of and opinions on [reproducible anal
 
 <br>
 
-# Most respondents have heard of RAP, but many do not know who their RAP champions are
+## Most respondents have heard of RAP, but many do not know who their RAP champions are
 
 65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. Of those who have heard or RAP, most do not know who their department RAP champion is. [RAP champions](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/reproducible-analytical-pipeline-rap-champions/) promote and support RAP development across government. There is clearly more to be done to make sure people are aware of RAP and know where they can find support. 
 
@@ -380,6 +381,7 @@ Although very few regularly meet the RAP MVP, there is a positive correlation (r
 ```{r}
 plot <- carsurvey3::plot_stacked(tables$basic_score_by_implementation, "Percent", "I Currently Implement RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
 
+tables$basic_score_by_implementation[2:8] <- round(tables$basic_score_by_implementation[2:8], digits = 1)
 table <- kableExtra::kable_styling(knitr::kable(tables$basic_score_by_implementation)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
 
@@ -397,6 +399,7 @@ There is a positive correlation between self-reported understanding of RAP and b
 ```{r}
 plot <- carsurvey3::plot_stacked(tables$basic_score_by_understanding , "Percent", "I Understand Key concepts of RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
 
+tables$basic_score_by_understanding[2:8] <- round(tables$basic_score_by_understanding[2:8], digits = 1) 
 table <- kableExtra::kable_styling(knitr::kable(tables$basic_score_by_understanding)) %>% 
   kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
 
