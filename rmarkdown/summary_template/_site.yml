@@ -4,7 +4,7 @@ output:
   html_document:
     css: "style.css"
 navbar:
-  title: "Coding in Analysis and Research Survey 2021 - DRAFT"
+  title: "Coding in Analysis and Research Survey 2021"
   left:
     - text: "Home"
       href: ../index.html

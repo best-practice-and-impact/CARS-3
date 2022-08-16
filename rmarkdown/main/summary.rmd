@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo=FALSE)
 
 library(magrittr)
 
-tables <- carsurvey3::summarise_all(data)
+tables <- carsurvey3::summarise_all(data, all_tables = TRUE)
 prof_langs <- carsurvey3::summarise_languages_by_prof(data)
 
 ```
@@ -29,7 +29,7 @@ We want our users to get as much value as possible from our analysis. Because of
 
 ## Most respondents use code at least regularly in their current role
 
-Over half of respondents reported using code to achieve their work objectives regularly or all the time. This survey is likely to have attracted many analysts with an interest in programming, meaning these figures may be skewed. Nevertheless, the figures here show that for many government analysts programming has become a key tool in their work.
+Over half of respondents reported using code to achieve their work objectives regularly or all the time. This survey is likely to have attracted many analysts with an interest in programming, meaning these figures may be skewed. Nevertheless, the figures here show that many analysts are regularly using code to carry out their work.
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$code_freq, "Coding frequency", "Count", n = samples$all, font_size = 14, width = 600)
@@ -44,7 +44,7 @@ carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ## Respondents use code to perform a variety of data operations 
 
-Most respondents use code to perform each of the data operations included in the survey, at least in part. While these were the responses to the questions included, many respondents reported other data operations in the free text box provided. Code is currently being used in government at every stage of analysis pipelines, from pre-processing through to analysis and presentation. 
+For each of the data operations included in the survey, the majority of analysts use code to carry them out at least some of the time. Many respondents reported other data operations in the free text box provided. Government analysts are capable to carry out a variety of tasks using code, including every part of the analytical pipeline. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$operations, "Count", "Data operation", n = samples$all, font_size = 14, width = 600)
@@ -66,9 +66,10 @@ Given a list of programming tools, we asked respondents to answer “Yes”, “
 Please note we did not set precise definitions for availability and knowledge here, as these are dependent on individual circumstances. 
 
 <br>
+
 ## Open source tools are the most available for analysts work
 
-R, SQL and Python were the three most available programming languages to government analysts. All three are open source languages, the use of which is a key component of the [RAP methodology](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). Such tools help analysts make their work more transparent and reproducible to their users, as cost is not a barrier to use. 
+R, SQL and Python were the three most available programming languages to government analysts. All three are open source languages, the use of which is a key component of the [RAP methodology](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/). Such tools help analysts make their work more transparent and accessible to users, as cost is not a barrier to learning these languages. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$access, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -81,7 +82,7 @@ carsurvey2::wrap_outputs("tools-access", plot, table)
 
 ## Open source tools are leading the way in capability
 
-More respondents said they were able to carry out their work using Python, SQL and R than any other programming language. R in particular is consistently popular across professions, having the highest or second highest levels of capability across all analytical professions. In contrast, proprietary tools are much more profession-specific.  
+More respondents said they were able to carry out their work using Python, SQL and R than any other programming language. R in particular is consistently popular across professions, having the highest or second highest levels of capability across all analytical professions. In contrast, proprietary tools are much more profession-specific. Popular Open source languages present the best opportunity for collaboration both across professions and between departments. 
 
 ```{r}
 plot <- carsurvey2::plot_stacked(tables$knowledge, xlab = "Count", ylab = "Programming tool", n = samples$all, colour_scale = "3scale", font_size = 14, width = 600)
@@ -104,12 +105,9 @@ carsurvey2::wrap_outputs("prof_langs", plot, table)
 ```
 <br>
 
-## Access and knowledge gaps
+## Many respondents have capability in tools they cannot access in work
 
 Using data collected from previous questions we calculated the number of respondents who have access but no knowledge, access and knowledge, and knowledge but no access for each programming language. 
-
-<br>
-## Many respondents have capability in tools they cannot access in work
 
 A large minority of respondents have capability in programming languages they do not have access to. This is particularly true for proprietary software. A further advantage of open-source software is that it is easier for analysts' coding skills to be transferable if they learn an open-source language, as they are more likely to have access to the same software at another department in future.
 
@@ -129,6 +127,7 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 # Coding capability
 
 <br>
+
 ## Most respondents learned to code outside of the public sector
 
 Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
@@ -164,20 +163,43 @@ carsurvey2::wrap_outputs("ability", plot, table)
 ```
 <br>
 
+## Most respondents learned to code outside of the public sector
+
+
+Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
+
+
+``` {r}
+plot <- carsurvey2::plot_freqs(tables$where_learned, xlab = "", ylab = "Count", n = samples$any_code_experience, break_q_names_col = "First coding experience", orientation = "h", font_size = 14, width = 600)
+table <- kableExtra::kable_styling(knitr::kable(tables$where_learned, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$any_code_experience))
+carsurvey2::wrap_outputs("first-learn", plot, table)
+```
+<br> 
+
 ## How often people code in their work is correlated with changes to their coding abilities
 
-People who write code to achieve their work objectives more often are more likely to report an improvement to their coding abilities. Conversely, those who do not code in their work are much more likely to report their coding abilities are getting worse. Although this finding is not surprising, it highlights the fact that analysts' coding abilities are not static, and need to be maintained. 
+Across government, code capability appears to be increasing. Many are picking up and improving these skills while working in government. How often people write code at work is positively correlated with the change in their coding ability (r(16) = .59, p < .01). Conversely, those who do not code in their work are much more likely to report their coding abilities are getting worse. Although this finding is not surprising, it highlights the fact that analysts' coding abilities are not static, and need to be maintained. 
 
-```{r}
+``` {r}
 
+plot <- carsurvey2::plot_likert(tables$capability_change_by_freq, 3, "Capability change", "", 912, font_size = 14, width = 600, height = 800)
+
+tables$capability_change_by_freq[2:6] <- round(tables$capability_change_by_freq[2:6], digits = 1)
+table <- kableExtra::kable_styling(knitr::kable(tables$capability_change_by_freq)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("cap-by-freq", plot, table)
 ```
 
 <br>
+
 # Coding practices
 
 We asked respondents who said they use code in their work how often they carry out various coding practices considered to be good practice. For more information on the practices presented below, please read our guidance on [quality assurance of code for analysis and research](https://best-practice-and-impact.github.io/qa-of-code-guidance/intro.html).
 
 <br>
+
 ## Many good coding practices are not regularly applied by analysts
 
 The practices list below are intended to improve the reproducibility, assurance and auditability of code. Most respondents reporting using these practices at least some of the time, but often not regularly. It appears many analysts have the skills to use these practices, but either do not have time or do not feel the need to do so.
@@ -247,10 +269,10 @@ carsurvey2::wrap_outputs("workflow", plot, table)
 We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
 
 <br>
-# Most respondents have heard of RAP
 
-65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. RAP and its principles are considered best practice and help to improve analysis. If respondents haven’t heard of RAP it means these best practices are less likely to be implemented.
+## Most respondents have heard of RAP, but many do not know who their RAP champions are
 
+65% of respondents have heard of RAP which means a large minority haven’t heard of RAP and its principles. Of those who have heard or RAP, most do not know who their department RAP champion is. [RAP champions](https://analysisfunction.civilservice.gov.uk/support/reproducible-analytical-pipelines/reproducible-analytical-pipeline-rap-champions/) promote and support RAP development across government. There is clearly more to be done to make sure people are aware of RAP and know where they can find support. 
 
 ```{r}
 plot <- carsurvey2::plot_freqs(tables$rap_knowledge, "", "Count", n = samples$all, font_size = 14, orientation = "h", break_q_names_col = "RAP champion knowledge", max_lines = 3, width = 600)
@@ -280,13 +302,13 @@ carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 # RAP scores
 
-RAP scores are the sum of scores for each componenet of the [minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
+RAP scores are the sum of scores for each component of the [minimum viable product (MVP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are RAP components that go beyond what the RAP champions saw as the minimum standard.
 
-<br<
-## Some components of RAP are not implemented often
+<br>
 
-The least common RAP component is open sourcing code. The lack of consistency of which RAP components analysts apply regularly means most analytical pipelines fail to meet the RAP minimum viable product standard.
+## None of the RAP components are applied consistently
 
+While some RAP components are applied often by most respondents, the majority are not, including the majority of the MVP components. Open sourcing in particular is only done by a minority of respondents. That means that, most of the time, analysts are not meeting the mimimum RAP guidance when writing code. 
 
 ```{r}
 plot <- carsurvey2::plot_grouped(tables$rap_components, "", "Count", n = samples$coders, orientation = "h", font_size = 14, width = 600)
@@ -299,9 +321,10 @@ carsurvey2::wrap_outputs("rap_comps", plot, table)
 ```
 
 <br>
-## Very few respondents are regularly meeting RAP MVP standards
 
-While 49% of respondents say they feel comfortable implementing RAP only 2% respondents are regularly meeting RAP MVP. A large minority of responses are completing none of the basic RAP principles with 92% of respondents have a basic RAP score of 3 or less.
+## Most respondents only apply a minority of recommended practices regularly
+
+Only a minority of respondents regularly more than half of the RAP MVP standards in their work (22%), with a small minority meeting all of the MVP standards (2%). These findings show most analysts who write code do meet some RAP standards but not others. More work needs to be done to share knowledge and expertise in these good coding practices, to ensure analyst apply RAP guidance more consistently.
 
 ```{r}
 
@@ -318,7 +341,9 @@ carsurvey2::wrap_outputs("basic_score", plot, table)
 ```
 <br>
 
-## Few respondents regularly use multiple advanced RAP components
+## Few respondents regularly use half or more of the advanced RAP components
+
+Only a minority of respondents apply the majority of the more advanced RAP practices included here. However, it should be noted that not all of these would be applicable or proportionate for every analytical pipelines, and we do not necessarily recommend they all be applied every time.
 
 ```{r}
 
@@ -330,3 +355,57 @@ table <- kableExtra::kable_styling(knitr::kable(tables$advanced_rap_scores, row.
 carsurvey2::wrap_outputs("advanced_score", plot, table)
 
 ```
+
+<br>
+
+## Respondents who tell us they are implementing RAP use more of the RAP MVP practices, more often
+
+```{r}
+corr_data <- data[data$heard_of_RAP == "Yes" & data$code_freq != "Never", ]
+
+likert_order <- c("Strongly Disagree",
+                  "Disagree",
+                  "Neutral", 
+                  "Agree",
+                  "Strongly Agree")
+
+corr_data$RAP_implementing <- factor(corr_data$RAP_implementing, levels = likert_order)
+corr_data$RAP_understand_key_components <- factor(corr_data$RAP_understand_key_components, levels = likert_order)
+
+implement_corr <- carsurvey3::compute_correlation_test(corr_data$RAP_implementing, corr_data$basic_rap_score)
+understand_corr <- carsurvey3::compute_correlation_test(corr_data$RAP_understand_key_components, corr_data$basic_rap_score)
+```
+
+Although very few regularly meet the RAP MVP, there is a positive correlation (r(24) = .37, p < .01) between respondents self-reporting that they currently implement RAP and their basic RAP score. However, the correlation is relatively weak. This suggests that more can done to improve awareness of the RAP MVP guidance across government. 
+
+```{r}
+plot <- carsurvey3::plot_stacked(tables$basic_score_by_implementation, "Percent", "I Currently Implement RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+tables$basic_score_by_implementation[2:8] <- round(tables$basic_score_by_implementation[2:8], digits = 1)
+table <- kableExtra::kable_styling(knitr::kable(tables$basic_score_by_implementation)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
+
+carsurvey2::wrap_outputs("basic-by-imp", plot, table)
+
+
+```
+
+<br>
+
+## Respondents with a better understanding of RAP use minimum RAP practices more often
+
+There is a positive correlation between self-reported understanding of RAP and basic RAP scores (r(24) = .39, p < .01). This suggests increasing awareness of RAP standards and guidelines could help increase the use of RAP practices. However, this is only a correlation and should be treated with caution, as it does not necessarily imply a causal direction. It should be noted that access to tools varies across departments and may impact analysts' ability to implement RAP practices. 
+
+```{r}
+plot <- carsurvey3::plot_stacked(tables$basic_score_by_understanding , "Percent", "I Understand Key concepts of RAP", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never"), colour_scale = "2gradients", neutral_mid = FALSE, font_size = 14, width = 600, height = 500)
+
+tables$basic_score_by_understanding[2:8] <- round(tables$basic_score_by_understanding[2:8], digits = 1) 
+table <- kableExtra::kable_styling(knitr::kable(tables$basic_score_by_understanding)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", sum(data$heard_of_RAP == "Yes" & data$code_freq != "Never")))
+
+carsurvey2::wrap_outputs("basic-by-und", plot, table)
+
+
+```
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
