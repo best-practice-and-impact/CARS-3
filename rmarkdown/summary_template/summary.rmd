@@ -20,9 +20,7 @@ tables <- carsurvey3::summarise_all(filtered_data)
 
 ```
 
-This is a living document. 
-
-We want our users to get as much value as possible from our analysis. Because of that, we will be updating these pages with additional outputs and insights when possible. To make sure you always access the latest insights, we recommend linking to these pages rather than sharing this analysis any other way at this stage. 
+This is a living document. We want our users to get as much value as possible from our analysis. Because of that, we will be updating these pages with additional outputs and insights when possible. To make sure you always access the latest insights, we recommend linking to these pages rather than sharing this analysis any other way at this stage. 
 
 # Coding frequency and tools
 
