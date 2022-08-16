@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove draft text from documentation 
 
 ## [0.5.19] 2021-12-03
+### Added
+- Tables from further analysis presentation [0.5.20] 2022-06-29
+
 ### Changed
 - RAP score text
 

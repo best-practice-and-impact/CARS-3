@@ -20,9 +20,7 @@ tables <- carsurvey3::summarise_all(filtered_data)
 
 ```
 
-Please note it is possible that the figures presented here will change in future. 
-
-While any changes to the data are not likely to be substantial, we are planning to carry out more in-depth analysis and the commentary may change. As such, we recommend linking to these pages rather than sharing this analysis any other way at this stage. We will be regularly updating these pages with additional outputs and insights. 
+This is a living document. We want our users to get as much value as possible from our analysis. Because of that, we will be updating these pages with additional outputs and insights when possible. To make sure you always access the latest insights, we recommend linking to these pages rather than sharing this analysis any other way at this stage. 
 
 # Coding frequency and tools
 
@@ -39,6 +37,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$code_freq)) %>%
 carsurvey2::wrap_outputs("coding-freq", plot, table)
 
 ```
+<br>
 
 ## What people are using code for 
 
@@ -52,6 +51,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$operations)) %>%
 
 carsurvey2::wrap_outputs("operations", plot, table)
 ```
+<br>
 
 ## Access to and knowledge of programming languages
 
@@ -64,6 +64,8 @@ Access to tools does not necessarily refer to official policy. Some analysts may
 
 Please note that capability in programming languages is self-reported here and was not objectively defined or tested.
 
+<br> 
+
 ## Access to coding tools
 
 ```{r}
@@ -73,6 +75,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$access, row.names = FALSE
 
 carsurvey2::wrap_outputs("tools-access", plot, table)
 ```
+<br>
 
 ## Knowledge of coding tools
 
@@ -83,6 +86,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$knowledge, row.names = FA
 
 carsurvey2::wrap_outputs("tools-knowledge", plot, table)
 ```
+<br>
 
 ## Access and knowledge gaps
 
@@ -106,6 +110,8 @@ carsurvey2::wrap_outputs("tools-status", plot, table)
 
 # Coding capability
 
+<br>
+
 ## Change in coding ability during current role
 
 This question was only asked of respondents with coding experience outside of their current role. This means analysts who first learned to code in their current role are not included in the data.
@@ -119,6 +125,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$ability_change, row.names
 carsurvey2::wrap_outputs("ability", plot, table)
 
 ```
+<br>
 
 ## Where respondents first learned to code
 
@@ -137,7 +144,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$where_learned, row.names 
 carsurvey2::wrap_outputs("first-learn", plot, table)
 
 ```
-
+<br>
 
 # Coding practices
 
@@ -154,7 +161,7 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$coding
 carsurvey2::wrap_outputs("code-prac", plot, table)
 
 ```
-
+<br>
 
 ## Documentation
 
@@ -169,7 +176,7 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$doc)) 
 carsurvey2::wrap_outputs("doc", plot, table)
 
 ```
-
+<br>
 
 ## Dependency management
 
@@ -191,6 +198,7 @@ carsurvey2::wrap_outputs("dep_management", plot, table)
 
 ```
 
+<br>
 
 ## Reproducible workflow packages
 
@@ -210,11 +218,13 @@ table <- kableExtra::kable_styling(knitr::kable(tables$rep_workflow)) %>%
 carsurvey2::wrap_outputs("workflow", plot, table)
 
 ```
-
+<br>
 
 # RAP knowledge and opinions
 
 We asked respondents about their knowledge of and opinions on [reproducible analytical pipelines (RAP)](https://gss.civilservice.gov.uk/reproducible-analytical-pipelines/). RAP refers to the use of practices from software engineering to make analysis more reproducible. These practices build on the advantages of writing analysis as code by ensuring increased quality, trust, efficiency, business continuity and knowledge management. The [RAP champions](https://gss.civilservice.gov.uk/about-us/champion-networks/reproducible-analytical-pipeline-rap-champions/) are a network of analysts across government who promote and support RAP development in their departments.
+
+<br>
 
 # Knowledge of RAP
 
@@ -229,7 +239,20 @@ table <- kableExtra::kable_styling(knitr::kable(tables$rap_knowledge, row.names 
 carsurvey2::wrap_outputs("rap-knowledge", plot, table)
 
 ```
+<br>
 
+```{r}
+## line manage
+
+plot <- carsurvey2::plot_freqs(tables$line_manage, xlab = "", ylab = "Count", n = samples$all, break_q_names_col = "Line manage anyone who writes codes", orientation = "h", font_size = 14, width = 600)
+
+table <- kableExtra::kable_styling(knitr::kable(tables$line_manage, row.names = FALSE)) %>% 
+  kableExtra::add_footnote(paste0("Sample size = ", samples$all))
+
+carsurvey2::wrap_outputs("line-manage", plot, table)
+
+```
+<br>
 
 ## Opinions on RAP
 
@@ -244,13 +267,15 @@ table <- kableExtra::kable_styling(carsurvey2::output_likert_table(tables$rap_op
 carsurvey2::wrap_outputs("rap-opinions", plot, table)
 
 ```
-
+<br>
 
 # RAP scores
 
 RAP component scores “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". 
 
 A score of one for each RAP component is derived where respondents answered “regularly” or “all the time” to the relevant questions. For documentation, this includes both code comments and README files. For the continuous integration and dependency management components we only collected "yes", "no" or "I don't understand the question" responses. As such, we gave "yes" responses a score of 1. The sum total of each respondent's scores is presented here as "RAP scores". “Basic components” are the components which make up the RAP MVP. "Advanced components" are components that help improve reproducibility, but were are considered part of the minimum standard. 
+
+<br>
 
 ## RAP components
 
@@ -264,6 +289,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$rap_components, row.names
 carsurvey2::wrap_outputs("rap_comps", plot, table)
 
 ```
+<br>
 
 ## Basic RAP scores
 
@@ -280,7 +306,7 @@ table <- kableExtra::kable_styling(knitr::kable(tables$basic_rap_scores, row.nam
 carsurvey2::wrap_outputs("basic_score", plot, table)
 
 ```
-
+<br>
 
 ## Advanced RAP scores
 
@@ -294,3 +320,4 @@ table <- kableExtra::kable_styling(knitr::kable(tables$advanced_rap_scores, row.
 carsurvey2::wrap_outputs("advanced_score", plot, table)
 
 ```
+
