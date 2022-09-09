@@ -892,7 +892,7 @@ summarise_languages_by_prof <- function(data) {
   
   data$prof_DS <- ifelse(data$prof_DS_GSG_GORS == "Yes" | data$prof_DS_other == "Yes", "Yes", "No")
   
-  profs <- c("prof_GAD", "prof_DDAT",  "prof_DS", "prof_GES", "prof_GORS", "prof_GSG", "prof_GSR")
+  profs <- c("prof_GAD", "prof_DDAT",  "prof_DS", "prof_GES", "prof_GORS", "prof_GSR", "prof_GSG")
   langs <- c("knowledge_R", "knowledge_SQL", "knowledge_python", "knowledge_SAS", "knowledge_SPSS",
              "knowledge_VBA", "knowledge_matlab", "knowledge_stata")
   lang_names <- c("R", "SQL", "Python", "SAS", "SPSS", "VBA", "Matlab", "Stata")
