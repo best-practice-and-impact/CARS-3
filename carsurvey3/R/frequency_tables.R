@@ -890,13 +890,14 @@ summarise_adv_rap_scores_comparison <- function(ons_data, other_deps_data, ons_t
 summarise_languages_by_prof <- function(data) {
   data <- data[data$code_freq <= "Never", ]
   
+  data$prof_DS <- ifelse(data$prof_DS_GSG_GORS == "Yes" | data$prof_DS_other == "Yes", "Yes", "No")
+  
   profs <- c("prof_GAD", "prof_DDAT",  "prof_DS", "prof_GES", "prof_GORS", "prof_GSG", "prof_GSR")
   langs <- c("knowledge_R", "knowledge_SQL", "knowledge_python", "knowledge_SAS", "knowledge_SPSS",
              "knowledge_VBA", "knowledge_matlab", "knowledge_stata")
   lang_names <- c("R", "SQL", "Python", "SAS", "SPSS", "VBA", "Matlab", "Stata")
   
   prof_counts <- colSums(data[profs] == "Yes")
-  
   
   prof_langs <- sapply(profs, function(prof) {
     filtered_data <- data[data[prof] == "Yes", ]
@@ -907,7 +908,8 @@ summarise_languages_by_prof <- function(data) {
   }) %>% data.frame
   
   prof_langs <- cbind(lang = lang_names, prof_langs)
-  colnames(prof_langs) <- c("lang", "Digital and data (DDAT)", "Data scientists", "Actuaries", "Economists (GES)", 
+  
+  colnames(prof_langs) <- c("lang", "Actuaries", "Digital and data (DDAT)", "Data scientists", "Economists (GES)", 
                             "Operational researchers (GORS)", "Social researchers (GSR)", "Statisticians (GSG)") 
   
   prof_langs_long <- tidyr::pivot_longer(prof_langs, cols = colnames(prof_langs)[2:8]) %>% data.frame
