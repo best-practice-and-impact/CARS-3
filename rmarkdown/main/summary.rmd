@@ -159,19 +159,6 @@ carsurvey2::wrap_outputs("ability", plot, table)
 ```
 <br>
 
-## Most respondents learned to code outside of the public sector
-
-
-Analysts are generally learning to code for the first time before joining the public sector, particularly in education. However, many reported learning to code for the first time in their current role or in previous public sector employment. This shows that not only are analysts with previous coding experience improving, but those without those skills are being upskilled as well.
-
-
-``` {r}
-plot <- carsurvey2::plot_freqs(tables$where_learned, xlab = "", ylab = "Count", n = samples$any_code_experience, break_q_names_col = "First coding experience", orientation = "h", font_size = 14, width = 600)
-table <- kableExtra::kable_styling(knitr::kable(tables$where_learned, row.names = FALSE)) %>% 
-  kableExtra::add_footnote(paste0("Sample size = ", samples$any_code_experience))
-carsurvey2::wrap_outputs("first-learn", plot, table)
-```
-<br> 
 
 ## How often people code in their work is correlated with changes to their coding abilities
 
